@@ -22,17 +22,15 @@ async function bootstrap() {
     new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
   );
 
-  if (process.env.SWAGGER_HABILITADO === 'true') {
-    const config = new DocumentBuilder()
-      .setTitle('Sistema de Gestión de Proyectos')
-      .setDescription(
-        'Descripción de la API del sistema de gestión de proyectos',
-      )
-      .addBearerAuth()
-      .build();
-    const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup(globalPrefix, app, document);
-  }
+  const config = new DocumentBuilder()
+    .setTitle('API Clínica Médica - TFI DAW')
+    .setDescription('Documentación de la API para el sistema de turnos médicos')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
+    
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('docs', app, document);
 
   await app.listen(process.env.PORT ?? 3000);
 }

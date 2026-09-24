@@ -7,7 +7,7 @@ export class Usuario {
   id: number;
 
   @Column({ unique: true })
-  document: string;
+  documento: string;
 
   @Column()
   apellidos: string;
