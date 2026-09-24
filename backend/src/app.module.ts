@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { MedicosModule } from './medicos/medicos.module';
+import { ReservasModule } from './reservas/reservas.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
@@ -29,6 +30,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
     UsuariosModule,
     MedicosModule,
+    ReservasModule,
   ],
   controllers: [AppController],
   providers: [AppService],
