@@ -3,8 +3,10 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsuariosModule } from './usuarios/usuarios.module';
 import { MedicosModule } from './medicos/medicos.module';
+import { ReservasModule } from './reservas/reservas.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -29,6 +31,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
     }),
     UsuariosModule,
     MedicosModule,
+    ReservasModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
