@@ -23,7 +23,8 @@ import { AuthModule } from './auth/auth.module';
         username: configService.get<string>('DB_USER'),
         password: configService.get<string>('DB_PASSWORD') || '',
         database: configService.get<string>('DB_NAME'),
-        synchronize: true,
+        synchronize:
+          configService.get<string>('DB_SYNCHRONIZE', 'true') === 'true',
         autoLoadEntities: true,
         logging: configService.get<string>('DB_LOGGING') === 'true',
         logger: 'advanced-console',

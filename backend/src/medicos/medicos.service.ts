@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateMedicoDto } from './dto/create-medico.dto';
-import { UpdateMedicoDto } from './dto/update-medico.dto';
+import { UpdateValorConsultaDto } from './dto/update-valor-consulta.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Medico } from './entities/medico.entity';
 import { Repository } from 'typeorm';
+import { EstadoUsuario } from '../enums/usuario.enums';
 
 @Injectable()
 export class MedicosService {
@@ -12,13 +12,12 @@ export class MedicosService {
     private readonly medicosRepository: Repository<Medico>,
   ) {}
 
-  async create(createMedicoDto: CreateMedicoDto) {
-    const medico = this.medicosRepository.create(createMedicoDto);
-    return await this.medicosRepository.save(medico);
-  }
-
   async findAll() {
-    return await this.medicosRepository.find({ relations: { usuario: true } });
+    return await this.medicosRepository.find({
+      where: { usuario: { estado: EstadoUsuario.ACTIVO } },
+      relations: { usuario: true },
+      order: { usuario: { apellidos: 'ASC', nombres: 'ASC' } },
+    });
   }
 
   async findOne(id: number) {
@@ -32,14 +31,16 @@ export class MedicosService {
     return medico;
   }
 
-  async update(id: number, updateMedicoDto: UpdateMedicoDto) {
-    const medico = await this.findOne(id);
-    this.medicosRepository.merge(medico, updateMedicoDto);
-    return await this.medicosRepository.save(medico);
+  async findByUsuarioId(idUsuario: number) {
+    return await this.medicosRepository.findOne({
+      where: { id_usuario: idUsuario },
+      relations: { usuario: true },
+    });
   }
 
-  async remove(id: number) {
+  async updateValorConsulta(id: number, dto: UpdateValorConsultaDto) {
     const medico = await this.findOne(id);
-    return await this.medicosRepository.remove(medico);
+    medico.valor_consulta = dto.valor_consulta;
+    return await this.medicosRepository.save(medico);
   }
 }
