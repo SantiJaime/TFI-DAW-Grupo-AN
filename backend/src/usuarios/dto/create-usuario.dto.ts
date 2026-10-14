@@ -1,33 +1,33 @@
-import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { EstadoUsuario, RolUsuario } from 'src/enums/usuario.enums';
+import { IsIn, IsInt, IsPositive, ValidateIf } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { RolUsuario } from '../../enums/usuario.enums';
+import { CreatePacienteDto } from './create-paciente.dto';
 
-export class CreateUsuarioDto {
-  @IsString()
-  @IsNotEmpty()
-  documento: string;
+export class CreateUsuarioDto extends CreatePacienteDto {
+  @ApiProperty({
+    enum: [RolUsuario.MEDICO, RolUsuario.ADMINISTRADOR],
+    example: RolUsuario.MEDICO,
+  })
+  @IsIn([RolUsuario.MEDICO, RolUsuario.ADMINISTRADOR], {
+    message: 'rol debe ser MEDICO o ADMINISTRADOR',
+  })
+  rol: RolUsuario.MEDICO | RolUsuario.ADMINISTRADOR;
 
-  @IsString()
-  @IsNotEmpty()
-  apellidos: string;
+  @ApiPropertyOptional({
+    example: 12345,
+    description: 'Obligatorio si el rol es MEDICO',
+  })
+  @ValidateIf((dto: CreateUsuarioDto) => dto.rol === RolUsuario.MEDICO)
+  @IsInt()
+  @IsPositive()
+  matricula?: number;
 
-  @IsString()
-  @IsNotEmpty()
-  nombres: string;
-
-  @IsString()
-  @IsNotEmpty()
-  @IsEmail()
-  email: string;
-
-  @IsString()
-  @IsNotEmpty()
-  clave: string;
-
-  @IsEnum(EstadoUsuario)
-  @IsNotEmpty()
-  estado: EstadoUsuario;
-
-  @IsEnum(RolUsuario)
-  @IsNotEmpty()
-  rol: RolUsuario;
+  @ApiPropertyOptional({
+    example: 25000,
+    description: 'Obligatorio si el rol es MEDICO',
+  })
+  @ValidateIf((dto: CreateUsuarioDto) => dto.rol === RolUsuario.MEDICO)
+  @IsInt()
+  @IsPositive()
+  valor_consulta?: number;
 }

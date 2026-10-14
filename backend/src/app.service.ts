@@ -1,8 +1,16 @@
 import { Injectable } from '@nestjs/common';
+import { DataSource } from 'typeorm';
 
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  constructor(private readonly dataSource: DataSource) {}
+
+  async baseDeDatosConectada(): Promise<boolean> {
+    try {
+      await this.dataSource.query('SELECT 1');
+      return true;
+    } catch {
+      return false;
+    }
   }
 }
