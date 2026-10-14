@@ -1,12 +1,29 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+  Index,
+} from 'typeorm';
 import { Medico } from '../../medicos/entities/medico.entity';
 import { Usuario } from '../../usuarios/entities/usuario.entity';
 import { EstadoReserva } from '../../enums/estado-reserva.enum';
 
+@Index('UQ_reserva_medico_horario', ['id_medico', 'fecha_hora'], {
+  unique: true,
+  where: `"estado" <> '${EstadoReserva.CANCELADO}'`,
+})
 @Entity('reservas')
 export class Reserva {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column({ type: 'int' })
+  id_medico: number;
+
+  @Column({ type: 'int' })
+  id_paciente: number;
 
   @ManyToOne(() => Medico)
   @JoinColumn({ name: 'id_medico' })
@@ -22,10 +39,10 @@ export class Reserva {
   @Column({
     type: 'enum',
     enum: EstadoReserva,
-    default: EstadoReserva.PENDIENTE,
+    default: EstadoReserva.ACTIVO,
   })
   estado: EstadoReserva;
 
-  @Column({ type: 'decimal', precision: 10, scale: 2 })
+  @Column({ type: 'int' })
   valor_consulta: number;
 }

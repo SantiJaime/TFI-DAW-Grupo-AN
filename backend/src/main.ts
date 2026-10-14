@@ -1,8 +1,11 @@
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe, VersioningType } from '@nestjs/common';
+import { RequestMethod, ValidationPipe, VersioningType } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import helmet from 'helmet';
 import { AppModule } from './app.module';
+import { NOMBRE_API, RUTA_DOCUMENTACION, VERSION_API } from './app.constants';
+
+process.env.TZ ??= 'America/Argentina/Buenos_Aires';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,7 +14,9 @@ async function bootstrap() {
 
   const globalPrefix = 'api';
 
-  app.setGlobalPrefix(globalPrefix);
+  app.setGlobalPrefix(globalPrefix, {
+    exclude: [{ path: '/', method: RequestMethod.GET }],
+  });
 
   app.enableVersioning({
     type: VersioningType.URI,
@@ -19,18 +24,22 @@ async function bootstrap() {
   });
 
   app.useGlobalPipes(
-    new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }),
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    }),
   );
 
   const config = new DocumentBuilder()
-    .setTitle('API Clínica Médica - TFI DAW')
+    .setTitle(NOMBRE_API)
     .setDescription('Documentación de la API para el sistema de turnos médicos')
-    .setVersion('1.0')
+    .setVersion(VERSION_API)
     .addBearerAuth()
     .build();
-    
+
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('docs', app, document);
+  SwaggerModule.setup(RUTA_DOCUMENTACION, app, document);
 
   await app.listen(process.env.PORT ?? 3000);
 }
