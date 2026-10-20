@@ -1,0 +1,58 @@
+<main class="contenedor">
+  <section class="tarjeta">
+    <header>
+      <h1>Clínica Médica</h1>
+      <p>Ingresá con tu cuenta para gestionar tus turnos</p>
+    </header>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+      <div class="campo">
+        <label for="email">Email</label>
+        <input
+          pInputText
+          id="email"
+          type="email"
+          formControlName="email"
+          autocomplete="email"
+          placeholder="usuario@mail.com"
+          [invalid]="campoInvalido('email')"
+          fluid
+        />
+        @if (campoInvalido('email')) {
+          <small class="mensaje-campo">
+            @if (form.controls.email.hasError('required')) {
+              El email es obligatorio.
+            } @else {
+              Ingresá un email válido.
+            }
+          </small>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="clave">Contraseña</label>
+        <p-password
+          inputId="clave"
+          formControlName="clave"
+          autocomplete="current-password"
+          placeholder="••••••••"
+          [feedback]="false"
+          [toggleMask]="true"
+          [invalid]="campoInvalido('clave')"
+          fluid
+        />
+        @if (campoInvalido('clave')) {
+          <small class="mensaje-campo">La contraseña es obligatoria.</small>
+        }
+      </div>
+
+      <p-button
+        type="submit"
+        label="Iniciar sesión"
+        icon="pi pi-sign-in"
+        [loading]="cargando()"
+        fluid
+      />
+    </form>
+  </section>
+</main>
