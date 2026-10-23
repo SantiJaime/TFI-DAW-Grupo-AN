@@ -7,6 +7,7 @@ import { Button } from 'primeng/button';
 import { InputText } from 'primeng/inputtext';
 import { Password } from 'primeng/password';
 import { AuthService } from '../../core/services/auth.service';
+import { mensajeError } from '../../core/utils/errores';
 
 @Component({
   selector: 'app-login',
@@ -65,20 +66,9 @@ export class Login {
         this.messageService.add({
           severity: 'error',
           summary: 'Error al iniciar sesión',
-          detail: this.mensajeError(err),
+          detail: mensajeError(err, 'Ocurrió un error al iniciar sesión.'),
         });
       },
     });
-  }
-
-  private mensajeError(err: HttpErrorResponse): string {
-    if (err.status === 0) {
-      return 'No se pudo conectar con el servidor. Intente nuevamente más tarde.';
-    }
-    const mensaje = err.error?.message;
-    if (Array.isArray(mensaje)) {
-      return mensaje.join('. ');
-    }
-    return mensaje ?? 'Ocurrió un error al iniciar sesión.';
   }
 }

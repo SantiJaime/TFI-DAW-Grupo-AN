@@ -182,7 +182,11 @@
                 <td class="col-md-9">
                         <div>        <code><a href="https://angular.dev/api/router/RouterOutlet" target="_blank" >RouterOutlet</a></code>
 </div>
-                        <div>        <code><a href="../components/NavbarComponent.html" target="_self" >NavbarComponent</a></code>
+                        <div>    <code>Toast</code>
+</div>
+                        <div>    <code>ConfirmDialog</code>
+</div>
+                        <div>        <code><a href="../components/Navbar.html" target="_self" >Navbar</a></code>
 </div>
                 </td>
             </tr>
@@ -231,7 +235,13 @@
                                             <code><a href="https://angular.dev/api/router/RouterOutlet" target="_blank" >RouterOutlet</a></code>
                                 </li>
                                 <li>
-                                            <code><a href="../components/NavbarComponent.html" target="_self" >NavbarComponent</a></code>
+                                        <code>Toast</code>
+                                </li>
+                                <li>
+                                        <code>ConfirmDialog</code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/Navbar.html" target="_self" >Navbar</a></code>
                                 </li>
                         </ul>
                 </div>
@@ -244,12 +254,13 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component } from &#x27;@angular/core&#x27;;
 import { RouterOutlet } from &#x27;@angular/router&#x27;;
-import { NavbarComponent } from &#x27;./components/navbar/navbar.component&#x27;;
+import { ConfirmDialog } from &#x27;primeng/confirmdialog&#x27;;
+import { Toast } from &#x27;primeng/toast&#x27;;
+import { Navbar } from &#x27;./components/navbar/navbar&#x27;;
 
 @Component({
   selector: &#x27;app-root&#x27;,
-  standalone: true,
-  imports: [RouterOutlet, NavbarComponent],
+  imports: [RouterOutlet, Toast, ConfirmDialog, Navbar],
   templateUrl: &#x27;./app.html&#x27;,
   styleUrl: &#x27;./app.css&#x27;
 })
@@ -258,7 +269,9 @@ export class App {}
     </div>
 
     <div class="tab-pane fade " id="templateData">
-        <pre class="line-numbers"><code class="language-html">&lt;app-navbar /&gt;
+        <pre class="line-numbers"><code class="language-html">&lt;p-toast /&gt;
+&lt;p-confirmdialog /&gt;
+&lt;app-navbar /&gt;
 &lt;main class&#x3D;&quot;main-content&quot;&gt;
   &lt;router-outlet /&gt;
 &lt;/main&gt;
@@ -302,8 +315,8 @@ export class App {}
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><app-navbar /><main class="main-content">  <router-outlet /></main></div>'
-    var COMPONENTS = [{'name': 'AdminDashboardComponent', 'selector': 'app-admin-dashboard'},{'name': 'App', 'selector': 'app-root'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MedicoDashboardComponent', 'selector': 'app-medico-dashboard'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PacienteDashboardComponent', 'selector': 'app-paciente-dashboard'}];
+        var COMPONENT_TEMPLATE = '<div><p-toast /><p-confirmdialog /><app-navbar /><main class="main-content">  <router-outlet /></main></div>'
+    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'EstadoReservaTag', 'selector': 'app-estado-reserva'},{'name': 'FormReserva', 'selector': 'app-form-reserva'},{'name': 'Login', 'selector': 'app-login'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'PanelAdmin', 'selector': 'app-admin'},{'name': 'PanelMedico', 'selector': 'app-medico'},{'name': 'PanelPaciente', 'selector': 'app-paciente'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'App'};
 </script>

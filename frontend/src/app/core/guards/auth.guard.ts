@@ -13,7 +13,6 @@ export const invitadoGuard: CanActivateFn = () => {
   return !authService.estaLogueado() || inject(Router).createUrlTree(['/inicio']);
 };
 
-// Requiere que el rol del usuario esté en route.data.roles; si no, lo manda a su panel
 export const rolGuard: CanActivateFn = (route) => {
   const rol = inject(AuthService).usuario()?.rol;
   const rolesPermitidos = (route.data['roles'] as RolUsuario[] | undefined) ?? [];

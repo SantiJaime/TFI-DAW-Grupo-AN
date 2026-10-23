@@ -63,22 +63,28 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? 'id="components-links"' : 'id="xs-components-links"' }>
                             <li class="link">
-                                <a href="components/AdminDashboardComponent.html" data-type="entity-link" >AdminDashboardComponent</a>
-                            </li>
-                            <li class="link">
                                 <a href="components/App.html" data-type="entity-link" >App</a>
                             </li>
                             <li class="link">
-                                <a href="components/LoginComponent.html" data-type="entity-link" >LoginComponent</a>
+                                <a href="components/EstadoReservaTag.html" data-type="entity-link" >EstadoReservaTag</a>
                             </li>
                             <li class="link">
-                                <a href="components/MedicoDashboardComponent.html" data-type="entity-link" >MedicoDashboardComponent</a>
+                                <a href="components/FormReserva.html" data-type="entity-link" >FormReserva</a>
                             </li>
                             <li class="link">
-                                <a href="components/NavbarComponent.html" data-type="entity-link" >NavbarComponent</a>
+                                <a href="components/Login.html" data-type="entity-link" >Login</a>
                             </li>
                             <li class="link">
-                                <a href="components/PacienteDashboardComponent.html" data-type="entity-link" >PacienteDashboardComponent</a>
+                                <a href="components/Navbar.html" data-type="entity-link" >Navbar</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/PanelAdmin.html" data-type="entity-link" >PanelAdmin</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/PanelMedico.html" data-type="entity-link" >PanelMedico</a>
+                            </li>
+                            <li class="link">
+                                <a href="components/PanelPaciente.html" data-type="entity-link" >PanelPaciente</a>
                             </li>
                         </ul>
                     </li>
@@ -116,7 +122,10 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="guards/authGuard.html" data-type="entity-link" >authGuard</a>
                             </li>
                             <li class="link">
-                                <a href="guards/roleGuard.html" data-type="entity-link" >roleGuard</a>
+                                <a href="guards/invitadoGuard.html" data-type="entity-link" >invitadoGuard</a>
+                            </li>
+                            <li class="link">
+                                <a href="guards/rolGuard.html" data-type="entity-link" >rolGuard</a>
                             </li>
                         </ul>
                     </li>
@@ -129,40 +138,49 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
                             <li class="link">
-                                <a href="interfaces/AuthResponseDto.html" data-type="entity-link" >AuthResponseDto</a>
+                                <a href="interfaces/CreateReservaRequest.html" data-type="entity-link" >CreateReservaRequest</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/CreateMedicoDto.html" data-type="entity-link" >CreateMedicoDto</a>
+                                <a href="interfaces/Disponibilidad.html" data-type="entity-link" >Disponibilidad</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/CreateReservaDto.html" data-type="entity-link" >CreateReservaDto</a>
+                                <a href="interfaces/FiltroReservas.html" data-type="entity-link" >FiltroReservas</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/CreateUsuarioDto.html" data-type="entity-link" >CreateUsuarioDto</a>
+                                <a href="interfaces/FiltroUsuarios.html" data-type="entity-link" >FiltroUsuarios</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/CurrentUserSession.html" data-type="entity-link" >CurrentUserSession</a>
+                                <a href="interfaces/LoginRequest.html" data-type="entity-link" >LoginRequest</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/LoginDto.html" data-type="entity-link" >LoginDto</a>
+                                <a href="interfaces/LoginResponse.html" data-type="entity-link" >LoginResponse</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Medico.html" data-type="entity-link" >Medico</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/OpcionHorario.html" data-type="entity-link" >OpcionHorario</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/Reserva.html" data-type="entity-link" >Reserva</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/UpdateMedicoDto.html" data-type="entity-link" >UpdateMedicoDto</a>
+                                <a href="interfaces/ReservaMedico.html" data-type="entity-link" >ReservaMedico</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/UpdateReservaDto.html" data-type="entity-link" >UpdateReservaDto</a>
+                                <a href="interfaces/ReservaPaciente.html" data-type="entity-link" >ReservaPaciente</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/UpdateUsuarioDto.html" data-type="entity-link" >UpdateUsuarioDto</a>
+                                <a href="interfaces/SeccionRol.html" data-type="entity-link" >SeccionRol</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/UpdateValorConsultaRequest.html" data-type="entity-link" >UpdateValorConsultaRequest</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Usuario.html" data-type="entity-link" >Usuario</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/UsuarioLogueado.html" data-type="entity-link" >UsuarioLogueado</a>
                             </li>
                         </ul>
                     </li>
@@ -174,6 +192,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <span class="icon ion-ios-arrow-down"></span>
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"' }>
+                            <li class="link">
+                                <a href="miscellaneous/enumerations.html" data-type="entity-link">Enums</a>
+                            </li>
+                            <li class="link">
+                                <a href="miscellaneous/functions.html" data-type="entity-link">Functions</a>
+                            </li>
                             <li class="link">
                                 <a href="miscellaneous/typealiases.html" data-type="entity-link">Type aliases</a>
                             </li>

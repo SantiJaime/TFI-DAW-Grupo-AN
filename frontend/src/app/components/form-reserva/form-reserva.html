@@ -1,0 +1,101 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-reserva" novalidate>
+  @if (pacientes()) {
+    <div class="campo">
+      <label for="paciente">Paciente</label>
+      <p-select
+        inputId="paciente"
+        formControlName="id_paciente"
+        [options]="opcionesPacientes()"
+        optionLabel="etiqueta"
+        optionValue="id"
+        [filter]="true"
+        filterBy="etiqueta"
+        placeholder="Seleccioná un paciente"
+        emptyMessage="No hay pacientes activos"
+        fluid
+      />
+    </div>
+  }
+
+  <div class="campo">
+    <label for="medico">Médico</label>
+    <p-select
+      inputId="medico"
+      formControlName="id_medico"
+      [options]="opcionesMedicos()"
+      optionLabel="etiqueta"
+      optionValue="id"
+      [filter]="true"
+      filterBy="etiqueta"
+      placeholder="Seleccioná un médico"
+      emptyMessage="No hay médicos disponibles"
+      fluid
+    />
+  </div>
+
+  <div class="campo">
+    <label for="fecha">Fecha</label>
+    <p-datepicker
+      inputId="fecha"
+      formControlName="fecha"
+      [minDate]="fechaMinima"
+      [maxDate]="fechaMaxima"
+      [showIcon]="true"
+      [readonlyInput]="true"
+      dateFormat="dd/mm/yy"
+      placeholder="dd/mm/aaaa"
+      fluid
+    />
+    <small class="ayuda">Hasta 30 días de anticipación.</small>
+  </div>
+
+  <div class="campo">
+    <label for="horario">Horario</label>
+    @if (cargandoHorarios()) {
+      <small class="ayuda"><i class="pi pi-spin pi-spinner"></i> Cargando horarios...</small>
+    } @else if (horarios().length) {
+      <p-selectbutton
+        formControlName="fecha_hora"
+        [options]="horarios()"
+        optionLabel="etiqueta"
+        optionValue="fecha_hora"
+        optionDisabled="ocupado"
+        [allowEmpty]="false"
+        styleClass="horarios"
+      />
+      <small class="ayuda">Turnos de 1 hora. Los horarios deshabilitados ya están ocupados.</small>
+    } @else {
+      <small class="ayuda">Elegí un médico y una fecha para ver los horarios disponibles.</small>
+    }
+  </div>
+
+  @if (medicoSeleccionado(); as medico) {
+    @if (fechaHora(); as turno) {
+      <div class="resumen">
+        <h4><i class="pi pi-check-circle"></i> Resumen del turno</h4>
+        @if (pacienteSeleccionado(); as paciente) {
+          <p>
+            <span>Paciente</span><strong>{{ paciente.apellidos }}, {{ paciente.nombres }}</strong>
+          </p>
+        }
+        <p>
+          <span>Médico</span><strong>Dr/a. {{ medico.apellidos }}, {{ medico.nombres }}</strong>
+        </p>
+        <p>
+          <span>Fecha y hora</span><strong>{{ turno | date: 'dd/MM/yyyy HH:mm' }} hs</strong>
+        </p>
+        <p>
+          <span>Valor de la consulta</span><strong>$ {{ medico.valor_consulta | number }}</strong>
+        </p>
+        <small class="ayuda">El valor queda congelado al confirmar la reserva.</small>
+      </div>
+    }
+  }
+
+  <p-button
+    type="submit"
+    label="Confirmar reserva"
+    icon="pi pi-calendar-plus"
+    [loading]="enviando()"
+  />
+</form>

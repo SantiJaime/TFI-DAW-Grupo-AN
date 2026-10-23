@@ -20,27 +20,21 @@ export const routes: Routes = [
     path: 'medico',
     canActivate: [authGuard, rolGuard],
     data: { roles: [RolUsuario.MEDICO] },
-    loadComponent: () =>
-      import('./pages/medico/medico-dashboard.component').then((m) => m.MedicoDashboardComponent),
+    loadComponent: () => import('./pages/medico/medico').then((m) => m.PanelMedico),
   },
   {
     path: 'paciente',
     canActivate: [authGuard, rolGuard],
     data: { roles: [RolUsuario.PACIENTE] },
-    loadComponent: () =>
-      import('./pages/paciente/paciente-dashboard.component').then(
-        (m) => m.PacienteDashboardComponent,
-      ),
+    loadComponent: () => import('./pages/paciente/paciente').then((m) => m.PanelPaciente),
   },
   {
     path: 'admin',
     canActivate: [authGuard, rolGuard],
     data: { roles: [RolUsuario.ADMINISTRADOR] },
-    loadComponent: () =>
-      import('./pages/admin/admin-dashboard.component').then((m) => m.AdminDashboardComponent),
+    loadComponent: () => import('./pages/admin/admin').then((m) => m.PanelAdmin),
   },
   {
-    // Redirige al panel que corresponde al rol del usuario logueado
     path: 'inicio',
     redirectTo: () => {
       const rol = inject(AuthService).usuario()?.rol;

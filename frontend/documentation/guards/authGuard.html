@@ -123,7 +123,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/guards/auth.guard.ts</code>
+    <code>src/app/core/guards/auth.guard.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -155,18 +155,23 @@
         <div class="tab-pane fade  tab-source-code" id="source">
             <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { inject } from &#x27;@angular/core&#x27;;
 import { CanActivateFn, Router } from &#x27;@angular/router&#x27;;
+import { RolUsuario } from &#x27;../enums/usuario.enums&#x27;;
 import { AuthService } from &#x27;../services/auth.service&#x27;;
 
 export const authGuard: CanActivateFn &#x3D; () &#x3D;&gt; {
   const authService &#x3D; inject(AuthService);
-  const router &#x3D; inject(Router);
+  return authService.estaLogueado() || inject(Router).createUrlTree([&#x27;/login&#x27;]);
+};
 
-  if (authService.isLoggedIn) {
-    return true;
-  }
+export const invitadoGuard: CanActivateFn &#x3D; () &#x3D;&gt; {
+  const authService &#x3D; inject(AuthService);
+  return !authService.estaLogueado() || inject(Router).createUrlTree([&#x27;/inicio&#x27;]);
+};
 
-  router.navigate([&#x27;/login&#x27;]);
-  return false;
+export const rolGuard: CanActivateFn &#x3D; (route) &#x3D;&gt; {
+  const rol &#x3D; inject(AuthService).usuario()?.rol;
+  const rolesPermitidos &#x3D; (route.data[&#x27;roles&#x27;] as RolUsuario[] | undefined) ?? [];
+  return (rol &amp;&amp; rolesPermitidos.includes(rol)) || inject(Router).createUrlTree([&#x27;/inicio&#x27;]);
 };
 </code></pre>
         </div>
