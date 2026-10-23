@@ -1,0 +1,4694 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>frontend documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">frontend documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  PacienteDashboardComponent</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/pages/paciente/paciente-dashboard.component.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-paciente-dashboard</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">styles</td>
+                <td class="col-md-9"><code>
+    .dashboard-page {
+      padding: 2rem 1rem;
+      background: #f8fafc;
+      min-height: calc(100vh - 70px);
+    }
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .page-header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #0f172a;
+    }
+    .subtitle {
+      margin: 0.35rem 0 0;
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+    .badge-role {
+      background: #dcfce7;
+      color: #15803d;
+      padding: 0.4rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .tabs-nav {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      color: #475569;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover {
+      background: #f1f5f9;
+      color: #0284c7;
+    }
+    .tab-btn.active {
+      background: #0284c7;
+      color: white;
+      border-color: #0284c7;
+      box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.2);
+    }
+    .alert {
+      padding: 0.85rem 1.25rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+    .alert-success {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+    .alert-error {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+    .alert-close {
+      background: transparent;
+      border: none;
+      font-size: 1.25rem;
+      cursor: pointer;
+      color: inherit;
+    }
+    .turnos-card, .reserva-card {
+      background: white;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .card-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .card-header h3 {
+      margin: 0;
+      font-size: 1.15rem;
+      color: #0f172a;
+    }
+    .header-note {
+      margin: 0.25rem 0 0;
+      font-size: 0.85rem;
+      color: #64748b;
+      width: 100%;
+    }
+    .btn-primary-sm {
+      padding: 0.45rem 0.9rem;
+      background: #0284c7;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-primary-sm:hover { background: #0369a1; }
+    .table-responsive { overflow-x: auto; }
+    .turnos-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    .turnos-table th {
+      background: #f8fafc;
+      padding: 0.85rem 1.25rem;
+      font-weight: 600;
+      color: #475569;
+      border-bottom: 1px solid #e2e8f0;
+      white-space: nowrap;
+    }
+    .turnos-table td {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
+    }
+    .time-slot {
+      display: flex;
+      flex-direction: column;
+    }
+    .time-hours {
+      font-weight: 700;
+      color: #0284c7;
+      font-size: 0.95rem;
+    }
+    .time-date {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+    .cell-valor {
+      font-weight: 600;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .tag-frozen {
+      font-size: 0.65rem;
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .badge-activo { background: #e0f2fe; color: #0369a1; }
+    .badge-atendido { background: #dcfce7; color: #15803d; }
+    .badge-ausente { background: #fee2e2; color: #b91c1c; }
+    .btn-cancel {
+      padding: 0.4rem 0.85rem;
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      border-radius: 6px;
+      color: #e11d48;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-cancel:hover {
+      background: #e11d48;
+      color: white;
+    }
+    .cancel-notice {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+    .cancel-notice small {
+      font-size: 0.7rem;
+      color: #dc2626;
+    }
+    .text-right { text-align: right; }
+    .text-muted { color: #94a3b8; font-size: 0.85rem; }
+    .text-success { color: #16a34a; font-weight: 600; font-size: 0.85rem; }
+
+    /* Estilos Formulario de Reserva */
+    .reserva-body {
+      padding: 2rem;
+    }
+    .reserva-form {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .form-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: white;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .medicos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .medico-option {
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      background: #f8fafc;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .medico-option:hover {
+      border-color: #93c5fd;
+      background: white;
+    }
+    .medico-option.selected {
+      border-color: #0284c7;
+      background: #f0f9ff;
+    }
+    .medico-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #e0f2fe;
+      color: #0284c7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .medico-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .medico-info strong {
+      color: #0f172a;
+      font-size: 0.95rem;
+    }
+    .medico-mat {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+    .medico-fee {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #0284c7;
+      margin-top: 0.2rem;
+    }
+    .check-icon {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: white;
+      font-size: 0.75rem;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .medico-option.selected .check-icon {
+      display: flex;
+    }
+    .date-picker-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      max-width: 320px;
+    }
+    .date-input-lg {
+      padding: 0.75rem 1rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 1rem;
+      background: #f8fafc;
+      color: #0f172a;
+      outline: none;
+    }
+    .date-input-lg:focus {
+      border-color: #0284c7;
+      background: white;
+    }
+    .hint-text {
+      color: #64748b;
+      font-size: 0.8rem;
+    }
+    .sub-hint {
+      color: #64748b;
+      font-size: 0.85rem;
+      margin: 0;
+    }
+    .slots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.75rem;
+    }
+    .slot-btn {
+      padding: 0.85rem 0.5rem;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
+      background: white;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      transition: all 0.15s ease;
+    }
+    .slot-btn:hover:not(:disabled) {
+      border-color: #0284c7;
+      background: #f0f9ff;
+    }
+    .slot-btn.selected {
+      border-color: #0284c7;
+      background: #0284c7;
+      color: white;
+    }
+    .slot-btn.selected .slot-time,
+    .slot-btn.selected .slot-status {
+      color: white;
+    }
+    .slot-btn.occupied {
+      background: #f1f5f9;
+      border-color: #e2e8f0;
+      color: #94a3b8;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    .slot-time {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #0f172a;
+    }
+    .slot-status {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #10b981;
+    }
+    .slot-btn.occupied .slot-status {
+      color: #ef4444;
+    }
+    .summary-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .summary-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #166534;
+    }
+    .summary-header h4 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+    .summary-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+      color: #334155;
+    }
+    .summary-row.highlight {
+      padding-top: 0.6rem;
+      border-top: 1px dashed #86efac;
+      font-size: 1.05rem;
+    }
+    .price-freeze {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .price-value {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #15803d;
+    }
+    .price-badge {
+      background: #15803d;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+    .freeze-policy {
+      margin: 0.5rem 0 0;
+      font-size: 0.8rem;
+      color: #166534;
+      font-style: italic;
+    }
+    .btn-confirm-reserva {
+      padding: 0.9rem;
+      background: #15803d;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 6px -1px rgba(21, 128, 61, 0.3);
+    }
+    .btn-confirm-reserva:hover:not(:disabled) {
+      background: #166534;
+      transform: translateY(-1px);
+    }
+    .btn-confirm-reserva:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .spinner-sm {
+      width: 18px;
+      height: 18px;
+      border: 2px solid white;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    .empty-state, .loading-state {
+      padding: 3rem 1rem;
+      text-align: center;
+      color: #64748b;
+    }
+    .empty-state svg {
+      margin-bottom: 1rem;
+      color: #94a3b8;
+    }
+    .empty-state h4 {
+      margin: 0 0 0.5rem;
+      color: #0f172a;
+      font-size: 1.15rem;
+    }
+    .btn-primary {
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: #0284c7;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .spinner {
+      width: 28px;
+      height: 28px;
+      border: 3px solid #e2e8f0;
+      border-top-color: #0284c7;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;dashboard-page&quot;&gt;
+  &lt;div class&#x3D;&quot;dashboard-container&quot;&gt;
+    &lt;!-- Encabezado del paciente --&gt;
+    &lt;header class&#x3D;&quot;page-header&quot;&gt;
+      &lt;div&gt;
+        &lt;h1&gt;Portal del Paciente&lt;/h1&gt;
+        &lt;p class&#x3D;&quot;subtitle&quot;&gt;
+          Bienvenido/a, &lt;strong&gt;{{ patientName() }}&lt;/strong&gt; (DNI: {{ patientDocumento() }})
+        &lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;header-badge&quot;&gt;
+        &lt;span class&#x3D;&quot;badge-role&quot;&gt;Atención Médica Clínica&lt;/span&gt;
+      &lt;/div&gt;
+    &lt;/header&gt;
+
+    &lt;!-- Mensajes de feedback --&gt;
+    @if (feedbackMessage()) {
+      &lt;div class&#x3D;&quot;alert&quot; [class.alert-success]&#x3D;&quot;feedbackType() &#x3D;&#x3D;&#x3D; &#x27;success&#x27;&quot; [class.alert-error]&#x3D;&quot;feedbackType() &#x3D;&#x3D;&#x3D; &#x27;error&#x27;&quot;&gt;
+        &lt;span&gt;{{ feedbackMessage() }}&lt;/span&gt;
+        &lt;button class&#x3D;&quot;alert-close&quot; (click)&#x3D;&quot;feedbackMessage.set(null)&quot;&gt;×&lt;/button&gt;
+      &lt;/div&gt;
+    }
+
+    &lt;!-- Pestañas de Navegación --&gt;
+    &lt;div class&#x3D;&quot;tabs-nav&quot;&gt;
+      &lt;button
+        class&#x3D;&quot;tab-btn&quot;
+        [class.active]&#x3D;&quot;activeTab() &#x3D;&#x3D;&#x3D; &#x27;turnos&#x27;&quot;
+        (click)&#x3D;&quot;activeTab.set(&#x27;turnos&#x27;)&quot;
+      &gt;
+        &lt;svg width&#x3D;&quot;18&quot; height&#x3D;&quot;18&quot; viewBox&#x3D;&quot;0 0 24 24&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;2&quot;&gt;
+          &lt;rect x&#x3D;&quot;3&quot; y&#x3D;&quot;4&quot; width&#x3D;&quot;18&quot; height&#x3D;&quot;18&quot; rx&#x3D;&quot;2&quot; ry&#x3D;&quot;2&quot;/&gt;
+          &lt;line x1&#x3D;&quot;16&quot; y1&#x3D;&quot;2&quot; x2&#x3D;&quot;16&quot; y2&#x3D;&quot;6&quot;/&gt;
+          &lt;line x1&#x3D;&quot;8&quot; y1&#x3D;&quot;2&quot; x2&#x3D;&quot;8&quot; y2&#x3D;&quot;6&quot;/&gt;
+          &lt;line x1&#x3D;&quot;3&quot; y1&#x3D;&quot;10&quot; x2&#x3D;&quot;21&quot; y2&#x3D;&quot;10&quot;/&gt;
+        &lt;/svg&gt;
+        &lt;span&gt;Mis Turnos Reservados ({{ misTurnos().length }})&lt;/span&gt;
+      &lt;/button&gt;
+      &lt;button
+        class&#x3D;&quot;tab-btn&quot;
+        [class.active]&#x3D;&quot;activeTab() &#x3D;&#x3D;&#x3D; &#x27;reservar&#x27;&quot;
+        (click)&#x3D;&quot;activeTab.set(&#x27;reservar&#x27;)&quot;
+      &gt;
+        &lt;svg width&#x3D;&quot;18&quot; height&#x3D;&quot;18&quot; viewBox&#x3D;&quot;0 0 24 24&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;2&quot;&gt;
+          &lt;line x1&#x3D;&quot;12&quot; y1&#x3D;&quot;5&quot; x2&#x3D;&quot;12&quot; y2&#x3D;&quot;19&quot;/&gt;
+          &lt;line x1&#x3D;&quot;5&quot; y1&#x3D;&quot;12&quot; x2&#x3D;&quot;19&quot; y2&#x3D;&quot;12&quot;/&gt;
+        &lt;/svg&gt;
+        &lt;span&gt;Reservar Nuevo Turno&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;!-- CONTENIDO PESTAÑA 1: MIS TURNOS --&gt;
+    @if (activeTab() &#x3D;&#x3D;&#x3D; &#x27;turnos&#x27;) {
+      &lt;div class&#x3D;&quot;turnos-card&quot;&gt;
+        &lt;div class&#x3D;&quot;card-header&quot;&gt;
+          &lt;h3&gt;Historial de Turnos y Próximas Citas&lt;/h3&gt;
+          &lt;button class&#x3D;&quot;btn-primary-sm&quot; (click)&#x3D;&quot;activeTab.set(&#x27;reservar&#x27;)&quot;&gt;
+            + Solicitar Turno
+          &lt;/button&gt;
+        &lt;/div&gt;
+
+        @if (isLoading()) {
+          &lt;div class&#x3D;&quot;loading-state&quot;&gt;
+            &lt;div class&#x3D;&quot;spinner&quot;&gt;&lt;/div&gt;
+            &lt;p&gt;Cargando sus turnos...&lt;/p&gt;
+          &lt;/div&gt;
+        } @else if (misTurnos().length &#x3D;&#x3D;&#x3D; 0) {
+          &lt;div class&#x3D;&quot;empty-state&quot;&gt;
+            &lt;svg width&#x3D;&quot;48&quot; height&#x3D;&quot;48&quot; viewBox&#x3D;&quot;0 0 24 24&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;1.5&quot;&gt;
+              &lt;rect x&#x3D;&quot;3&quot; y&#x3D;&quot;4&quot; width&#x3D;&quot;18&quot; height&#x3D;&quot;18&quot; rx&#x3D;&quot;2&quot; ry&#x3D;&quot;2&quot;/&gt;
+              &lt;line x1&#x3D;&quot;16&quot; y1&#x3D;&quot;2&quot; x2&#x3D;&quot;16&quot; y2&#x3D;&quot;6&quot;/&gt;
+              &lt;line x1&#x3D;&quot;8&quot; y1&#x3D;&quot;2&quot; x2&#x3D;&quot;8&quot; y2&#x3D;&quot;6&quot;/&gt;
+              &lt;line x1&#x3D;&quot;3&quot; y1&#x3D;&quot;10&quot; x2&#x3D;&quot;21&quot; y2&#x3D;&quot;10&quot;/&gt;
+            &lt;/svg&gt;
+            &lt;h4&gt;No posee turnos reservados&lt;/h4&gt;
+            &lt;p&gt;Reserve un turno médico clínico con hasta 30 días de anticipación.&lt;/p&gt;
+            &lt;button class&#x3D;&quot;btn-primary&quot; (click)&#x3D;&quot;activeTab.set(&#x27;reservar&#x27;)&quot;&gt;
+              Reservar mi primer turno
+            &lt;/button&gt;
+          &lt;/div&gt;
+        } @else {
+          &lt;div class&#x3D;&quot;table-responsive&quot;&gt;
+            &lt;table class&#x3D;&quot;turnos-table&quot;&gt;
+              &lt;thead&gt;
+                &lt;tr&gt;
+                  &lt;th&gt;Fecha y Hora&lt;/th&gt;
+                  &lt;th&gt;Médico Asignado&lt;/th&gt;
+                  &lt;th&gt;Matrícula&lt;/th&gt;
+                  &lt;th&gt;Valor Congelado&lt;/th&gt;
+                  &lt;th&gt;Estado&lt;/th&gt;
+                  &lt;th class&#x3D;&quot;text-right&quot;&gt;Acción&lt;/th&gt;
+                &lt;/tr&gt;
+              &lt;/thead&gt;
+              &lt;tbody&gt;
+                @for (turno of misTurnos(); track turno.id) {
+                  &lt;tr&gt;
+                    &lt;td class&#x3D;&quot;cell-time&quot;&gt;
+                      &lt;div class&#x3D;&quot;time-slot&quot;&gt;
+                        &lt;span class&#x3D;&quot;time-hours&quot;&gt;{{ formatSlotHour(turno.fecha_hora) }}&lt;/span&gt;
+                        &lt;span class&#x3D;&quot;time-date&quot;&gt;{{ formatFechaDisplay(turno.fecha_hora) }}&lt;/span&gt;
+                      &lt;/div&gt;
+                    &lt;/td&gt;
+                    &lt;td&gt;
+                      &lt;strong&gt;Dr/a. {{ turno.medico.usuario ? (turno.medico.usuario.nombres + &#x27; &#x27; + turno.medico.usuario.apellidos) : &#x27;Médico Clínico&#x27; }}&lt;/strong&gt;
+                    &lt;/td&gt;
+                    &lt;td&gt;{{ turno.medico.matricula }}&lt;/td&gt;
+                    &lt;td class&#x3D;&quot;cell-valor&quot;&gt;
+                      ${{ turno.valor_consulta | number }}
+                      &lt;span class&#x3D;&quot;tag-frozen&quot; title&#x3D;&quot;Valor congelado al momento de la reserva&quot;&gt;Congelado&lt;/span&gt;
+                    &lt;/td&gt;
+                    &lt;td&gt;
+                      &lt;span class&#x3D;&quot;status-badge&quot; [ngClass]&#x3D;&quot;getStatusBadgeClass(turno.estado)&quot;&gt;
+                        {{ getStatusLabel(turno.estado) }}
+                      &lt;/span&gt;
+                    &lt;/td&gt;
+                    &lt;td class&#x3D;&quot;text-right&quot;&gt;
+                      @if (turno.estado &#x3D;&#x3D;&#x3D; &#x27;PENDIENTE&#x27; || turno.estado &#x3D;&#x3D;&#x3D; &#x27;CONFIRMADA&#x27;) {
+                        @if (canCancelTurno(turno.fecha_hora)) {
+                          &lt;button
+                            class&#x3D;&quot;btn-cancel&quot;
+                            (click)&#x3D;&quot;cancelarTurno(turno)&quot;
+                            title&#x3D;&quot;Cancelar reserva (permitido hasta el día anterior)&quot;
+                          &gt;
+                            Cancelar Turno
+                          &lt;/button&gt;
+                        } @else {
+                          &lt;span
+                            class&#x3D;&quot;cancel-notice&quot;
+                            title&#x3D;&quot;Regla de negocio: la cancelación solo está permitida hasta el día anterior a la consulta&quot;
+                          &gt;
+                            Cancelación no permitida
+                            &lt;small&gt;(solo hasta el día anterior)&lt;/small&gt;
+                          &lt;/span&gt;
+                        }
+                      } @else if (turno.estado &#x3D;&#x3D;&#x3D; &#x27;CANCELADA&#x27;) {
+                        &lt;span class&#x3D;&quot;text-muted&quot;&gt;Turno cancelado&lt;/span&gt;
+                      } @else if (turno.estado &#x3D;&#x3D;&#x3D; &#x27;ASISTIO&#x27;) {
+                        &lt;span class&#x3D;&quot;text-success&quot;&gt;Atendido ✓&lt;/span&gt;
+                      }
+                    &lt;/td&gt;
+                  &lt;/tr&gt;
+                }
+              &lt;/tbody&gt;
+            &lt;/table&gt;
+          &lt;/div&gt;
+        }
+      &lt;/div&gt;
+    }
+
+    &lt;!-- CONTENIDO PESTAÑA 2: RESERVAR NUEVO TURNO --&gt;
+    @if (activeTab() &#x3D;&#x3D;&#x3D; &#x27;reservar&#x27;) {
+      &lt;div class&#x3D;&quot;reserva-card&quot;&gt;
+        &lt;div class&#x3D;&quot;card-header&quot;&gt;
+          &lt;h3&gt;Solicitud de Turno Médico Clínico&lt;/h3&gt;
+          &lt;p class&#x3D;&quot;header-note&quot;&gt;
+            Horario de atención: &lt;strong&gt;8:00 a 16:00 hs&lt;/strong&gt;. Turnos de 1 hora exacta. Máximo 30 días de anticipación.
+          &lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;reserva-body&quot;&gt;
+          &lt;form [formGroup]&#x3D;&quot;reservaForm&quot; (ngSubmit)&#x3D;&quot;onReservarSubmit()&quot; class&#x3D;&quot;reserva-form&quot;&gt;
+
+            &lt;!-- PASO 1: SELECCIONAR MÉDICO --&gt;
+            &lt;div class&#x3D;&quot;form-section&quot;&gt;
+              &lt;label class&#x3D;&quot;section-label&quot;&gt;
+                &lt;span class&#x3D;&quot;step-num&quot;&gt;1&lt;/span&gt;
+                Seleccione un Médico Clínico
+              &lt;/label&gt;
+              &lt;div class&#x3D;&quot;medicos-grid&quot;&gt;
+                @for (medico of medicos(); track medico.id) {
+                  &lt;div
+                    class&#x3D;&quot;medico-option&quot;
+                    [class.selected]&#x3D;&quot;reservaForm.value.id_medico &#x3D;&#x3D;&#x3D; medico.id&quot;
+                    (click)&#x3D;&quot;selectMedico(medico)&quot;
+                  &gt;
+                    &lt;div class&#x3D;&quot;medico-avatar&quot;&gt;
+                      &lt;svg width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; viewBox&#x3D;&quot;0 0 24 24&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;2&quot;&gt;
+                        &lt;path d&#x3D;&quot;M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2&quot;/&gt;
+                        &lt;circle cx&#x3D;&quot;12&quot; cy&#x3D;&quot;7&quot; r&#x3D;&quot;4&quot;/&gt;
+                      &lt;/svg&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;medico-info&quot;&gt;
+                      &lt;strong&gt;Dr/a. {{ medico.usuario ? (medico.usuario.nombres + &#x27; &#x27; + medico.usuario.apellidos) : &#x27;Médico General&#x27; }}&lt;/strong&gt;
+                      &lt;span class&#x3D;&quot;medico-mat&quot;&gt;Matrícula: {{ medico.matricula }}&lt;/span&gt;
+                      &lt;span class&#x3D;&quot;medico-fee&quot;&gt;Valor Consulta: ${{ medico.valor_consulta | number }}&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;check-icon&quot;&gt;✓&lt;/div&gt;
+                  &lt;/div&gt;
+                }
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- PASO 2: SELECCIONAR FECHA --&gt;
+            &lt;div class&#x3D;&quot;form-section&quot;&gt;
+              &lt;label class&#x3D;&quot;section-label&quot; for&#x3D;&quot;reservaFecha&quot;&gt;
+                &lt;span class&#x3D;&quot;step-num&quot;&gt;2&lt;/span&gt;
+                Seleccione la Fecha de la Consulta
+              &lt;/label&gt;
+              &lt;div class&#x3D;&quot;date-picker-wrap&quot;&gt;
+                &lt;input
+                  id&#x3D;&quot;reservaFecha&quot;
+                  type&#x3D;&quot;date&quot;
+                  formControlName&#x3D;&quot;fecha&quot;
+                  [min]&#x3D;&quot;minDate&quot;
+                  [max]&#x3D;&quot;maxDate&quot;
+                  (change)&#x3D;&quot;onFechaChange()&quot;
+                  class&#x3D;&quot;date-input-lg&quot;
+                /&gt;
+                &lt;small class&#x3D;&quot;hint-text&quot;&gt;
+                  Permitido desde hoy hasta el {{ formatDateDisplay(maxDate) }} (máximo 30 días).
+                &lt;/small&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;!-- PASO 3: SELECCIONAR HORARIO DISPONIBLE --&gt;
+            @if (reservaForm.value.id_medico &amp;&amp; reservaForm.value.fecha) {
+              &lt;div class&#x3D;&quot;form-section&quot;&gt;
+                &lt;label class&#x3D;&quot;section-label&quot;&gt;
+                  &lt;span class&#x3D;&quot;step-num&quot;&gt;3&lt;/span&gt;
+                  Seleccione el Horario (Turnos de 1 hora)
+                &lt;/label&gt;
+                &lt;p class&#x3D;&quot;sub-hint&quot;&gt;
+                  Los horarios marcados en gris ya se encuentran ocupados y no admiten reservas.
+                &lt;/p&gt;
+
+                &lt;div class&#x3D;&quot;slots-grid&quot;&gt;
+                  @for (slot of timeSlots(); track slot.hour) {
+                    &lt;button
+                      type&#x3D;&quot;button&quot;
+                      class&#x3D;&quot;slot-btn&quot;
+                      [class.occupied]&#x3D;&quot;slot.occupied&quot;
+                      [class.selected]&#x3D;&quot;reservaForm.value.hora &#x3D;&#x3D;&#x3D; slot.hour&quot;
+                      [disabled]&#x3D;&quot;slot.occupied&quot;
+                      (click)&#x3D;&quot;selectSlot(slot.hour)&quot;
+                    &gt;
+                      &lt;span class&#x3D;&quot;slot-time&quot;&gt;{{ slot.label }}&lt;/span&gt;
+                      &lt;span class&#x3D;&quot;slot-status&quot;&gt;
+                        {{ slot.occupied ? &#x27;Ocupado&#x27; : &#x27;Disponible&#x27; }}
+                      &lt;/span&gt;
+                    &lt;/button&gt;
+                  }
+                &lt;/div&gt;
+              &lt;/div&gt;
+            }
+
+            &lt;!-- RESUMEN Y CONGELACIÓN DE VALOR --&gt;
+            @if (selectedMedico() &amp;&amp; reservaForm.value.fecha &amp;&amp; reservaForm.value.hora !&#x3D;&#x3D; null) {
+              &lt;div class&#x3D;&quot;summary-box&quot;&gt;
+                &lt;div class&#x3D;&quot;summary-header&quot;&gt;
+                  &lt;svg width&#x3D;&quot;22&quot; height&#x3D;&quot;22&quot; viewBox&#x3D;&quot;0 0 24 24&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;2&quot;&gt;
+                    &lt;path d&#x3D;&quot;M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z&quot;/&gt;
+                  &lt;/svg&gt;
+                  &lt;h4&gt;Resumen del Turno y Tarifa&lt;/h4&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;summary-details&quot;&gt;
+                  &lt;div class&#x3D;&quot;summary-row&quot;&gt;
+                    &lt;span&gt;Médico Clínico:&lt;/span&gt;
+                    &lt;strong&gt;Dr/a. {{ selectedMedico()?.usuario?.nombres }} {{ selectedMedico()?.usuario?.apellidos }}&lt;/strong&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;summary-row&quot;&gt;
+                    &lt;span&gt;Fecha y Horario:&lt;/span&gt;
+                    &lt;strong&gt;{{ formatDateDisplay(reservaForm.value.fecha!) }} a las {{ formatHourString(reservaForm.value.hora!) }}&lt;/strong&gt;
+                  &lt;/div&gt;
+                  &lt;div class&#x3D;&quot;summary-row highlight&quot;&gt;
+                    &lt;span&gt;Valor de la Consulta:&lt;/span&gt;
+                    &lt;div class&#x3D;&quot;price-freeze&quot;&gt;
+                      &lt;span class&#x3D;&quot;price-value&quot;&gt;${{ selectedMedico()?.valor_consulta | number }}&lt;/span&gt;
+                      &lt;span class&#x3D;&quot;price-badge&quot;&gt;Valor Congelado&lt;/span&gt;
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                  &lt;p class&#x3D;&quot;freeze-policy&quot;&gt;
+                    * De acuerdo a las políticas de la clínica, el valor de la consulta se congela en este instante al confirmar su reserva.
+                  &lt;/p&gt;
+                &lt;/div&gt;
+
+                &lt;button
+                  type&#x3D;&quot;submit&quot;
+                  class&#x3D;&quot;btn-confirm-reserva&quot;
+                  [disabled]&#x3D;&quot;isSubmitting()&quot;
+                &gt;
+                  @if (isSubmitting()) {
+                    &lt;span class&#x3D;&quot;spinner-sm&quot;&gt;&lt;/span&gt;
+                    &lt;span&gt;Confirmando Reserva...&lt;/span&gt;
+                  } @else {
+                    &lt;span&gt;Confirmar Reserva de Turno&lt;/span&gt;
+                  }
+                &lt;/button&gt;
+              &lt;/div&gt;
+            }
+
+          &lt;/form&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    }
+
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/CommonModule" target="_blank" >CommonModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/FormsModule" target="_blank" >FormsModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#activeTab" >activeTab</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#allReservas" >allReservas</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#fb" >fb</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#feedbackMessage" >feedbackMessage</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#feedbackType" >feedbackType</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isLoading" >isLoading</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isSubmitting" >isSubmitting</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#maxDate" >maxDate</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#medicos" >medicos</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#medicosService" >medicosService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#minDate" >minDate</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#misTurnos" >misTurnos</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#patientDocumento" >patientDocumento</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#patientName" >patientName</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#reservaForm" >reservaForm</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#reservasService" >reservasService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#selectedMedico" >selectedMedico</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#timeSlots" >timeSlots</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#canCancelTurno" >canCancelTurno</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#cancelarTurno" >cancelarTurno</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#formatDateDisplay" >formatDateDisplay</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#formatFechaDisplay" >formatFechaDisplay</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#formatHourString" >formatHourString</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#formatSlotHour" >formatSlotHour</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#getStatusBadgeClass" >getStatusBadgeClass</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#getStatusLabel" >getStatusLabel</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#loadData" >loadData</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadPatientInfo" >loadPatientInfo</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onFechaChange" >onFechaChange</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#onReservarSubmit" >onReservarSubmit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#recalculateSlots" >recalculateSlots</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#selectMedico" >selectMedico</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#selectSlot" >selectSlot</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#showFeedback" >showFeedback</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="canCancelTurno"></a>
+                    <span class="name">
+                        <span ><b>canCancelTurno</b></span>
+                        <a href="#canCancelTurno"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>canCancelTurno(fechaHora: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="1043"
+                                    class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:1043</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>fechaHora</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cancelarTurno"></a>
+                    <span class="name">
+                        <span ><b>cancelarTurno</b></span>
+                        <a href="#cancelarTurno"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>cancelarTurno(turno: <a href="../interfaces/Reserva.html" target="_self">Reserva</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="1047"
+                                    class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:1047</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>turno</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Reserva.html" target="_self" >Reserva</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatDateDisplay"></a>
+                    <span class="name">
+                        <span ><b>formatDateDisplay</b></span>
+                        <a href="#formatDateDisplay"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>formatDateDisplay(ymd: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="1080"
+                                    class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:1080</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>ymd</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatFechaDisplay"></a>
+                    <span class="name">
+                        <span ><b>formatFechaDisplay</b></span>
+                        <a href="#formatFechaDisplay"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>formatFechaDisplay(isoDate: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="1075"
+                                    class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:1075</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>isoDate</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatHourString"></a>
+                    <span class="name">
+                        <span ><b>formatHourString</b></span>
+                        <a href="#formatHourString"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>formatHourString(hour: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="1086"
+                                    class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:1086</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>hour</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatSlotHour"></a>
+                    <span class="name">
+                        <span ><b>formatSlotHour</b></span>
+                        <a href="#formatSlotHour"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>formatSlotHour(isoDate: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="1068"
+                                    class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:1068</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>isoDate</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStatusBadgeClass"></a>
+                    <span class="name">
+                        <span ><b>getStatusBadgeClass</b></span>
+                        <a href="#getStatusBadgeClass"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStatusBadgeClass(estado: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="1090"
+                                    class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:1090</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>estado</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getStatusLabel"></a>
+                    <span class="name">
+                        <span ><b>getStatusLabel</b></span>
+                        <a href="#getStatusLabel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getStatusLabel(estado: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="1098"
+                                    class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:1098</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>estado</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadData"></a>
+                    <span class="name">
+                        <span ><b>loadData</b></span>
+                        <a href="#loadData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>loadData()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="893"
+                                    class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:893</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadPatientInfo"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadPatientInfo</b></span>
+                        <a href="#loadPatientInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadPatientInfo()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="885"
+                                    class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:885</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="880"
+                                    class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:880</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onFechaChange"></a>
+                    <span class="name">
+                        <span ><b>onFechaChange</b></span>
+                        <a href="#onFechaChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onFechaChange()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="932"
+                                    class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:932</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onReservarSubmit"></a>
+                    <span class="name">
+                        <span ><b>onReservarSubmit</b></span>
+                        <a href="#onReservarSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onReservarSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="982"
+                                    class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:982</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="recalculateSlots"></a>
+                    <span class="name">
+                        <span ><b>recalculateSlots</b></span>
+                        <a href="#recalculateSlots"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>recalculateSlots()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="940"
+                                    class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:940</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectMedico"></a>
+                    <span class="name">
+                        <span ><b>selectMedico</b></span>
+                        <a href="#selectMedico"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>selectMedico(medico: <a href="../interfaces/Medico.html" target="_self">Medico</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="926"
+                                    class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:926</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>medico</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Medico.html" target="_self" >Medico</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectSlot"></a>
+                    <span class="name">
+                        <span ><b>selectSlot</b></span>
+                        <a href="#selectSlot"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>selectSlot(hour: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="936"
+                                    class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:936</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>hour</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showFeedback"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>showFeedback</b></span>
+                        <a href="#showFeedback"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showFeedback(msg: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, type: "success" | "error")</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="1107"
+                                    class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:1107</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>msg</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>type</td>
+                                            <td>
+                                                        <code>&quot;success&quot; | &quot;error&quot;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activeTab"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>activeTab</b></span>
+                        <a href="#activeTab"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;&#x27;turnos&#x27; | &#x27;reservar&#x27;&gt;(&#x27;turnos&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="855" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:855</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="allReservas"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>allReservas</b></span>
+                        <a href="#allReservas"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;Reserva[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="858" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:858</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="851" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:851</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fb"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>fb</b></span>
+                        <a href="#fb"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(FormBuilder)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="850" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:850</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="feedbackMessage"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>feedbackMessage</b></span>
+                        <a href="#feedbackMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="862" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:862</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="feedbackType"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>feedbackType</b></span>
+                        <a href="#feedbackType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;&#x27;success&#x27; | &#x27;error&#x27;&gt;(&#x27;success&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="863" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:863</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isLoading"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isLoading</b></span>
+                        <a href="#isLoading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(true)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="860" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:860</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSubmitting"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isSubmitting</b></span>
+                        <a href="#isSubmitting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="861" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:861</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="maxDate"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>maxDate</b></span>
+                        <a href="#maxDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.reservasService.getMaxDate()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="872" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:872</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="medicos"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>medicos</b></span>
+                        <a href="#medicos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;Medico[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="857" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:857</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="medicosService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>medicosService</b></span>
+                        <a href="#medicosService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(MedicosService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="853" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:853</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="minDate"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>minDate</b></span>
+                        <a href="#minDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.reservasService.getMinDate()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="871" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:871</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="misTurnos"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>misTurnos</b></span>
+                        <a href="#misTurnos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;Reserva[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="856" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:856</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="patientDocumento"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>patientDocumento</b></span>
+                        <a href="#patientDocumento"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="866" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:866</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="patientName"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>patientName</b></span>
+                        <a href="#patientName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(&#x27;&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="865" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:865</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reservaForm"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>reservaForm</b></span>
+                        <a href="#reservaForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.fb.group({
+    id_medico: [null as number | null, [Validators.required]],
+    fecha: [&#x27;&#x27;, [Validators.required]],
+    hora: [null as number | null, [Validators.required]]
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="874" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:874</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reservasService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>reservasService</b></span>
+                        <a href="#reservasService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ReservasService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="852" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:852</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedMedico"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>selectedMedico</b></span>
+                        <a href="#selectedMedico"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;Medico | null&gt;(null)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="868" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:868</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="timeSlots"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>timeSlots</b></span>
+                        <a href="#timeSlots"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;{ hour: number; label: string; occupied: boolean }[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="869" class="link-to-prism">src/app/pages/paciente/paciente-dashboard.component.ts:869</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, inject, signal } from &#x27;@angular/core&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from &#x27;@angular/forms&#x27;;
+import { AuthService } from &#x27;../../services/auth.service&#x27;;
+import { ReservasService } from &#x27;../../services/reservas.service&#x27;;
+import { MedicosService } from &#x27;../../services/medicos.service&#x27;;
+import { Reserva, CreateReservaDto } from &#x27;../../models/reserva.model&#x27;;
+import { Medico } from &#x27;../../models/medico.model&#x27;;
+
+@Component({
+  selector: &#x27;app-paciente-dashboard&#x27;,
+  standalone: true,
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  template: &#x60;
+    &lt;div class&#x3D;&quot;dashboard-page&quot;&gt;
+      &lt;div class&#x3D;&quot;dashboard-container&quot;&gt;
+        &lt;!-- Encabezado del paciente --&gt;
+        &lt;header class&#x3D;&quot;page-header&quot;&gt;
+          &lt;div&gt;
+            &lt;h1&gt;Portal del Paciente&lt;/h1&gt;
+            &lt;p class&#x3D;&quot;subtitle&quot;&gt;
+              Bienvenido/a, &lt;strong&gt;{{ patientName() }}&lt;/strong&gt; (DNI: {{ patientDocumento() }})
+            &lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;header-badge&quot;&gt;
+            &lt;span class&#x3D;&quot;badge-role&quot;&gt;Atención Médica Clínica&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/header&gt;
+
+        &lt;!-- Mensajes de feedback --&gt;
+        @if (feedbackMessage()) {
+          &lt;div class&#x3D;&quot;alert&quot; [class.alert-success]&#x3D;&quot;feedbackType() &#x3D;&#x3D;&#x3D; &#x27;success&#x27;&quot; [class.alert-error]&#x3D;&quot;feedbackType() &#x3D;&#x3D;&#x3D; &#x27;error&#x27;&quot;&gt;
+            &lt;span&gt;{{ feedbackMessage() }}&lt;/span&gt;
+            &lt;button class&#x3D;&quot;alert-close&quot; (click)&#x3D;&quot;feedbackMessage.set(null)&quot;&gt;×&lt;/button&gt;
+          &lt;/div&gt;
+        }
+
+        &lt;!-- Pestañas de Navegación --&gt;
+        &lt;div class&#x3D;&quot;tabs-nav&quot;&gt;
+          &lt;button
+            class&#x3D;&quot;tab-btn&quot;
+            [class.active]&#x3D;&quot;activeTab() &#x3D;&#x3D;&#x3D; &#x27;turnos&#x27;&quot;
+            (click)&#x3D;&quot;activeTab.set(&#x27;turnos&#x27;)&quot;
+          &gt;
+            &lt;svg width&#x3D;&quot;18&quot; height&#x3D;&quot;18&quot; viewBox&#x3D;&quot;0 0 24 24&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;2&quot;&gt;
+              &lt;rect x&#x3D;&quot;3&quot; y&#x3D;&quot;4&quot; width&#x3D;&quot;18&quot; height&#x3D;&quot;18&quot; rx&#x3D;&quot;2&quot; ry&#x3D;&quot;2&quot;/&gt;
+              &lt;line x1&#x3D;&quot;16&quot; y1&#x3D;&quot;2&quot; x2&#x3D;&quot;16&quot; y2&#x3D;&quot;6&quot;/&gt;
+              &lt;line x1&#x3D;&quot;8&quot; y1&#x3D;&quot;2&quot; x2&#x3D;&quot;8&quot; y2&#x3D;&quot;6&quot;/&gt;
+              &lt;line x1&#x3D;&quot;3&quot; y1&#x3D;&quot;10&quot; x2&#x3D;&quot;21&quot; y2&#x3D;&quot;10&quot;/&gt;
+            &lt;/svg&gt;
+            &lt;span&gt;Mis Turnos Reservados ({{ misTurnos().length }})&lt;/span&gt;
+          &lt;/button&gt;
+          &lt;button
+            class&#x3D;&quot;tab-btn&quot;
+            [class.active]&#x3D;&quot;activeTab() &#x3D;&#x3D;&#x3D; &#x27;reservar&#x27;&quot;
+            (click)&#x3D;&quot;activeTab.set(&#x27;reservar&#x27;)&quot;
+          &gt;
+            &lt;svg width&#x3D;&quot;18&quot; height&#x3D;&quot;18&quot; viewBox&#x3D;&quot;0 0 24 24&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;2&quot;&gt;
+              &lt;line x1&#x3D;&quot;12&quot; y1&#x3D;&quot;5&quot; x2&#x3D;&quot;12&quot; y2&#x3D;&quot;19&quot;/&gt;
+              &lt;line x1&#x3D;&quot;5&quot; y1&#x3D;&quot;12&quot; x2&#x3D;&quot;19&quot; y2&#x3D;&quot;12&quot;/&gt;
+            &lt;/svg&gt;
+            &lt;span&gt;Reservar Nuevo Turno&lt;/span&gt;
+          &lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;!-- CONTENIDO PESTAÑA 1: MIS TURNOS --&gt;
+        @if (activeTab() &#x3D;&#x3D;&#x3D; &#x27;turnos&#x27;) {
+          &lt;div class&#x3D;&quot;turnos-card&quot;&gt;
+            &lt;div class&#x3D;&quot;card-header&quot;&gt;
+              &lt;h3&gt;Historial de Turnos y Próximas Citas&lt;/h3&gt;
+              &lt;button class&#x3D;&quot;btn-primary-sm&quot; (click)&#x3D;&quot;activeTab.set(&#x27;reservar&#x27;)&quot;&gt;
+                + Solicitar Turno
+              &lt;/button&gt;
+            &lt;/div&gt;
+
+            @if (isLoading()) {
+              &lt;div class&#x3D;&quot;loading-state&quot;&gt;
+                &lt;div class&#x3D;&quot;spinner&quot;&gt;&lt;/div&gt;
+                &lt;p&gt;Cargando sus turnos...&lt;/p&gt;
+              &lt;/div&gt;
+            } @else if (misTurnos().length &#x3D;&#x3D;&#x3D; 0) {
+              &lt;div class&#x3D;&quot;empty-state&quot;&gt;
+                &lt;svg width&#x3D;&quot;48&quot; height&#x3D;&quot;48&quot; viewBox&#x3D;&quot;0 0 24 24&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;1.5&quot;&gt;
+                  &lt;rect x&#x3D;&quot;3&quot; y&#x3D;&quot;4&quot; width&#x3D;&quot;18&quot; height&#x3D;&quot;18&quot; rx&#x3D;&quot;2&quot; ry&#x3D;&quot;2&quot;/&gt;
+                  &lt;line x1&#x3D;&quot;16&quot; y1&#x3D;&quot;2&quot; x2&#x3D;&quot;16&quot; y2&#x3D;&quot;6&quot;/&gt;
+                  &lt;line x1&#x3D;&quot;8&quot; y1&#x3D;&quot;2&quot; x2&#x3D;&quot;8&quot; y2&#x3D;&quot;6&quot;/&gt;
+                  &lt;line x1&#x3D;&quot;3&quot; y1&#x3D;&quot;10&quot; x2&#x3D;&quot;21&quot; y2&#x3D;&quot;10&quot;/&gt;
+                &lt;/svg&gt;
+                &lt;h4&gt;No posee turnos reservados&lt;/h4&gt;
+                &lt;p&gt;Reserve un turno médico clínico con hasta 30 días de anticipación.&lt;/p&gt;
+                &lt;button class&#x3D;&quot;btn-primary&quot; (click)&#x3D;&quot;activeTab.set(&#x27;reservar&#x27;)&quot;&gt;
+                  Reservar mi primer turno
+                &lt;/button&gt;
+              &lt;/div&gt;
+            } @else {
+              &lt;div class&#x3D;&quot;table-responsive&quot;&gt;
+                &lt;table class&#x3D;&quot;turnos-table&quot;&gt;
+                  &lt;thead&gt;
+                    &lt;tr&gt;
+                      &lt;th&gt;Fecha y Hora&lt;/th&gt;
+                      &lt;th&gt;Médico Asignado&lt;/th&gt;
+                      &lt;th&gt;Matrícula&lt;/th&gt;
+                      &lt;th&gt;Valor Congelado&lt;/th&gt;
+                      &lt;th&gt;Estado&lt;/th&gt;
+                      &lt;th class&#x3D;&quot;text-right&quot;&gt;Acción&lt;/th&gt;
+                    &lt;/tr&gt;
+                  &lt;/thead&gt;
+                  &lt;tbody&gt;
+                    @for (turno of misTurnos(); track turno.id) {
+                      &lt;tr&gt;
+                        &lt;td class&#x3D;&quot;cell-time&quot;&gt;
+                          &lt;div class&#x3D;&quot;time-slot&quot;&gt;
+                            &lt;span class&#x3D;&quot;time-hours&quot;&gt;{{ formatSlotHour(turno.fecha_hora) }}&lt;/span&gt;
+                            &lt;span class&#x3D;&quot;time-date&quot;&gt;{{ formatFechaDisplay(turno.fecha_hora) }}&lt;/span&gt;
+                          &lt;/div&gt;
+                        &lt;/td&gt;
+                        &lt;td&gt;
+                          &lt;strong&gt;Dr/a. {{ turno.medico.usuario ? (turno.medico.usuario.nombres + &#x27; &#x27; + turno.medico.usuario.apellidos) : &#x27;Médico Clínico&#x27; }}&lt;/strong&gt;
+                        &lt;/td&gt;
+                        &lt;td&gt;{{ turno.medico.matricula }}&lt;/td&gt;
+                        &lt;td class&#x3D;&quot;cell-valor&quot;&gt;
+                          \${{ turno.valor_consulta | number }}
+                          &lt;span class&#x3D;&quot;tag-frozen&quot; title&#x3D;&quot;Valor congelado al momento de la reserva&quot;&gt;Congelado&lt;/span&gt;
+                        &lt;/td&gt;
+                        &lt;td&gt;
+                          &lt;span class&#x3D;&quot;status-badge&quot; [ngClass]&#x3D;&quot;getStatusBadgeClass(turno.estado)&quot;&gt;
+                            {{ getStatusLabel(turno.estado) }}
+                          &lt;/span&gt;
+                        &lt;/td&gt;
+                        &lt;td class&#x3D;&quot;text-right&quot;&gt;
+                          @if (turno.estado &#x3D;&#x3D;&#x3D; &#x27;PENDIENTE&#x27; || turno.estado &#x3D;&#x3D;&#x3D; &#x27;CONFIRMADA&#x27;) {
+                            @if (canCancelTurno(turno.fecha_hora)) {
+                              &lt;button
+                                class&#x3D;&quot;btn-cancel&quot;
+                                (click)&#x3D;&quot;cancelarTurno(turno)&quot;
+                                title&#x3D;&quot;Cancelar reserva (permitido hasta el día anterior)&quot;
+                              &gt;
+                                Cancelar Turno
+                              &lt;/button&gt;
+                            } @else {
+                              &lt;span
+                                class&#x3D;&quot;cancel-notice&quot;
+                                title&#x3D;&quot;Regla de negocio: la cancelación solo está permitida hasta el día anterior a la consulta&quot;
+                              &gt;
+                                Cancelación no permitida
+                                &lt;small&gt;(solo hasta el día anterior)&lt;/small&gt;
+                              &lt;/span&gt;
+                            }
+                          } @else if (turno.estado &#x3D;&#x3D;&#x3D; &#x27;CANCELADA&#x27;) {
+                            &lt;span class&#x3D;&quot;text-muted&quot;&gt;Turno cancelado&lt;/span&gt;
+                          } @else if (turno.estado &#x3D;&#x3D;&#x3D; &#x27;ASISTIO&#x27;) {
+                            &lt;span class&#x3D;&quot;text-success&quot;&gt;Atendido ✓&lt;/span&gt;
+                          }
+                        &lt;/td&gt;
+                      &lt;/tr&gt;
+                    }
+                  &lt;/tbody&gt;
+                &lt;/table&gt;
+              &lt;/div&gt;
+            }
+          &lt;/div&gt;
+        }
+
+        &lt;!-- CONTENIDO PESTAÑA 2: RESERVAR NUEVO TURNO --&gt;
+        @if (activeTab() &#x3D;&#x3D;&#x3D; &#x27;reservar&#x27;) {
+          &lt;div class&#x3D;&quot;reserva-card&quot;&gt;
+            &lt;div class&#x3D;&quot;card-header&quot;&gt;
+              &lt;h3&gt;Solicitud de Turno Médico Clínico&lt;/h3&gt;
+              &lt;p class&#x3D;&quot;header-note&quot;&gt;
+                Horario de atención: &lt;strong&gt;8:00 a 16:00 hs&lt;/strong&gt;. Turnos de 1 hora exacta. Máximo 30 días de anticipación.
+              &lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;div class&#x3D;&quot;reserva-body&quot;&gt;
+              &lt;form [formGroup]&#x3D;&quot;reservaForm&quot; (ngSubmit)&#x3D;&quot;onReservarSubmit()&quot; class&#x3D;&quot;reserva-form&quot;&gt;
+                
+                &lt;!-- PASO 1: SELECCIONAR MÉDICO --&gt;
+                &lt;div class&#x3D;&quot;form-section&quot;&gt;
+                  &lt;label class&#x3D;&quot;section-label&quot;&gt;
+                    &lt;span class&#x3D;&quot;step-num&quot;&gt;1&lt;/span&gt;
+                    Seleccione un Médico Clínico
+                  &lt;/label&gt;
+                  &lt;div class&#x3D;&quot;medicos-grid&quot;&gt;
+                    @for (medico of medicos(); track medico.id) {
+                      &lt;div
+                        class&#x3D;&quot;medico-option&quot;
+                        [class.selected]&#x3D;&quot;reservaForm.value.id_medico &#x3D;&#x3D;&#x3D; medico.id&quot;
+                        (click)&#x3D;&quot;selectMedico(medico)&quot;
+                      &gt;
+                        &lt;div class&#x3D;&quot;medico-avatar&quot;&gt;
+                          &lt;svg width&#x3D;&quot;24&quot; height&#x3D;&quot;24&quot; viewBox&#x3D;&quot;0 0 24 24&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;2&quot;&gt;
+                            &lt;path d&#x3D;&quot;M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2&quot;/&gt;
+                            &lt;circle cx&#x3D;&quot;12&quot; cy&#x3D;&quot;7&quot; r&#x3D;&quot;4&quot;/&gt;
+                          &lt;/svg&gt;
+                        &lt;/div&gt;
+                        &lt;div class&#x3D;&quot;medico-info&quot;&gt;
+                          &lt;strong&gt;Dr/a. {{ medico.usuario ? (medico.usuario.nombres + &#x27; &#x27; + medico.usuario.apellidos) : &#x27;Médico General&#x27; }}&lt;/strong&gt;
+                          &lt;span class&#x3D;&quot;medico-mat&quot;&gt;Matrícula: {{ medico.matricula }}&lt;/span&gt;
+                          &lt;span class&#x3D;&quot;medico-fee&quot;&gt;Valor Consulta: \${{ medico.valor_consulta | number }}&lt;/span&gt;
+                        &lt;/div&gt;
+                        &lt;div class&#x3D;&quot;check-icon&quot;&gt;✓&lt;/div&gt;
+                      &lt;/div&gt;
+                    }
+                  &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;!-- PASO 2: SELECCIONAR FECHA --&gt;
+                &lt;div class&#x3D;&quot;form-section&quot;&gt;
+                  &lt;label class&#x3D;&quot;section-label&quot; for&#x3D;&quot;reservaFecha&quot;&gt;
+                    &lt;span class&#x3D;&quot;step-num&quot;&gt;2&lt;/span&gt;
+                    Seleccione la Fecha de la Consulta
+                  &lt;/label&gt;
+                  &lt;div class&#x3D;&quot;date-picker-wrap&quot;&gt;
+                    &lt;input
+                      id&#x3D;&quot;reservaFecha&quot;
+                      type&#x3D;&quot;date&quot;
+                      formControlName&#x3D;&quot;fecha&quot;
+                      [min]&#x3D;&quot;minDate&quot;
+                      [max]&#x3D;&quot;maxDate&quot;
+                      (change)&#x3D;&quot;onFechaChange()&quot;
+                      class&#x3D;&quot;date-input-lg&quot;
+                    /&gt;
+                    &lt;small class&#x3D;&quot;hint-text&quot;&gt;
+                      Permitido desde hoy hasta el {{ formatDateDisplay(maxDate) }} (máximo 30 días).
+                    &lt;/small&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;!-- PASO 3: SELECCIONAR HORARIO DISPONIBLE --&gt;
+                @if (reservaForm.value.id_medico &amp;&amp; reservaForm.value.fecha) {
+                  &lt;div class&#x3D;&quot;form-section&quot;&gt;
+                    &lt;label class&#x3D;&quot;section-label&quot;&gt;
+                      &lt;span class&#x3D;&quot;step-num&quot;&gt;3&lt;/span&gt;
+                      Seleccione el Horario (Turnos de 1 hora)
+                    &lt;/label&gt;
+                    &lt;p class&#x3D;&quot;sub-hint&quot;&gt;
+                      Los horarios marcados en gris ya se encuentran ocupados y no admiten reservas.
+                    &lt;/p&gt;
+
+                    &lt;div class&#x3D;&quot;slots-grid&quot;&gt;
+                      @for (slot of timeSlots(); track slot.hour) {
+                        &lt;button
+                          type&#x3D;&quot;button&quot;
+                          class&#x3D;&quot;slot-btn&quot;
+                          [class.occupied]&#x3D;&quot;slot.occupied&quot;
+                          [class.selected]&#x3D;&quot;reservaForm.value.hora &#x3D;&#x3D;&#x3D; slot.hour&quot;
+                          [disabled]&#x3D;&quot;slot.occupied&quot;
+                          (click)&#x3D;&quot;selectSlot(slot.hour)&quot;
+                        &gt;
+                          &lt;span class&#x3D;&quot;slot-time&quot;&gt;{{ slot.label }}&lt;/span&gt;
+                          &lt;span class&#x3D;&quot;slot-status&quot;&gt;
+                            {{ slot.occupied ? &#x27;Ocupado&#x27; : &#x27;Disponible&#x27; }}
+                          &lt;/span&gt;
+                        &lt;/button&gt;
+                      }
+                    &lt;/div&gt;
+                  &lt;/div&gt;
+                }
+
+                &lt;!-- RESUMEN Y CONGELACIÓN DE VALOR --&gt;
+                @if (selectedMedico() &amp;&amp; reservaForm.value.fecha &amp;&amp; reservaForm.value.hora !&#x3D;&#x3D; null) {
+                  &lt;div class&#x3D;&quot;summary-box&quot;&gt;
+                    &lt;div class&#x3D;&quot;summary-header&quot;&gt;
+                      &lt;svg width&#x3D;&quot;22&quot; height&#x3D;&quot;22&quot; viewBox&#x3D;&quot;0 0 24 24&quot; fill&#x3D;&quot;none&quot; stroke&#x3D;&quot;currentColor&quot; stroke-width&#x3D;&quot;2&quot;&gt;
+                        &lt;path d&#x3D;&quot;M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z&quot;/&gt;
+                      &lt;/svg&gt;
+                      &lt;h4&gt;Resumen del Turno y Tarifa&lt;/h4&gt;
+                    &lt;/div&gt;
+                    &lt;div class&#x3D;&quot;summary-details&quot;&gt;
+                      &lt;div class&#x3D;&quot;summary-row&quot;&gt;
+                        &lt;span&gt;Médico Clínico:&lt;/span&gt;
+                        &lt;strong&gt;Dr/a. {{ selectedMedico()?.usuario?.nombres }} {{ selectedMedico()?.usuario?.apellidos }}&lt;/strong&gt;
+                      &lt;/div&gt;
+                      &lt;div class&#x3D;&quot;summary-row&quot;&gt;
+                        &lt;span&gt;Fecha y Horario:&lt;/span&gt;
+                        &lt;strong&gt;{{ formatDateDisplay(reservaForm.value.fecha!) }} a las {{ formatHourString(reservaForm.value.hora!) }}&lt;/strong&gt;
+                      &lt;/div&gt;
+                      &lt;div class&#x3D;&quot;summary-row highlight&quot;&gt;
+                        &lt;span&gt;Valor de la Consulta:&lt;/span&gt;
+                        &lt;div class&#x3D;&quot;price-freeze&quot;&gt;
+                          &lt;span class&#x3D;&quot;price-value&quot;&gt;\${{ selectedMedico()?.valor_consulta | number }}&lt;/span&gt;
+                          &lt;span class&#x3D;&quot;price-badge&quot;&gt;Valor Congelado&lt;/span&gt;
+                        &lt;/div&gt;
+                      &lt;/div&gt;
+                      &lt;p class&#x3D;&quot;freeze-policy&quot;&gt;
+                        * De acuerdo a las políticas de la clínica, el valor de la consulta se congela en este instante al confirmar su reserva.
+                      &lt;/p&gt;
+                    &lt;/div&gt;
+
+                    &lt;button
+                      type&#x3D;&quot;submit&quot;
+                      class&#x3D;&quot;btn-confirm-reserva&quot;
+                      [disabled]&#x3D;&quot;isSubmitting()&quot;
+                    &gt;
+                      @if (isSubmitting()) {
+                        &lt;span class&#x3D;&quot;spinner-sm&quot;&gt;&lt;/span&gt;
+                        &lt;span&gt;Confirmando Reserva...&lt;/span&gt;
+                      } @else {
+                        &lt;span&gt;Confirmar Reserva de Turno&lt;/span&gt;
+                      }
+                    &lt;/button&gt;
+                  &lt;/div&gt;
+                }
+
+              &lt;/form&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        }
+
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &#x60;,
+  styles: [&#x60;
+    .dashboard-page {
+      padding: 2rem 1rem;
+      background: #f8fafc;
+      min-height: calc(100vh - 70px);
+    }
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .page-header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #0f172a;
+    }
+    .subtitle {
+      margin: 0.35rem 0 0;
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+    .badge-role {
+      background: #dcfce7;
+      color: #15803d;
+      padding: 0.4rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .tabs-nav {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      color: #475569;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover {
+      background: #f1f5f9;
+      color: #0284c7;
+    }
+    .tab-btn.active {
+      background: #0284c7;
+      color: white;
+      border-color: #0284c7;
+      box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.2);
+    }
+    .alert {
+      padding: 0.85rem 1.25rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+    .alert-success {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+    .alert-error {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+    .alert-close {
+      background: transparent;
+      border: none;
+      font-size: 1.25rem;
+      cursor: pointer;
+      color: inherit;
+    }
+    .turnos-card, .reserva-card {
+      background: white;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .card-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .card-header h3 {
+      margin: 0;
+      font-size: 1.15rem;
+      color: #0f172a;
+    }
+    .header-note {
+      margin: 0.25rem 0 0;
+      font-size: 0.85rem;
+      color: #64748b;
+      width: 100%;
+    }
+    .btn-primary-sm {
+      padding: 0.45rem 0.9rem;
+      background: #0284c7;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-primary-sm:hover { background: #0369a1; }
+    .table-responsive { overflow-x: auto; }
+    .turnos-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    .turnos-table th {
+      background: #f8fafc;
+      padding: 0.85rem 1.25rem;
+      font-weight: 600;
+      color: #475569;
+      border-bottom: 1px solid #e2e8f0;
+      white-space: nowrap;
+    }
+    .turnos-table td {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
+    }
+    .time-slot {
+      display: flex;
+      flex-direction: column;
+    }
+    .time-hours {
+      font-weight: 700;
+      color: #0284c7;
+      font-size: 0.95rem;
+    }
+    .time-date {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+    .cell-valor {
+      font-weight: 600;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .tag-frozen {
+      font-size: 0.65rem;
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .badge-activo { background: #e0f2fe; color: #0369a1; }
+    .badge-atendido { background: #dcfce7; color: #15803d; }
+    .badge-ausente { background: #fee2e2; color: #b91c1c; }
+    .btn-cancel {
+      padding: 0.4rem 0.85rem;
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      border-radius: 6px;
+      color: #e11d48;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-cancel:hover {
+      background: #e11d48;
+      color: white;
+    }
+    .cancel-notice {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+    .cancel-notice small {
+      font-size: 0.7rem;
+      color: #dc2626;
+    }
+    .text-right { text-align: right; }
+    .text-muted { color: #94a3b8; font-size: 0.85rem; }
+    .text-success { color: #16a34a; font-weight: 600; font-size: 0.85rem; }
+
+    /* Estilos Formulario de Reserva */
+    .reserva-body {
+      padding: 2rem;
+    }
+    .reserva-form {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .form-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: white;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .medicos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .medico-option {
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      background: #f8fafc;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .medico-option:hover {
+      border-color: #93c5fd;
+      background: white;
+    }
+    .medico-option.selected {
+      border-color: #0284c7;
+      background: #f0f9ff;
+    }
+    .medico-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #e0f2fe;
+      color: #0284c7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .medico-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .medico-info strong {
+      color: #0f172a;
+      font-size: 0.95rem;
+    }
+    .medico-mat {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+    .medico-fee {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #0284c7;
+      margin-top: 0.2rem;
+    }
+    .check-icon {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: white;
+      font-size: 0.75rem;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .medico-option.selected .check-icon {
+      display: flex;
+    }
+    .date-picker-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      max-width: 320px;
+    }
+    .date-input-lg {
+      padding: 0.75rem 1rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 1rem;
+      background: #f8fafc;
+      color: #0f172a;
+      outline: none;
+    }
+    .date-input-lg:focus {
+      border-color: #0284c7;
+      background: white;
+    }
+    .hint-text {
+      color: #64748b;
+      font-size: 0.8rem;
+    }
+    .sub-hint {
+      color: #64748b;
+      font-size: 0.85rem;
+      margin: 0;
+    }
+    .slots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.75rem;
+    }
+    .slot-btn {
+      padding: 0.85rem 0.5rem;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
+      background: white;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      transition: all 0.15s ease;
+    }
+    .slot-btn:hover:not(:disabled) {
+      border-color: #0284c7;
+      background: #f0f9ff;
+    }
+    .slot-btn.selected {
+      border-color: #0284c7;
+      background: #0284c7;
+      color: white;
+    }
+    .slot-btn.selected .slot-time,
+    .slot-btn.selected .slot-status {
+      color: white;
+    }
+    .slot-btn.occupied {
+      background: #f1f5f9;
+      border-color: #e2e8f0;
+      color: #94a3b8;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    .slot-time {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #0f172a;
+    }
+    .slot-status {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #10b981;
+    }
+    .slot-btn.occupied .slot-status {
+      color: #ef4444;
+    }
+    .summary-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .summary-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #166534;
+    }
+    .summary-header h4 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+    .summary-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+      color: #334155;
+    }
+    .summary-row.highlight {
+      padding-top: 0.6rem;
+      border-top: 1px dashed #86efac;
+      font-size: 1.05rem;
+    }
+    .price-freeze {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .price-value {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #15803d;
+    }
+    .price-badge {
+      background: #15803d;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+    .freeze-policy {
+      margin: 0.5rem 0 0;
+      font-size: 0.8rem;
+      color: #166534;
+      font-style: italic;
+    }
+    .btn-confirm-reserva {
+      padding: 0.9rem;
+      background: #15803d;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 6px -1px rgba(21, 128, 61, 0.3);
+    }
+    .btn-confirm-reserva:hover:not(:disabled) {
+      background: #166534;
+      transform: translateY(-1px);
+    }
+    .btn-confirm-reserva:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .spinner-sm {
+      width: 18px;
+      height: 18px;
+      border: 2px solid white;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    .empty-state, .loading-state {
+      padding: 3rem 1rem;
+      text-align: center;
+      color: #64748b;
+    }
+    .empty-state svg {
+      margin-bottom: 1rem;
+      color: #94a3b8;
+    }
+    .empty-state h4 {
+      margin: 0 0 0.5rem;
+      color: #0f172a;
+      font-size: 1.15rem;
+    }
+    .btn-primary {
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: #0284c7;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .spinner {
+      width: 28px;
+      height: 28px;
+      border: 3px solid #e2e8f0;
+      border-top-color: #0284c7;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  &#x60;]
+})
+export class PacienteDashboardComponent implements OnInit {
+  private readonly fb &#x3D; inject(FormBuilder);
+  private readonly authService &#x3D; inject(AuthService);
+  private readonly reservasService &#x3D; inject(ReservasService);
+  private readonly medicosService &#x3D; inject(MedicosService);
+
+  readonly activeTab &#x3D; signal&lt;&#x27;turnos&#x27; | &#x27;reservar&#x27;&gt;(&#x27;turnos&#x27;);
+  readonly misTurnos &#x3D; signal&lt;Reserva[]&gt;([]);
+  readonly medicos &#x3D; signal&lt;Medico[]&gt;([]);
+  readonly allReservas &#x3D; signal&lt;Reserva[]&gt;([]);
+
+  readonly isLoading &#x3D; signal(true);
+  readonly isSubmitting &#x3D; signal(false);
+  readonly feedbackMessage &#x3D; signal&lt;string | null&gt;(null);
+  readonly feedbackType &#x3D; signal&lt;&#x27;success&#x27; | &#x27;error&#x27;&gt;(&#x27;success&#x27;);
+
+  readonly patientName &#x3D; signal(&#x27;&#x27;);
+  readonly patientDocumento &#x3D; signal(&#x27;&#x27;);
+
+  readonly selectedMedico &#x3D; signal&lt;Medico | null&gt;(null);
+  readonly timeSlots &#x3D; signal&lt;{ hour: number; label: string; occupied: boolean }[]&gt;([]);
+
+  readonly minDate &#x3D; this.reservasService.getMinDate();
+  readonly maxDate &#x3D; this.reservasService.getMaxDate();
+
+  readonly reservaForm &#x3D; this.fb.group({
+    id_medico: [null as number | null, [Validators.required]],
+    fecha: [&#x27;&#x27;, [Validators.required]],
+    hora: [null as number | null, [Validators.required]]
+  });
+
+  ngOnInit(): void {
+    this.loadPatientInfo();
+    this.loadData();
+  }
+
+  private loadPatientInfo(): void {
+    const session &#x3D; this.authService.session;
+    if (session?.usuario) {
+      this.patientName.set(&#x60;${session.usuario.nombres} ${session.usuario.apellidos}&#x60;);
+      this.patientDocumento.set(session.usuario.documento);
+    }
+  }
+
+  loadData(): void {
+    this.isLoading.set(true);
+    // Cargamos médicos clínicos
+    this.medicosService.getMedicos().subscribe({
+      next: (meds) &#x3D;&gt; {
+        this.medicos.set(meds);
+      }
+    });
+
+    // Cargamos reservas
+    this.reservasService.getReservas().subscribe({
+      next: (reservas) &#x3D;&gt; {
+        this.allReservas.set(reservas);
+        const currentUserId &#x3D; this.authService.currentUserId;
+
+        // Filtrar solo las reservas de este paciente
+        const mine &#x3D; reservas.filter(
+          (r) &#x3D;&gt; r.paciente?.id &#x3D;&#x3D;&#x3D; currentUserId || r.paciente?.documento &#x3D;&#x3D;&#x3D; this.patientDocumento()
+        );
+
+        // Ordenar cronológicamente
+        mine.sort((a, b) &#x3D;&gt; new Date(a.fecha_hora).getTime() - new Date(b.fecha_hora).getTime());
+
+        this.misTurnos.set(mine);
+        this.isLoading.set(false);
+      },
+      error: () &#x3D;&gt; {
+        this.isLoading.set(false);
+        this.showFeedback(&#x27;Error al cargar información de turnos.&#x27;, &#x27;error&#x27;);
+      }
+    });
+  }
+
+  selectMedico(medico: Medico): void {
+    this.selectedMedico.set(medico);
+    this.reservaForm.patchValue({ id_medico: medico.id });
+    this.recalculateSlots();
+  }
+
+  onFechaChange(): void {
+    this.recalculateSlots();
+  }
+
+  selectSlot(hour: number): void {
+    this.reservaForm.patchValue({ hora: hour });
+  }
+
+  recalculateSlots(): void {
+    const medicoId &#x3D; this.reservaForm.value.id_medico;
+    const fecha &#x3D; this.reservaForm.value.fecha;
+
+    if (!medicoId || !fecha) {
+      this.timeSlots.set([]);
+      return;
+    }
+
+    const slots &#x3D; this.reservasService.HORARIOS_DISPONIBLES.map((hour) &#x3D;&gt; {
+      const occupied &#x3D; this.reservasService.isHorarioOcupado(
+        medicoId,
+        fecha,
+        hour,
+        this.allReservas()
+      );
+
+      // Si la fecha seleccionada es hoy, verificar que la hora no haya pasado
+      const hoy &#x3D; new Date();
+      const [y, m, d] &#x3D; fecha.split(&#x27;-&#x27;).map(Number);
+      const slotDate &#x3D; new Date(y, m - 1, d, hour, 0, 0);
+      const isPast &#x3D; slotDate.getTime() &lt;&#x3D; hoy.getTime();
+
+      return {
+        hour,
+        label: &#x60;${String(hour).padStart(2, &#x27;0&#x27;)}:00 hs&#x60;,
+        occupied: occupied || isPast
+      };
+    });
+
+    this.timeSlots.set(slots);
+
+    // Si la hora seleccionada ahora está ocupada, resetear selección
+    const currentHora &#x3D; this.reservaForm.value.hora;
+    if (currentHora !&#x3D;&#x3D; null) {
+      const currentSlot &#x3D; slots.find((s) &#x3D;&gt; s.hour &#x3D;&#x3D;&#x3D; currentHora);
+      if (!currentSlot || currentSlot.occupied) {
+        this.reservaForm.patchValue({ hora: null });
+      }
+    }
+  }
+
+  onReservarSubmit(): void {
+    if (this.reservaForm.invalid || !this.authService.currentUserId) {
+      return;
+    }
+
+    const { id_medico, fecha, hora } &#x3D; this.reservaForm.value;
+    if (!id_medico || !fecha || hora &#x3D;&#x3D;&#x3D; null || hora &#x3D;&#x3D;&#x3D; undefined) {
+      return;
+    }
+
+    // Doble validación de turno ocupado según regla de negocio
+    const isOccupied &#x3D; this.reservasService.isHorarioOcupado(
+      id_medico,
+      fecha,
+      hora,
+      this.allReservas()
+    );
+
+    if (isOccupied) {
+      this.showFeedback(&#x27;El horario seleccionado acaba de ser reservado. Por favor elija otro turno.&#x27;, &#x27;error&#x27;);
+      this.recalculateSlots();
+      return;
+    }
+
+    this.isSubmitting.set(true);
+
+    // Construir fecha ISO para el turno (ej: &quot;2026-10-25T09:00:00&quot;)
+    const [year, month, day] &#x3D; fecha.split(&#x27;-&#x27;).map(Number);
+    // Armamos fecha con hora local
+    const fechaObj &#x3D; new Date(year, month - 1, day, hora, 0, 0);
+    const fechaIso &#x3D; fechaObj.toISOString();
+
+    const dto: CreateReservaDto &#x3D; {
+      id_medico: id_medico,
+      id_paciente: this.authService.currentUserId,
+      fecha_hora: fechaIso
+    };
+
+    this.reservasService.createReserva(dto).subscribe({
+      next: (nuevaReserva) &#x3D;&gt; {
+        this.isSubmitting.set(false);
+        this.showFeedback(
+          &#x60;¡Turno reservado con éxito para el ${this.formatDateDisplay(fecha)} a las ${this.formatHourString(hora)}! Valor congelado: \$${this.selectedMedico()?.valor_consulta}&#x60;,
+          &#x27;success&#x27;
+        );
+        // Reset form
+        this.reservaForm.reset();
+        this.selectedMedico.set(null);
+        this.timeSlots.set([]);
+        // Recargar datos y cambiar a pestaña de turnos
+        this.loadData();
+        this.activeTab.set(&#x27;turnos&#x27;);
+      },
+      error: (err) &#x3D;&gt; {
+        this.isSubmitting.set(false);
+        const errMsg &#x3D; err.error?.message || &#x27;Error al procesar la reserva. Verifique que el horario no esté ocupado.&#x27;;
+        this.showFeedback(errMsg, &#x27;error&#x27;);
+      }
+    });
+  }
+
+  canCancelTurno(fechaHora: string): boolean {
+    return this.reservasService.canPatientCancel(fechaHora);
+  }
+
+  cancelarTurno(turno: Reserva): void {
+    if (!this.canCancelTurno(turno.fecha_hora)) {
+      this.showFeedback(&#x27;Solo se permite cancelar turnos hasta el día anterior a la consulta médica.&#x27;, &#x27;error&#x27;);
+      return;
+    }
+
+    if (!confirm(&#x27;¿Confirma que desea cancelar su turno reservado?&#x27;)) {
+      return;
+    }
+
+    this.reservasService.cancelarReserva(turno.id).subscribe({
+      next: () &#x3D;&gt; {
+        this.showFeedback(&#x27;Turno cancelado correctamente.&#x27;, &#x27;success&#x27;);
+        this.loadData();
+      },
+      error: () &#x3D;&gt; {
+        this.showFeedback(&#x27;Error al cancelar el turno. Intente nuevamente.&#x27;, &#x27;error&#x27;);
+      }
+    });
+  }
+
+  formatSlotHour(isoDate: string): string {
+    const d &#x3D; new Date(isoDate);
+    const start &#x3D; String(d.getHours()).padStart(2, &#x27;0&#x27;) + &#x27;:00&#x27;;
+    const end &#x3D; String(d.getHours() + 1).padStart(2, &#x27;0&#x27;) + &#x27;:00&#x27;;
+    return &#x60;${start} - ${end} hs&#x60;;
+  }
+
+  formatFechaDisplay(isoDate: string): string {
+    const d &#x3D; new Date(isoDate);
+    return &#x60;${String(d.getDate()).padStart(2, &#x27;0&#x27;)}/${String(d.getMonth() + 1).padStart(2, &#x27;0&#x27;)}/${d.getFullYear()}&#x60;;
+  }
+
+  formatDateDisplay(ymd: string): string {
+    if (!ymd) return &#x27;&#x27;;
+    const [y, m, d] &#x3D; ymd.split(&#x27;-&#x27;);
+    return &#x60;${d}/${m}/${y}&#x60;;
+  }
+
+  formatHourString(hour: number): string {
+    return &#x60;${String(hour).padStart(2, &#x27;0&#x27;)}:00 hs&#x60;;
+  }
+
+  getStatusBadgeClass(estado: string): string {
+    switch (estado) {
+      case &#x27;ASISTIO&#x27;: return &#x27;badge-atendido&#x27;;
+      case &#x27;CANCELADA&#x27;: return &#x27;badge-ausente&#x27;;
+      default: return &#x27;badge-activo&#x27;;
+    }
+  }
+
+  getStatusLabel(estado: string): string {
+    switch (estado) {
+      case &#x27;ASISTIO&#x27;: return &#x27;Atendido&#x27;;
+      case &#x27;CANCELADA&#x27;: return &#x27;Cancelado&#x27;;
+      case &#x27;CONFIRMADA&#x27;: return &#x27;Confirmado&#x27;;
+      default: return &#x27;Activo / Pendiente&#x27;;
+    }
+  }
+
+  private showFeedback(msg: string, type: &#x27;success&#x27; | &#x27;error&#x27;): void {
+    this.feedbackMessage.set(msg);
+    this.feedbackType.set(type);
+    setTimeout(() &#x3D;&gt; {
+      this.feedbackMessage.set(null);
+    }, 6000);
+  }
+}
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="styleData">
+            <pre class="line-numbers"><code class="language-scss">
+    .dashboard-page {
+      padding: 2rem 1rem;
+      background: #f8fafc;
+      min-height: calc(100vh - 70px);
+    }
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      padding: 1.5rem 2rem;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .page-header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #0f172a;
+    }
+    .subtitle {
+      margin: 0.35rem 0 0;
+      color: #64748b;
+      font-size: 0.95rem;
+    }
+    .badge-role {
+      background: #dcfce7;
+      color: #15803d;
+      padding: 0.4rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .tabs-nav {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .tab-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      color: #475569;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .tab-btn:hover {
+      background: #f1f5f9;
+      color: #0284c7;
+    }
+    .tab-btn.active {
+      background: #0284c7;
+      color: white;
+      border-color: #0284c7;
+      box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.2);
+    }
+    .alert {
+      padding: 0.85rem 1.25rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+    .alert-success {
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+    .alert-error {
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1px solid #fecaca;
+    }
+    .alert-close {
+      background: transparent;
+      border: none;
+      font-size: 1.25rem;
+      cursor: pointer;
+      color: inherit;
+    }
+    .turnos-card, .reserva-card {
+      background: white;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .card-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .card-header h3 {
+      margin: 0;
+      font-size: 1.15rem;
+      color: #0f172a;
+    }
+    .header-note {
+      margin: 0.25rem 0 0;
+      font-size: 0.85rem;
+      color: #64748b;
+      width: 100%;
+    }
+    .btn-primary-sm {
+      padding: 0.45rem 0.9rem;
+      background: #0284c7;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-primary-sm:hover { background: #0369a1; }
+    .table-responsive { overflow-x: auto; }
+    .turnos-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+    .turnos-table th {
+      background: #f8fafc;
+      padding: 0.85rem 1.25rem;
+      font-weight: 600;
+      color: #475569;
+      border-bottom: 1px solid #e2e8f0;
+      white-space: nowrap;
+    }
+    .turnos-table td {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
+    }
+    .time-slot {
+      display: flex;
+      flex-direction: column;
+    }
+    .time-hours {
+      font-weight: 700;
+      color: #0284c7;
+      font-size: 0.95rem;
+    }
+    .time-date {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+    .cell-valor {
+      font-weight: 600;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .tag-frozen {
+      font-size: 0.65rem;
+      background: #e0f2fe;
+      color: #0369a1;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
+    .badge-activo { background: #e0f2fe; color: #0369a1; }
+    .badge-atendido { background: #dcfce7; color: #15803d; }
+    .badge-ausente { background: #fee2e2; color: #b91c1c; }
+    .btn-cancel {
+      padding: 0.4rem 0.85rem;
+      background: #fff1f2;
+      border: 1px solid #fecdd3;
+      border-radius: 6px;
+      color: #e11d48;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-cancel:hover {
+      background: #e11d48;
+      color: white;
+    }
+    .cancel-notice {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+    .cancel-notice small {
+      font-size: 0.7rem;
+      color: #dc2626;
+    }
+    .text-right { text-align: right; }
+    .text-muted { color: #94a3b8; font-size: 0.85rem; }
+    .text-success { color: #16a34a; font-weight: 600; font-size: 0.85rem; }
+
+    /* Estilos Formulario de Reserva */
+    .reserva-body {
+      padding: 2rem;
+    }
+    .reserva-form {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .form-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: white;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .medicos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .medico-option {
+      border: 2px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      background: #f8fafc;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .medico-option:hover {
+      border-color: #93c5fd;
+      background: white;
+    }
+    .medico-option.selected {
+      border-color: #0284c7;
+      background: #f0f9ff;
+    }
+    .medico-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #e0f2fe;
+      color: #0284c7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .medico-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .medico-info strong {
+      color: #0f172a;
+      font-size: 0.95rem;
+    }
+    .medico-mat {
+      font-size: 0.75rem;
+      color: #64748b;
+    }
+    .medico-fee {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #0284c7;
+      margin-top: 0.2rem;
+    }
+    .check-icon {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #0284c7;
+      color: white;
+      font-size: 0.75rem;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .medico-option.selected .check-icon {
+      display: flex;
+    }
+    .date-picker-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      max-width: 320px;
+    }
+    .date-input-lg {
+      padding: 0.75rem 1rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 1rem;
+      background: #f8fafc;
+      color: #0f172a;
+      outline: none;
+    }
+    .date-input-lg:focus {
+      border-color: #0284c7;
+      background: white;
+    }
+    .hint-text {
+      color: #64748b;
+      font-size: 0.8rem;
+    }
+    .sub-hint {
+      color: #64748b;
+      font-size: 0.85rem;
+      margin: 0;
+    }
+    .slots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 0.75rem;
+    }
+    .slot-btn {
+      padding: 0.85rem 0.5rem;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
+      background: white;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      transition: all 0.15s ease;
+    }
+    .slot-btn:hover:not(:disabled) {
+      border-color: #0284c7;
+      background: #f0f9ff;
+    }
+    .slot-btn.selected {
+      border-color: #0284c7;
+      background: #0284c7;
+      color: white;
+    }
+    .slot-btn.selected .slot-time,
+    .slot-btn.selected .slot-status {
+      color: white;
+    }
+    .slot-btn.occupied {
+      background: #f1f5f9;
+      border-color: #e2e8f0;
+      color: #94a3b8;
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+    .slot-time {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #0f172a;
+    }
+    .slot-status {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #10b981;
+    }
+    .slot-btn.occupied .slot-status {
+      color: #ef4444;
+    }
+    .summary-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .summary-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #166534;
+    }
+    .summary-header h4 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+    .summary-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+      color: #334155;
+    }
+    .summary-row.highlight {
+      padding-top: 0.6rem;
+      border-top: 1px dashed #86efac;
+      font-size: 1.05rem;
+    }
+    .price-freeze {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .price-value {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #15803d;
+    }
+    .price-badge {
+      background: #15803d;
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+    .freeze-policy {
+      margin: 0.5rem 0 0;
+      font-size: 0.8rem;
+      color: #166534;
+      font-style: italic;
+    }
+    .btn-confirm-reserva {
+      padding: 0.9rem;
+      background: #15803d;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 6px -1px rgba(21, 128, 61, 0.3);
+    }
+    .btn-confirm-reserva:hover:not(:disabled) {
+      background: #166534;
+      transform: translateY(-1px);
+    }
+    .btn-confirm-reserva:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .spinner-sm {
+      width: 18px;
+      height: 18px;
+      border: 2px solid white;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    .empty-state, .loading-state {
+      padding: 3rem 1rem;
+      text-align: center;
+      color: #64748b;
+    }
+    .empty-state svg {
+      margin-bottom: 1rem;
+      color: #94a3b8;
+    }
+    .empty-state h4 {
+      margin: 0 0 0.5rem;
+      color: #0f172a;
+      font-size: 1.15rem;
+    }
+    .btn-primary {
+      margin-top: 1rem;
+      padding: 0.75rem 1.5rem;
+      background: #0284c7;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .spinner {
+      width: 28px;
+      height: 28px;
+      border: 3px solid #e2e8f0;
+      border-top-color: #0284c7;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="dashboard-page">  <div class="dashboard-container">    <!-- Encabezado del paciente -->    <header class="page-header">      <div>        <h1>Portal del Paciente</h1>        <p class="subtitle">          Bienvenido/a, <strong>{{ patientName() }}</strong> (DNI: {{ patientDocumento() }})        </p>      </div>      <div class="header-badge">        <span class="badge-role">Atención Médica Clínica</span>      </div>    </header>    <!-- Mensajes de feedback -->    @if (feedbackMessage()) {      <div class="alert" [class.alert-success]="feedbackType() === \'success\'" [class.alert-error]="feedbackType() === \'error\'">        <span>{{ feedbackMessage() }}</span>        <button class="alert-close" (click)="feedbackMessage.set(null)">×</button>      </div>    }    <!-- Pestañas de Navegación -->    <div class="tabs-nav">      <button        class="tab-btn"        [class.active]="activeTab() === \'turnos\'"        (click)="activeTab.set(\'turnos\')"      >        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>          <line x1="16" y1="2" x2="16" y2="6"/>          <line x1="8" y1="2" x2="8" y2="6"/>          <line x1="3" y1="10" x2="21" y2="10"/>        </svg>        <span>Mis Turnos Reservados ({{ misTurnos().length }})</span>      </button>      <button        class="tab-btn"        [class.active]="activeTab() === \'reservar\'"        (click)="activeTab.set(\'reservar\')"      >        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">          <line x1="12" y1="5" x2="12" y2="19"/>          <line x1="5" y1="12" x2="19" y2="12"/>        </svg>        <span>Reservar Nuevo Turno</span>      </button>    </div>    <!-- CONTENIDO PESTAÑA 1: MIS TURNOS -->    @if (activeTab() === \'turnos\') {      <div class="turnos-card">        <div class="card-header">          <h3>Historial de Turnos y Próximas Citas</h3>          <button class="btn-primary-sm" (click)="activeTab.set(\'reservar\')">            + Solicitar Turno          </button>        </div>        @if (isLoading()) {          <div class="loading-state">            <div class="spinner"></div>            <p>Cargando sus turnos...</p>          </div>        } @else if (misTurnos().length === 0) {          <div class="empty-state">            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>              <line x1="16" y1="2" x2="16" y2="6"/>              <line x1="8" y1="2" x2="8" y2="6"/>              <line x1="3" y1="10" x2="21" y2="10"/>            </svg>            <h4>No posee turnos reservados</h4>            <p>Reserve un turno médico clínico con hasta 30 días de anticipación.</p>            <button class="btn-primary" (click)="activeTab.set(\'reservar\')">              Reservar mi primer turno            </button>          </div>        } @else {          <div class="table-responsive">            <table class="turnos-table">              <thead>                <tr>                  <th>Fecha y Hora</th>                  <th>Médico Asignado</th>                  <th>Matrícula</th>                  <th>Valor Congelado</th>                  <th>Estado</th>                  <th class="text-right">Acción</th>                </tr>              </thead>              <tbody>                @for (turno of misTurnos(); track turno.id) {                  <tr>                    <td class="cell-time">                      <div class="time-slot">                        <span class="time-hours">{{ formatSlotHour(turno.fecha_hora) }}</span>                        <span class="time-date">{{ formatFechaDisplay(turno.fecha_hora) }}</span>                      </div>                    </td>                    <td>                      <strong>Dr/a. {{ turno.medico.usuario ? (turno.medico.usuario.nombres + \' \' + turno.medico.usuario.apellidos) : \'Médico Clínico\' }}</strong>                    </td>                    <td>{{ turno.medico.matricula }}</td>                    <td class="cell-valor">                      ${{ turno.valor_consulta | number }}                      <span class="tag-frozen" title="Valor congelado al momento de la reserva">Congelado</span>                    </td>                    <td>                      <span class="status-badge" [ngClass]="getStatusBadgeClass(turno.estado)">                        {{ getStatusLabel(turno.estado) }}                      </span>                    </td>                    <td class="text-right">                      @if (turno.estado === \'PENDIENTE\' || turno.estado === \'CONFIRMADA\') {                        @if (canCancelTurno(turno.fecha_hora)) {                          <button                            class="btn-cancel"                            (click)="cancelarTurno(turno)"                            title="Cancelar reserva (permitido hasta el día anterior)"                          >                            Cancelar Turno                          </button>                        } @else {                          <span                            class="cancel-notice"                            title="Regla de negocio: la cancelación solo está permitida hasta el día anterior a la consulta"                          >                            Cancelación no permitida                            <small>(solo hasta el día anterior)</small>                          </span>                        }                      } @else if (turno.estado === \'CANCELADA\') {                        <span class="text-muted">Turno cancelado</span>                      } @else if (turno.estado === \'ASISTIO\') {                        <span class="text-success">Atendido ✓</span>                      }                    </td>                  </tr>                }              </tbody>            </table>          </div>        }      </div>    }    <!-- CONTENIDO PESTAÑA 2: RESERVAR NUEVO TURNO -->    @if (activeTab() === \'reservar\') {      <div class="reserva-card">        <div class="card-header">          <h3>Solicitud de Turno Médico Clínico</h3>          <p class="header-note">            Horario de atención: <strong>8:00 a 16:00 hs</strong>. Turnos de 1 hora exacta. Máximo 30 días de anticipación.          </p>        </div>        <div class="reserva-body">          <form [formGroup]="reservaForm" (ngSubmit)="onReservarSubmit()" class="reserva-form">            <!-- PASO 1: SELECCIONAR MÉDICO -->            <div class="form-section">              <label class="section-label">                <span class="step-num">1</span>                Seleccione un Médico Clínico              </label>              <div class="medicos-grid">                @for (medico of medicos(); track medico.id) {                  <div                    class="medico-option"                    [class.selected]="reservaForm.value.id_medico === medico.id"                    (click)="selectMedico(medico)"                  >                    <div class="medico-avatar">                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>                        <circle cx="12" cy="7" r="4"/>                      </svg>                    </div>                    <div class="medico-info">                      <strong>Dr/a. {{ medico.usuario ? (medico.usuario.nombres + \' \' + medico.usuario.apellidos) : \'Médico General\' }}</strong>                      <span class="medico-mat">Matrícula: {{ medico.matricula }}</span>                      <span class="medico-fee">Valor Consulta: ${{ medico.valor_consulta | number }}</span>                    </div>                    <div class="check-icon">✓</div>                  </div>                }              </div>            </div>            <!-- PASO 2: SELECCIONAR FECHA -->            <div class="form-section">              <label class="section-label" for="reservaFecha">                <span class="step-num">2</span>                Seleccione la Fecha de la Consulta              </label>              <div class="date-picker-wrap">                <input                  id="reservaFecha"                  type="date"                  formControlName="fecha"                  [min]="minDate"                  [max]="maxDate"                  (change)="onFechaChange()"                  class="date-input-lg"                />                <small class="hint-text">                  Permitido desde hoy hasta el {{ formatDateDisplay(maxDate) }} (máximo 30 días).                </small>              </div>            </div>            <!-- PASO 3: SELECCIONAR HORARIO DISPONIBLE -->            @if (reservaForm.value.id_medico && reservaForm.value.fecha) {              <div class="form-section">                <label class="section-label">                  <span class="step-num">3</span>                  Seleccione el Horario (Turnos de 1 hora)                </label>                <p class="sub-hint">                  Los horarios marcados en gris ya se encuentran ocupados y no admiten reservas.                </p>                <div class="slots-grid">                  @for (slot of timeSlots(); track slot.hour) {                    <button                      type="button"                      class="slot-btn"                      [class.occupied]="slot.occupied"                      [class.selected]="reservaForm.value.hora === slot.hour"                      [disabled]="slot.occupied"                      (click)="selectSlot(slot.hour)"                    >                      <span class="slot-time">{{ slot.label }}</span>                      <span class="slot-status">                        {{ slot.occupied ? \'Ocupado\' : \'Disponible\' }}                      </span>                    </button>                  }                </div>              </div>            }            <!-- RESUMEN Y CONGELACIÓN DE VALOR -->            @if (selectedMedico() && reservaForm.value.fecha && reservaForm.value.hora !== null) {              <div class="summary-box">                <div class="summary-header">                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>                  </svg>                  <h4>Resumen del Turno y Tarifa</h4>                </div>                <div class="summary-details">                  <div class="summary-row">                    <span>Médico Clínico:</span>                    <strong>Dr/a. {{ selectedMedico()?.usuario?.nombres }} {{ selectedMedico()?.usuario?.apellidos }}</strong>                  </div>                  <div class="summary-row">                    <span>Fecha y Horario:</span>                    <strong>{{ formatDateDisplay(reservaForm.value.fecha!) }} a las {{ formatHourString(reservaForm.value.hora!) }}</strong>                  </div>                  <div class="summary-row highlight">                    <span>Valor de la Consulta:</span>                    <div class="price-freeze">                      <span class="price-value">${{ selectedMedico()?.valor_consulta | number }}</span>                      <span class="price-badge">Valor Congelado</span>                    </div>                  </div>                  <p class="freeze-policy">                    * De acuerdo a las políticas de la clínica, el valor de la consulta se congela en este instante al confirmar su reserva.                  </p>                </div>                <button                  type="submit"                  class="btn-confirm-reserva"                  [disabled]="isSubmitting()"                >                  @if (isSubmitting()) {                    <span class="spinner-sm"></span>                    <span>Confirmando Reserva...</span>                  } @else {                    <span>Confirmar Reserva de Turno</span>                  }                </button>              </div>            }          </form>        </div>      </div>    }  </div></div></div>'
+    var COMPONENTS = [{'name': 'AdminDashboardComponent', 'selector': 'app-admin-dashboard'},{'name': 'App', 'selector': 'app-root'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MedicoDashboardComponent', 'selector': 'app-medico-dashboard'},{'name': 'NavbarComponent', 'selector': 'app-navbar'},{'name': 'PacienteDashboardComponent', 'selector': 'app-paciente-dashboard'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'PacienteDashboardComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PacienteDashboardComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
