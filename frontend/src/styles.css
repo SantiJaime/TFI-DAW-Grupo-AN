@@ -24,7 +24,6 @@ a {
   text-decoration: none;
 }
 
-/* Layout común de los paneles (paciente, médico, administrador) */
 .panel {
   width: 100%;
   max-width: 1200px;

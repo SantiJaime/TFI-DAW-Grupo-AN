@@ -25,7 +25,6 @@ export interface Reserva {
 
 export interface CreateReservaRequest {
   id_medico: number;
-  /** Obligatorio solo para administradores; para pacientes se toma del token */
   id_paciente?: number;
   fecha_hora: string;
 }

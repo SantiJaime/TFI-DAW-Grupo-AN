@@ -74,7 +74,6 @@ export class PanelAdmin implements OnInit {
     estado: new FormControl<EstadoReserva | null>(null),
   });
 
-  // Edición del valor de la consulta
   protected readonly medicoEditando = signal<Medico | null>(null);
   protected readonly guardandoValor = signal(false);
   protected readonly formValor = new FormGroup({
@@ -122,7 +121,8 @@ export class PanelAdmin implements OnInit {
             });
             this.cargarReservas();
           },
-          error: (err: HttpErrorResponse) => this.mostrarError(err, 'No se pudo cancelar el turno.'),
+          error: (err: HttpErrorResponse) =>
+            this.mostrarError(err, 'No se pudo cancelar el turno.'),
         });
       },
     });
@@ -154,7 +154,9 @@ export class PanelAdmin implements OnInit {
     this.medicosService.updateValorConsulta(medico.id, { valor_consulta: valor }).subscribe({
       next: (actualizado) => {
         this.guardandoValor.set(false);
-        this.medicos.update((lista) => lista.map((m) => (m.id === actualizado.id ? actualizado : m)));
+        this.medicos.update((lista) =>
+          lista.map((m) => (m.id === actualizado.id ? actualizado : m)),
+        );
         this.messageService.add({
           severity: 'success',
           summary: 'Valor actualizado',
@@ -181,7 +183,9 @@ export class PanelAdmin implements OnInit {
     this.reservasService.getReservas(filtro).subscribe({
       next: (reservas) => {
         this.reservas.set(
-          reservas.sort((a, b) => new Date(a.fecha_hora).getTime() - new Date(b.fecha_hora).getTime()),
+          reservas.sort(
+            (a, b) => new Date(a.fecha_hora).getTime() - new Date(b.fecha_hora).getTime(),
+          ),
         );
         this.cargando.set(false);
       },
@@ -195,7 +199,8 @@ export class PanelAdmin implements OnInit {
   private cargarMedicos(): void {
     this.medicosService.getMedicos().subscribe({
       next: (medicos) => this.medicos.set(medicos),
-      error: (err: HttpErrorResponse) => this.mostrarError(err, 'No se pudieron cargar los médicos.'),
+      error: (err: HttpErrorResponse) =>
+        this.mostrarError(err, 'No se pudieron cargar los médicos.'),
     });
   }
 

@@ -12,7 +12,6 @@
     </p-tablist>
 
     <p-tabpanels>
-      <!-- Listado de turnos con filtros (se aplican en el backend) -->
       <p-tabpanel value="turnos">
         <form [formGroup]="filtros" class="panel-barra">
           <div class="campo">
@@ -112,7 +111,6 @@
         </p-table>
       </p-tabpanel>
 
-      <!-- Reserva a nombre de un paciente -->
       <p-tabpanel value="reservar">
         <p-card
           header="Nueva reserva"
@@ -126,7 +124,6 @@
         </p-card>
       </p-tabpanel>
 
-      <!-- Valores de consulta -->
       <p-tabpanel value="medicos">
         <p-table [value]="medicos()" dataKey="id">
           <ng-template #header>

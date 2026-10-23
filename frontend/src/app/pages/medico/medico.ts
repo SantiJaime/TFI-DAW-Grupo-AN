@@ -126,7 +126,9 @@ export class PanelMedico implements OnInit {
     this.reservasService.getMisTurnos(formatearYMD(this.form.controls.fecha.value)).subscribe({
       next: (turnos) => {
         this.turnos.set(
-          turnos.sort((a, b) => new Date(a.fecha_hora).getTime() - new Date(b.fecha_hora).getTime()),
+          turnos.sort(
+            (a, b) => new Date(a.fecha_hora).getTime() - new Date(b.fecha_hora).getTime(),
+          ),
         );
         this.cargando.set(false);
       },

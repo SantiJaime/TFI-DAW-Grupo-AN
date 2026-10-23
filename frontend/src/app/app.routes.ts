@@ -35,7 +35,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/admin/admin').then((m) => m.PanelAdmin),
   },
   {
-    // Redirige al panel que corresponde al rol del usuario logueado
     path: 'inicio',
     redirectTo: () => {
       const rol = inject(AuthService).usuario()?.rol;

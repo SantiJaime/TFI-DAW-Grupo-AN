@@ -1,6 +1,15 @@
 import { DecimalPipe, DatePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, computed, DestroyRef, inject, input, OnInit, output, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  input,
+  OnInit,
+  output,
+  signal,
+} from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
@@ -36,7 +45,6 @@ export class FormReserva implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
 
   readonly medicos = input.required<Medico[]>();
-  /** Si se indica, se muestra el selector de paciente (reserva hecha por el administrador) */
   readonly pacientes = input<Usuario[] | null>(null);
   readonly reservada = output<Reserva>();
 
@@ -139,7 +147,6 @@ export class FormReserva implements OnInit {
             summary: 'No se pudo reservar',
             detail: mensajeError(err, 'Ocurrió un error al reservar el turno.'),
           });
-          // Si otro usuario ocupó el horario, se actualiza la grilla
           if (err.status === 409) {
             this.cargarHorarios();
           }

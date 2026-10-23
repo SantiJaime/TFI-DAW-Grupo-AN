@@ -50,7 +50,8 @@ export class PanelPaciente implements OnInit {
     this.cargarTurnos();
     this.medicosService.getMedicos().subscribe({
       next: (medicos) => this.medicos.set(medicos),
-      error: (err: HttpErrorResponse) => this.mostrarError(err, 'No se pudieron cargar los médicos.'),
+      error: (err: HttpErrorResponse) =>
+        this.mostrarError(err, 'No se pudieron cargar los médicos.'),
     });
   }
 
@@ -78,7 +79,8 @@ export class PanelPaciente implements OnInit {
             });
             this.cargarTurnos();
           },
-          error: (err: HttpErrorResponse) => this.mostrarError(err, 'No se pudo cancelar el turno.'),
+          error: (err: HttpErrorResponse) =>
+            this.mostrarError(err, 'No se pudo cancelar el turno.'),
         });
       },
     });
@@ -94,7 +96,9 @@ export class PanelPaciente implements OnInit {
     this.reservasService.getMisReservas().subscribe({
       next: (turnos) => {
         this.turnos.set(
-          turnos.sort((a, b) => new Date(a.fecha_hora).getTime() - new Date(b.fecha_hora).getTime()),
+          turnos.sort(
+            (a, b) => new Date(a.fecha_hora).getTime() - new Date(b.fecha_hora).getTime(),
+          ),
         );
         this.cargando.set(false);
       },
