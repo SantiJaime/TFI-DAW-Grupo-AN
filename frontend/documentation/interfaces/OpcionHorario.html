@@ -123,12 +123,12 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  AuthResponseDto</li>
+  OpcionHorario</li>
 </ol>
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/models/auth.model.ts</code>
+    <code>src/app/components/form-reserva/form-reserva.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -170,13 +170,18 @@
                 <td class="col-md-9">
                     <ul class="index-list">
                         <li>
-                                <a href="#access_token" class="reference-link ">
-                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">access_token</span>
+                                <a href="#etiqueta" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">etiqueta</span>
                                 </a>
                         </li>
                         <li>
-                                <a href="#usuario" class="reference-link ">
-                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">usuario</span>
+                                <a href="#fecha_hora" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">fecha_hora</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#ocupado" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">ocupado</span>
                                 </a>
                         </li>
                     </ul>
@@ -194,9 +199,9 @@
                 <tbody>
                         <tr>
                             <td class="col-md-4">
-                                <a name="access_token"></a>
-                                <span class="name "><b>access_token</b>
-                                    <a href="#access_token">
+                                <a name="etiqueta"></a>
+                                <span class="name "><b>etiqueta</b>
+                                    <a href="#etiqueta">
                                         <span class="icon ion-ios-link"></span>
                                     </a>
                                 </span>
@@ -204,7 +209,7 @@
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                <code>access_token:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                <code>etiqueta:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                             </td>
                         </tr>
@@ -223,7 +228,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/models/auth.model.ts:9</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:31</a></div>
                                 </td>
                             </tr>
 
@@ -233,9 +238,9 @@
                 <tbody>
                         <tr>
                             <td class="col-md-4">
-                                <a name="usuario"></a>
-                                <span class="name "><b>usuario</b>
-                                    <a href="#usuario">
+                                <a name="fecha_hora"></a>
+                                <span class="name "><b>fecha_hora</b>
+                                    <a href="#fecha_hora">
                                         <span class="icon ion-ios-link"></span>
                                     </a>
                                 </span>
@@ -243,7 +248,7 @@
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                <code>usuario:         <code><a href="../interfaces/Usuario.html" target="_self" >{ id: number; rol: RolUsuario }</a></code>
+                                <code>fecha_hora:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                             </td>
                         </tr>
@@ -251,35 +256,57 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <i>Type : </i>        <code><a href="../interfaces/Usuario.html" target="_self" >{ id: number; rol: RolUsuario }</a></code>
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                 </td>
                             </tr>
 
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-nested-properties">
-                                        <i>Properties :</i>
-                                        <ul class="index-list">
-                                                <li>
-                                                    <span class="io-nested-property-name"><code>id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-</code></span>
-                                                </li>
-                                                <li>
-                                                    <span class="io-nested-property-name"><code>rol:         <code><a href="../miscellaneous/typealiases.html#RolUsuario" target="_self" >RolUsuario</a></code>
-</code></span>
-                                                </li>
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
 
 
 
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/models/auth.model.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:32</a></div>
+                                </td>
+                            </tr>
+
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                        <tr>
+                            <td class="col-md-4">
+                                <a name="ocupado"></a>
+                                <span class="name "><b>ocupado</b>
+                                    <a href="#ocupado">
+                                        <span class="icon ion-ios-link"></span>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <code>ocupado:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                            </td>
+                        </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </td>
+                            </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:33</a></div>
                                 </td>
                             </tr>
 
@@ -290,27 +317,198 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { RolUsuario, Usuario } from &#x27;./usuario.model&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { DecimalPipe, DatePipe } from &#x27;@angular/common&#x27;;
+import { HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
+import {
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  input,
+  OnInit,
+  output,
+  signal,
+} from &#x27;@angular/core&#x27;;
+import { takeUntilDestroyed, toSignal } from &#x27;@angular/core/rxjs-interop&#x27;;
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
+import { MessageService } from &#x27;primeng/api&#x27;;
+import { Button } from &#x27;primeng/button&#x27;;
+import { DatePicker } from &#x27;primeng/datepicker&#x27;;
+import { Select } from &#x27;primeng/select&#x27;;
+import { SelectButton } from &#x27;primeng/selectbutton&#x27;;
+import { merge } from &#x27;rxjs&#x27;;
+import { Medico } from &#x27;../../core/models/medico.models&#x27;;
+import { Reserva } from &#x27;../../core/models/reserva.models&#x27;;
+import { Usuario } from &#x27;../../core/models/usuario.models&#x27;;
+import { ReservasService } from &#x27;../../core/services/reservas.service&#x27;;
+import { mensajeError } from &#x27;../../core/utils/errores&#x27;;
+import { formatearYMD } from &#x27;../../core/utils/reservas.utils&#x27;;
 
-export interface LoginDto {
-  email: string;
-  clave: string;
+const DIAS_MAXIMOS_ANTICIPACION &#x3D; 30;
+
+interface OpcionHorario {
+  etiqueta: string;
+  fecha_hora: string;
+  ocupado: boolean;
 }
 
-export interface AuthResponseDto {
-  access_token: string;
-  usuario: {
-    id: number;
-    rol: RolUsuario;
-  };
-}
+@Component({
+  selector: &#x27;app-form-reserva&#x27;,
+  imports: [ReactiveFormsModule, Select, DatePicker, SelectButton, Button, DecimalPipe, DatePipe],
+  templateUrl: &#x27;./form-reserva.html&#x27;,
+  styleUrl: &#x27;./form-reserva.css&#x27;,
+})
+export class FormReserva implements OnInit {
+  private readonly reservasService &#x3D; inject(ReservasService);
+  private readonly messageService &#x3D; inject(MessageService);
+  private readonly destroyRef &#x3D; inject(DestroyRef);
 
-export interface CurrentUserSession {
-  token: string;
-  id: number;
-  rol: RolUsuario;
-  usuario?: Usuario;
-  medicoId?: number; // Para médicos, el ID en la tabla medicos
+  readonly medicos &#x3D; input.required&lt;Medico[]&gt;();
+  readonly pacientes &#x3D; input&lt;Usuario[] | null&gt;(null);
+  readonly reservada &#x3D; output&lt;Reserva&gt;();
+
+  protected readonly horarios &#x3D; signal&lt;OpcionHorario[]&gt;([]);
+  protected readonly cargandoHorarios &#x3D; signal(false);
+  protected readonly enviando &#x3D; signal(false);
+
+  protected readonly fechaMinima &#x3D; new Date();
+  protected readonly fechaMaxima &#x3D; (() &#x3D;&gt; {
+    const max &#x3D; new Date();
+    max.setDate(max.getDate() + DIAS_MAXIMOS_ANTICIPACION);
+    return max;
+  })();
+
+  protected readonly form &#x3D; new FormGroup({
+    id_paciente: new FormControl&lt;number | null&gt;(null),
+    id_medico: new FormControl&lt;number | null&gt;(null, { validators: [Validators.required] }),
+    fecha: new FormControl&lt;Date | null&gt;(null, { validators: [Validators.required] }),
+    fecha_hora: new FormControl&lt;string | null&gt;(null, { validators: [Validators.required] }),
+  });
+
+  private readonly idMedico &#x3D; toSignal(this.form.controls.id_medico.valueChanges, {
+    initialValue: null,
+  });
+  private readonly idPaciente &#x3D; toSignal(this.form.controls.id_paciente.valueChanges, {
+    initialValue: null,
+  });
+  protected readonly fechaHora &#x3D; toSignal(this.form.controls.fecha_hora.valueChanges, {
+    initialValue: null,
+  });
+
+  protected readonly opcionesMedicos &#x3D; computed(() &#x3D;&gt;
+    this.medicos().map((m) &#x3D;&gt; ({
+      etiqueta: &#x60;Dr/a. ${m.apellidos}, ${m.nombres} (Mat. ${m.matricula})&#x60;,
+      id: m.id,
+    })),
+  );
+
+  protected readonly opcionesPacientes &#x3D; computed(() &#x3D;&gt;
+    (this.pacientes() ?? []).map((p) &#x3D;&gt; ({
+      etiqueta: &#x60;${p.apellidos}, ${p.nombres} (DNI ${p.documento})&#x60;,
+      id: p.id,
+    })),
+  );
+
+  protected readonly medicoSeleccionado &#x3D; computed(
+    () &#x3D;&gt; this.medicos().find((m) &#x3D;&gt; m.id &#x3D;&#x3D;&#x3D; this.idMedico()) ?? null,
+  );
+
+  protected readonly pacienteSeleccionado &#x3D; computed(
+    () &#x3D;&gt; this.pacientes()?.find((p) &#x3D;&gt; p.id &#x3D;&#x3D;&#x3D; this.idPaciente()) ?? null,
+  );
+
+  ngOnInit(): void {
+    if (this.pacientes()) {
+      this.form.controls.id_paciente.addValidators(Validators.required);
+    }
+
+    merge(this.form.controls.id_medico.valueChanges, this.form.controls.fecha.valueChanges)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() &#x3D;&gt; this.cargarHorarios());
+  }
+
+  protected onSubmit(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.messageService.add({
+        severity: &#x27;warn&#x27;,
+        summary: &#x27;Formulario incompleto&#x27;,
+        detail: &#x27;Completá todos los pasos para reservar el turno.&#x27;,
+      });
+      return;
+    }
+
+    const { id_paciente, id_medico, fecha_hora } &#x3D; this.form.getRawValue();
+    this.enviando.set(true);
+
+    this.reservasService
+      .createReserva({
+        id_medico: id_medico!,
+        fecha_hora: fecha_hora!,
+        ...(id_paciente ? { id_paciente } : {}),
+      })
+      .subscribe({
+        next: (reserva) &#x3D;&gt; {
+          this.enviando.set(false);
+          this.messageService.add({
+            severity: &#x27;success&#x27;,
+            summary: &#x27;Turno reservado&#x27;,
+            detail: &#x60;Turno con Dr/a. ${reserva.medico.apellidos} reservado correctamente.&#x60;,
+          });
+          this.form.reset();
+          this.horarios.set([]);
+          this.reservada.emit(reserva);
+        },
+        error: (err: HttpErrorResponse) &#x3D;&gt; {
+          this.enviando.set(false);
+          this.messageService.add({
+            severity: &#x27;error&#x27;,
+            summary: &#x27;No se pudo reservar&#x27;,
+            detail: mensajeError(err, &#x27;Ocurrió un error al reservar el turno.&#x27;),
+          });
+          if (err.status &#x3D;&#x3D;&#x3D; 409) {
+            this.cargarHorarios();
+          }
+        },
+      });
+  }
+
+  private cargarHorarios(): void {
+    const { id_medico, fecha } &#x3D; this.form.getRawValue();
+    this.form.controls.fecha_hora.reset();
+
+    if (!id_medico || !fecha) {
+      this.horarios.set([]);
+      return;
+    }
+
+    this.cargandoHorarios.set(true);
+    this.reservasService.getDisponibilidad(id_medico, formatearYMD(fecha)).subscribe({
+      next: (disponibilidad) &#x3D;&gt; {
+        const ahora &#x3D; Date.now();
+        this.horarios.set(
+          disponibilidad.map((d) &#x3D;&gt; {
+            const inicio &#x3D; new Date(d.fecha_hora);
+            return {
+              etiqueta: &#x60;${String(inicio.getHours()).padStart(2, &#x27;0&#x27;)}:00&#x60;,
+              fecha_hora: d.fecha_hora,
+              ocupado: !d.disponible || inicio.getTime() &lt;&#x3D; ahora,
+            };
+          }),
+        );
+        this.cargandoHorarios.set(false);
+      },
+      error: (err: HttpErrorResponse) &#x3D;&gt; {
+        this.horarios.set([]);
+        this.cargandoHorarios.set(false);
+        this.messageService.add({
+          severity: &#x27;error&#x27;,
+          summary: &#x27;Error al cargar horarios&#x27;,
+          detail: mensajeError(err, &#x27;No se pudieron obtener los horarios disponibles.&#x27;),
+        });
+      },
+    });
+  }
 }
 </code></pre>
     </div>
@@ -349,7 +547,7 @@ export interface CurrentUserSession {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'AuthResponseDto.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'OpcionHorario.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

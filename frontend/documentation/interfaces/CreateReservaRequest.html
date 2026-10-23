@@ -123,12 +123,12 @@
   <li class="breadcrumb-item">Interfaces</li>
   <li class="breadcrumb-item"
   >
-  UpdateUsuarioDto</li>
+  CreateReservaRequest</li>
 </ol>
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/models/usuario.model.ts</code>
+    <code>src/app/core/models/reserva.models.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -170,45 +170,19 @@
                 <td class="col-md-9">
                     <ul class="index-list">
                         <li>
-                                    <span class="modifier">Optional</span>
-                                <a href="#apellidos" class="reference-link ">
-                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">apellidos</span>
+                                <a href="#fecha_hora" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">fecha_hora</span>
+                                </a>
+                        </li>
+                        <li>
+                                <a href="#id_medico" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">id_medico</span>
                                 </a>
                         </li>
                         <li>
                                     <span class="modifier">Optional</span>
-                                <a href="#clave" class="reference-link ">
-                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">clave</span>
-                                </a>
-                        </li>
-                        <li>
-                                    <span class="modifier">Optional</span>
-                                <a href="#documento" class="reference-link ">
-                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">documento</span>
-                                </a>
-                        </li>
-                        <li>
-                                    <span class="modifier">Optional</span>
-                                <a href="#email" class="reference-link ">
-                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">email</span>
-                                </a>
-                        </li>
-                        <li>
-                                    <span class="modifier">Optional</span>
-                                <a href="#estado" class="reference-link ">
-                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">estado</span>
-                                </a>
-                        </li>
-                        <li>
-                                    <span class="modifier">Optional</span>
-                                <a href="#nombres" class="reference-link ">
-                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">nombres</span>
-                                </a>
-                        </li>
-                        <li>
-                                    <span class="modifier">Optional</span>
-                                <a href="#rol" class="reference-link ">
-                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">rol</span>
+                                <a href="#id_paciente" class="reference-link ">
+                                    <span class="reference-badge reference-badge--property" aria-hidden="true">P</span><span class="reference-link-label">id_paciente</span>
                                 </a>
                         </li>
                     </ul>
@@ -226,9 +200,9 @@
                 <tbody>
                         <tr>
                             <td class="col-md-4">
-                                <a name="apellidos"></a>
-                                <span class="name "><b>apellidos</b>
-                                    <a href="#apellidos">
+                                <a name="fecha_hora"></a>
+                                <span class="name "><b>fecha_hora</b>
+                                    <a href="#fecha_hora">
                                         <span class="icon ion-ios-link"></span>
                                     </a>
                                 </span>
@@ -236,7 +210,7 @@
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                <code>apellidos:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                <code>fecha_hora:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                             </td>
                         </tr>
@@ -250,17 +224,12 @@
                             </tr>
 
 
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Optional</i>
-                                </td>
-                            </tr>
 
 
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/models/usuario.model.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/core/models/reserva.models.ts:29</a></div>
                                 </td>
                             </tr>
 
@@ -270,9 +239,9 @@
                 <tbody>
                         <tr>
                             <td class="col-md-4">
-                                <a name="clave"></a>
-                                <span class="name "><b>clave</b>
-                                    <a href="#clave">
+                                <a name="id_medico"></a>
+                                <span class="name "><b>id_medico</b>
+                                    <a href="#id_medico">
                                         <span class="icon ion-ios-link"></span>
                                     </a>
                                 </span>
@@ -280,7 +249,7 @@
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                <code>clave:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                <code>id_medico:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                             </td>
                         </tr>
@@ -288,23 +257,18 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                                 </td>
                             </tr>
 
 
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Optional</i>
-                                </td>
-                            </tr>
 
 
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/models/usuario.model.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/core/models/reserva.models.ts:27</a></div>
                                 </td>
                             </tr>
 
@@ -314,9 +278,9 @@
                 <tbody>
                         <tr>
                             <td class="col-md-4">
-                                <a name="documento"></a>
-                                <span class="name "><b>documento</b>
-                                    <a href="#documento">
+                                <a name="id_paciente"></a>
+                                <span class="name "><b>id_paciente</b>
+                                    <a href="#id_paciente">
                                         <span class="icon ion-ios-link"></span>
                                     </a>
                                 </span>
@@ -324,7 +288,7 @@
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                <code>documento:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                <code>id_paciente:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                             </td>
                         </tr>
@@ -332,7 +296,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                                 </td>
                             </tr>
@@ -348,183 +312,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/models/usuario.model.ts:24</a></div>
-                                </td>
-                            </tr>
-
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                        <tr>
-                            <td class="col-md-4">
-                                <a name="email"></a>
-                                <span class="name "><b>email</b>
-                                    <a href="#email">
-                                        <span class="icon ion-ios-link"></span>
-                                    </a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <code>email:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                            </td>
-                        </tr>
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Optional</i>
-                                </td>
-                            </tr>
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/models/usuario.model.ts:27</a></div>
-                                </td>
-                            </tr>
-
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                        <tr>
-                            <td class="col-md-4">
-                                <a name="estado"></a>
-                                <span class="name "><b>estado</b>
-                                    <a href="#estado">
-                                        <span class="icon ion-ios-link"></span>
-                                    </a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <code>estado:         <code><a href="../miscellaneous/typealiases.html#EstadoUsuario" target="_self" >EstadoUsuario</a></code>
-</code>
-                            </td>
-                        </tr>
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#EstadoUsuario" target="_self" >EstadoUsuario</a></code>
-
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Optional</i>
-                                </td>
-                            </tr>
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/models/usuario.model.ts:29</a></div>
-                                </td>
-                            </tr>
-
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                        <tr>
-                            <td class="col-md-4">
-                                <a name="nombres"></a>
-                                <span class="name "><b>nombres</b>
-                                    <a href="#nombres">
-                                        <span class="icon ion-ios-link"></span>
-                                    </a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <code>nombres:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-</code>
-                            </td>
-                        </tr>
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Optional</i>
-                                </td>
-                            </tr>
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/models/usuario.model.ts:26</a></div>
-                                </td>
-                            </tr>
-
-                </tbody>
-            </table>
-            <table class="table table-sm table-bordered">
-                <tbody>
-                        <tr>
-                            <td class="col-md-4">
-                                <a name="rol"></a>
-                                <span class="name "><b>rol</b>
-                                    <a href="#rol">
-                                        <span class="icon ion-ios-link"></span>
-                                    </a>
-                                </span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <code>rol:         <code><a href="../miscellaneous/typealiases.html#RolUsuario" target="_self" >RolUsuario</a></code>
-</code>
-                            </td>
-                        </tr>
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#RolUsuario" target="_self" >RolUsuario</a></code>
-
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <i>Optional</i>
-                                </td>
-                            </tr>
-
-
-
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/models/usuario.model.ts:30</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/core/models/reserva.models.ts:28</a></div>
                                 </td>
                             </tr>
 
@@ -535,36 +323,47 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export type RolUsuario &#x3D; &#x27;MEDICO&#x27; | &#x27;PACIENTE&#x27; | &#x27;ADMINISTRADOR&#x27;;
-export type EstadoUsuario &#x3D; &#x27;ACTIVO&#x27; | &#x27;BAJA&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { EstadoReserva } from &#x27;../enums/reserva.enums&#x27;;
 
-export interface Usuario {
+export interface ReservaMedico {
+  id: number;
+  matricula: number;
+  apellidos: string;
+  nombres: string;
+}
+
+export interface ReservaPaciente {
   id: number;
   documento: string;
   apellidos: string;
   nombres: string;
-  email: string;
-  estado: EstadoUsuario;
-  rol: RolUsuario;
 }
 
-export interface CreateUsuarioDto {
-  documento: string;
-  apellidos: string;
-  nombres: string;
-  email: string;
-  clave: string;
-  rol: RolUsuario;
+export interface Reserva {
+  id: number;
+  fecha_hora: string;
+  estado: EstadoReserva;
+  valor_consulta: number;
+  medico: ReservaMedico;
+  paciente: ReservaPaciente;
 }
 
-export interface UpdateUsuarioDto {
-  documento?: string;
-  apellidos?: string;
-  nombres?: string;
-  email?: string;
-  clave?: string;
-  estado?: EstadoUsuario;
-  rol?: RolUsuario;
+export interface CreateReservaRequest {
+  id_medico: number;
+  id_paciente?: number;
+  fecha_hora: string;
+}
+
+export interface FiltroReservas {
+  fecha?: string;
+  id_medico?: number;
+  id_paciente?: number;
+  estado?: EstadoReserva;
+}
+
+export interface Disponibilidad {
+  fecha_hora: string;
+  disponible: boolean;
 }
 </code></pre>
     </div>
@@ -603,7 +402,7 @@ export interface UpdateUsuarioDto {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
-            var COMPODOC_CURRENT_PAGE_URL = 'UpdateUsuarioDto.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'CreateReservaRequest.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

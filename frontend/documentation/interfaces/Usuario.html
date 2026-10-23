@@ -128,7 +128,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/models/usuario.model.ts</code>
+    <code>src/app/core/models/usuario.models.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -248,7 +248,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/app/models/usuario.model.ts:7</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/app/core/models/usuario.models.ts:6</a></div>
                                 </td>
                             </tr>
 
@@ -287,7 +287,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/app/models/usuario.model.ts:6</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/app/core/models/usuario.models.ts:5</a></div>
                                 </td>
                             </tr>
 
@@ -326,7 +326,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/models/usuario.model.ts:9</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/core/models/usuario.models.ts:8</a></div>
                                 </td>
                             </tr>
 
@@ -346,7 +346,7 @@
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                <code>estado:         <code><a href="../miscellaneous/typealiases.html#EstadoUsuario" target="_self" >EstadoUsuario</a></code>
+                                <code>estado:         <code><a href="../miscellaneous/enumerations.html#EstadoUsuario" target="_self" >EstadoUsuario</a></code>
 </code>
                             </td>
                         </tr>
@@ -354,7 +354,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#EstadoUsuario" target="_self" >EstadoUsuario</a></code>
+                                    <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#EstadoUsuario" target="_self" >EstadoUsuario</a></code>
 
                                 </td>
                             </tr>
@@ -365,7 +365,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/models/usuario.model.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/core/models/usuario.models.ts:9</a></div>
                                 </td>
                             </tr>
 
@@ -404,7 +404,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/app/models/usuario.model.ts:5</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="4" class="link-to-prism">src/app/core/models/usuario.models.ts:4</a></div>
                                 </td>
                             </tr>
 
@@ -443,7 +443,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/models/usuario.model.ts:8</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/app/core/models/usuario.models.ts:7</a></div>
                                 </td>
                             </tr>
 
@@ -463,7 +463,7 @@
                         </tr>
                         <tr>
                             <td class="col-md-4">
-                                <code>rol:         <code><a href="../miscellaneous/typealiases.html#RolUsuario" target="_self" >RolUsuario</a></code>
+                                <code>rol:         <code><a href="../miscellaneous/enumerations.html#RolUsuario" target="_self" >RolUsuario</a></code>
 </code>
                             </td>
                         </tr>
@@ -471,7 +471,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#RolUsuario" target="_self" >RolUsuario</a></code>
+                                    <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#RolUsuario" target="_self" >RolUsuario</a></code>
 
                                 </td>
                             </tr>
@@ -482,7 +482,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/models/usuario.model.ts:11</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/core/models/usuario.models.ts:10</a></div>
                                 </td>
                             </tr>
 
@@ -493,8 +493,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export type RolUsuario &#x3D; &#x27;MEDICO&#x27; | &#x27;PACIENTE&#x27; | &#x27;ADMINISTRADOR&#x27;;
-export type EstadoUsuario &#x3D; &#x27;ACTIVO&#x27; | &#x27;BAJA&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { EstadoUsuario, RolUsuario } from &#x27;../enums/usuario.enums&#x27;;
 
 export interface Usuario {
   id: number;
@@ -506,23 +505,9 @@ export interface Usuario {
   rol: RolUsuario;
 }
 
-export interface CreateUsuarioDto {
-  documento: string;
-  apellidos: string;
-  nombres: string;
-  email: string;
-  clave: string;
-  rol: RolUsuario;
-}
-
-export interface UpdateUsuarioDto {
-  documento?: string;
-  apellidos?: string;
-  nombres?: string;
-  email?: string;
-  clave?: string;
-  estado?: EstadoUsuario;
+export interface FiltroUsuarios {
   rol?: RolUsuario;
+  estado?: EstadoUsuario;
 }
 </code></pre>
     </div>

@@ -121,7 +121,7 @@
 
 <div class="io-file io-file-path" data-compodoc="entity-file-path">
     <span class="icon ion-ios-document" aria-hidden="true"></span>
-    <code>src/app/services/medicos.service.ts</code>
+    <code>src/app/core/services/medicos.service.ts</code>
 </div>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -180,7 +180,7 @@
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#baseUrl" >baseUrl</a>
+                                <a href="#apiUrl" >apiUrl</a>
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
@@ -212,7 +212,7 @@
                             </li>
                             <li>
                                 <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
-                                <a href="#updateMedico" >updateMedico</a>
+                                <a href="#updateValorConsulta" >updateValorConsulta</a>
                             </li>
                         </ul>
                     </td>
@@ -252,8 +252,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="17"
-                                    class="link-to-prism">src/app/services/medicos.service.ts:17</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="15"
+                                    class="link-to-prism">src/app/core/services/medicos.service.ts:15</a></div>
                         </td>
                     </tr>
 
@@ -319,8 +319,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="13"
-                                    class="link-to-prism">src/app/services/medicos.service.ts:13</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="11"
+                                    class="link-to-prism">src/app/core/services/medicos.service.ts:11</a></div>
                         </td>
                     </tr>
 
@@ -340,24 +340,24 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="updateMedico"></a>
+                    <a name="updateValorConsulta"></a>
                     <span class="name">
-                        <span ><b>updateMedico</b></span>
-                        <a href="#updateMedico"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>updateValorConsulta</b></span>
+                        <a href="#updateValorConsulta"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>updateMedico(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, dto: <a href="../interfaces/UpdateMedicoDto.html" target="_self">UpdateMedicoDto</a>)</code>
+<code>updateValorConsulta(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, body: <a href="../interfaces/UpdateValorConsultaRequest.html" target="_self">UpdateValorConsultaRequest</a>)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="21"
-                                    class="link-to-prism">src/app/services/medicos.service.ts:21</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="19"
+                                    class="link-to-prism">src/app/core/services/medicos.service.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -390,9 +390,9 @@
 
                                         </tr>
                                         <tr>
-                                                <td>dto</td>
+                                                <td>body</td>
                                             <td>
-                                                            <code><a href="../interfaces/UpdateMedicoDto.html" target="_self" >UpdateMedicoDto</a></code>
+                                                            <code><a href="../interfaces/UpdateValorConsultaRequest.html" target="_self" >UpdateValorConsultaRequest</a></code>
                                             </td>
 
                                             <td>
@@ -426,12 +426,12 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="baseUrl"></a>
+                    <a name="apiUrl"></a>
                     <span class="name">
                             <span class="modifier">Private</span>
                             <span class="modifier">Readonly</span>
-                        <span ><b>baseUrl</b></span>
-                        <a href="#baseUrl"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>apiUrl</b></span>
+                        <a href="#apiUrl"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -448,7 +448,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/services/medicos.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/core/services/medicos.service.ts:9</a></div>
                         </td>
                     </tr>
 
@@ -481,7 +481,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/services/medicos.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/core/services/medicos.service.ts:8</a></div>
                         </td>
                     </tr>
 
@@ -494,28 +494,26 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, inject } from &#x27;@angular/core&#x27;;
-import { HttpClient } from &#x27;@angular/common/http&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { inject, Injectable } from &#x27;@angular/core&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
-import { Medico, UpdateMedicoDto } from &#x27;../models/medico.model&#x27;;
+import { Medico, UpdateValorConsultaRequest } from &#x27;../models/medico.models&#x27;;
 
-@Injectable({
-  providedIn: &#x27;root&#x27;
-})
+@Injectable({ providedIn: &#x27;root&#x27; })
 export class MedicosService {
   private readonly http &#x3D; inject(HttpClient);
-  private readonly baseUrl &#x3D; &#x27;/api/v1/medicos&#x27;;
+  private readonly apiUrl &#x3D; &#x27;/api/v1/medicos&#x27;;
 
   getMedicos(): Observable&lt;Medico[]&gt; {
-    return this.http.get&lt;Medico[]&gt;(this.baseUrl);
+    return this.http.get&lt;Medico[]&gt;(this.apiUrl);
   }
 
   getMedico(id: number): Observable&lt;Medico&gt; {
-    return this.http.get&lt;Medico&gt;(&#x60;${this.baseUrl}/${id}&#x60;);
+    return this.http.get&lt;Medico&gt;(&#x60;${this.apiUrl}/${id}&#x60;);
   }
 
-  updateMedico(id: number, dto: UpdateMedicoDto): Observable&lt;Medico&gt; {
-    return this.http.patch&lt;Medico&gt;(&#x60;${this.baseUrl}/${id}&#x60;, dto);
+  updateValorConsulta(id: number, body: UpdateValorConsultaRequest): Observable&lt;Medico&gt; {
+    return this.http.patch&lt;Medico&gt;(&#x60;${this.apiUrl}/${id}/valor-consulta&#x60;, body);
   }
 }
 </code></pre>
