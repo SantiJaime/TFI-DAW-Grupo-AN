@@ -1,0 +1,1416 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>frontend documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">frontend documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  PanelPaciente</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/pages/paciente/paciente.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-paciente</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/aria/tabs/Tabs" target="_blank" >Tabs</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/aria/tabs/TabList" target="_blank" >TabList</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/aria/tabs/Tab" target="_blank" >Tab</a></code>
+</div>
+                        <div>    <code>TabPanels</code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/aria/tabs/TabPanel" target="_blank" >TabPanel</a></code>
+</div>
+                        <div>    <code>TableModule</code>
+</div>
+                        <div>    <code>Card</code>
+</div>
+                        <div>        <code><a href="../components/EstadoReservaTag.html" target="_self" >EstadoReservaTag</a></code>
+</div>
+                        <div>    <code>Button</code>
+</div>
+                        <div>        <code><a href="../components/FormReserva.html" target="_self" >FormReserva</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/common/DatePipe" target="_blank" >DatePipe</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/common/DecimalPipe" target="_blank" >DecimalPipe</a></code>
+</div>
+                </td>
+            </tr>
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./paciente.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <p class="comment"><i>No results matching.</i></p>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/aria/tabs/Tabs" target="_blank" >Tabs</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/aria/tabs/TabList" target="_blank" >TabList</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/aria/tabs/Tab" target="_blank" >Tab</a></code>
+                                </li>
+                                <li>
+                                        <code>TabPanels</code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/aria/tabs/TabPanel" target="_blank" >TabPanel</a></code>
+                                </li>
+                                <li>
+                                        <code>TableModule</code>
+                                </li>
+                                <li>
+                                        <code>Card</code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/EstadoReservaTag.html" target="_self" >EstadoReservaTag</a></code>
+                                </li>
+                                <li>
+                                        <code>Button</code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/FormReserva.html" target="_self" >FormReserva</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/DatePipe" target="_blank" >DatePipe</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/DecimalPipe" target="_blank" >DecimalPipe</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#authService" >authService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#cargando" >cargando</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#confirmationService" >confirmationService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#medicos" >medicos</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#medicosService" >medicosService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#messageService" >messageService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#reservasService" >reservasService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#tabActiva" >tabActiva</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#turnos" >turnos</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Protected</span>
+                                <a href="#cancelar" >cancelar</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#cargarTurnos" >cargarTurnos</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#mostrarError" >mostrarError</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Protected</span>
+                                <a href="#onReservada" >onReservada</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Protected</span>
+                                <a href="#puedeCancelar" >puedeCancelar</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+</section>
+
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cancelar"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>cancelar</b></span>
+                        <a href="#cancelar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>cancelar(turno: <a href="../interfaces/Reserva.html" target="_self">Reserva</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/pages/paciente/paciente.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>turno</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Reserva.html" target="_self" >Reserva</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargarTurnos"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>cargarTurnos</b></span>
+                        <a href="#cargarTurnos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>cargarTurnos()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="94"
+                                    class="link-to-prism">src/app/pages/paciente/paciente.ts:94</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mostrarError"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>mostrarError</b></span>
+                        <a href="#mostrarError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>mostrarError(err: <a href="https://angular.dev/api/common/http/HttpErrorResponse" target="_blank">HttpErrorResponse</a>, porDefecto: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="112"
+                                    class="link-to-prism">src/app/pages/paciente/paciente.ts:112</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>err</td>
+                                            <td>
+                                                            <code><a href="https://angular.dev/api/common/http/HttpErrorResponse" target="_blank" >HttpErrorResponse</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>porDefecto</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="49"
+                                    class="link-to-prism">src/app/pages/paciente/paciente.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onReservada"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>onReservada</b></span>
+                        <a href="#onReservada"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onReservada()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/app/pages/paciente/paciente.ts:89</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="puedeCancelar"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>puedeCancelar</b></span>
+                        <a href="#puedeCancelar"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>puedeCancelar(turno: <a href="../interfaces/Reserva.html" target="_self">Reserva</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="58"
+                                    class="link-to-prism">src/app/pages/paciente/paciente.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>turno</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Reserva.html" target="_self" >Reserva</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="authService"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>authService</b></span>
+                        <a href="#authService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(AuthService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/paciente/paciente.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargando"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>cargando</b></span>
+                        <a href="#cargando"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(true)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/pages/paciente/paciente.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmationService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>confirmationService</b></span>
+                        <a href="#confirmationService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ConfirmationService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/paciente/paciente.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="medicos"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>medicos</b></span>
+                        <a href="#medicos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;Medico[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/pages/paciente/paciente.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="medicosService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>medicosService</b></span>
+                        <a href="#medicosService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(MedicosService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/pages/paciente/paciente.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messageService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>messageService</b></span>
+                        <a href="#messageService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(MessageService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/pages/paciente/paciente.ts:41</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reservasService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>reservasService</b></span>
+                        <a href="#reservasService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ReservasService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/pages/paciente/paciente.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tabActiva"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>tabActiva</b></span>
+                        <a href="#tabActiva"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;string | number | undefined&gt;(&#x27;turnos&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/paciente/paciente.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="turnos"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>turnos</b></span>
+                        <a href="#turnos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;Reserva[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/pages/paciente/paciente.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { DatePipe, DecimalPipe } from &#x27;@angular/common&#x27;;
+import { HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
+import { Component, inject, OnInit, signal } from &#x27;@angular/core&#x27;;
+import { ConfirmationService, MessageService } from &#x27;primeng/api&#x27;;
+import { Button } from &#x27;primeng/button&#x27;;
+import { Card } from &#x27;primeng/card&#x27;;
+import { TableModule } from &#x27;primeng/table&#x27;;
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from &#x27;primeng/tabs&#x27;;
+import { EstadoReservaTag } from &#x27;../../components/estado-reserva/estado-reserva&#x27;;
+import { FormReserva } from &#x27;../../components/form-reserva/form-reserva&#x27;;
+import { EstadoReserva } from &#x27;../../core/enums/reserva.enums&#x27;;
+import { Medico } from &#x27;../../core/models/medico.models&#x27;;
+import { Reserva } from &#x27;../../core/models/reserva.models&#x27;;
+import { AuthService } from &#x27;../../core/services/auth.service&#x27;;
+import { MedicosService } from &#x27;../../core/services/medicos.service&#x27;;
+import { ReservasService } from &#x27;../../core/services/reservas.service&#x27;;
+import { mensajeError } from &#x27;../../core/utils/errores&#x27;;
+
+@Component({
+  selector: &#x27;app-paciente&#x27;,
+  imports: [
+    Tabs,
+    TabList,
+    Tab,
+    TabPanels,
+    TabPanel,
+    TableModule,
+    Card,
+    EstadoReservaTag,
+    Button,
+    FormReserva,
+    DatePipe,
+    DecimalPipe,
+  ],
+  templateUrl: &#x27;./paciente.html&#x27;,
+})
+export class PanelPaciente implements OnInit {
+  protected readonly authService &#x3D; inject(AuthService);
+  private readonly reservasService &#x3D; inject(ReservasService);
+  private readonly medicosService &#x3D; inject(MedicosService);
+  private readonly messageService &#x3D; inject(MessageService);
+  private readonly confirmationService &#x3D; inject(ConfirmationService);
+
+  protected readonly tabActiva &#x3D; signal&lt;string | number | undefined&gt;(&#x27;turnos&#x27;);
+  protected readonly turnos &#x3D; signal&lt;Reserva[]&gt;([]);
+  protected readonly medicos &#x3D; signal&lt;Medico[]&gt;([]);
+  protected readonly cargando &#x3D; signal(true);
+
+  ngOnInit(): void {
+    this.cargarTurnos();
+    this.medicosService.getMedicos().subscribe({
+      next: (medicos) &#x3D;&gt; this.medicos.set(medicos),
+      error: (err: HttpErrorResponse) &#x3D;&gt;
+        this.mostrarError(err, &#x27;No se pudieron cargar los médicos.&#x27;),
+    });
+  }
+
+  protected puedeCancelar(turno: Reserva): boolean {
+    return (
+      turno.estado &#x3D;&#x3D;&#x3D; EstadoReserva.ACTIVO &amp;&amp;
+      this.reservasService.pacientePuedeCancelar(turno.fecha_hora)
+    );
+  }
+
+  protected cancelar(turno: Reserva): void {
+    this.confirmationService.confirm({
+      header: &#x27;Cancelar turno&#x27;,
+      message: &#x60;¿Querés cancelar el turno con Dr/a. ${turno.medico.apellidos}?&#x60;,
+      icon: &#x27;pi pi-exclamation-triangle&#x27;,
+      acceptButtonProps: { label: &#x27;Sí, cancelar&#x27;, severity: &#x27;danger&#x27; },
+      rejectButtonProps: { label: &#x27;No&#x27;, severity: &#x27;secondary&#x27;, outlined: true },
+      accept: () &#x3D;&gt; {
+        this.reservasService.cancelarReserva(turno.id).subscribe({
+          next: () &#x3D;&gt; {
+            this.messageService.add({
+              severity: &#x27;success&#x27;,
+              summary: &#x27;Turno cancelado&#x27;,
+              detail: &#x27;El turno se canceló correctamente.&#x27;,
+            });
+            this.cargarTurnos();
+          },
+          error: (err: HttpErrorResponse) &#x3D;&gt;
+            this.mostrarError(err, &#x27;No se pudo cancelar el turno.&#x27;),
+        });
+      },
+    });
+  }
+
+  protected onReservada(): void {
+    this.cargarTurnos();
+    this.tabActiva.set(&#x27;turnos&#x27;);
+  }
+
+  private cargarTurnos(): void {
+    this.cargando.set(true);
+    this.reservasService.getMisReservas().subscribe({
+      next: (turnos) &#x3D;&gt; {
+        this.turnos.set(
+          turnos.sort(
+            (a, b) &#x3D;&gt; new Date(a.fecha_hora).getTime() - new Date(b.fecha_hora).getTime(),
+          ),
+        );
+        this.cargando.set(false);
+      },
+      error: (err: HttpErrorResponse) &#x3D;&gt; {
+        this.cargando.set(false);
+        this.mostrarError(err, &#x27;No se pudieron cargar tus turnos.&#x27;);
+      },
+    });
+  }
+
+  private mostrarError(err: HttpErrorResponse, porDefecto: string): void {
+    this.messageService.add({
+      severity: &#x27;error&#x27;,
+      summary: &#x27;Error&#x27;,
+      detail: mensajeError(err, porDefecto),
+    });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;section class&#x3D;&quot;panel&quot;&gt;
+  &lt;header class&#x3D;&quot;panel-encabezado&quot;&gt;
+    &lt;h1&gt;Mis turnos&lt;/h1&gt;
+    @if (authService.usuario(); as usuario) {
+      &lt;p&gt;Bienvenido/a, {{ usuario.nombres }} {{ usuario.apellidos }}&lt;/p&gt;
+    }
+  &lt;/header&gt;
+
+  &lt;p-tabs [(value)]&#x3D;&quot;tabActiva&quot;&gt;
+    &lt;p-tablist&gt;
+      &lt;p-tab value&#x3D;&quot;turnos&quot;&gt;&lt;i class&#x3D;&quot;pi pi-calendar&quot;&gt;&lt;/i&gt; Mis turnos ({{ turnos().length }})&lt;/p-tab&gt;
+      &lt;p-tab value&#x3D;&quot;reservar&quot;&gt;&lt;i class&#x3D;&quot;pi pi-calendar-plus&quot;&gt;&lt;/i&gt; Reservar turno&lt;/p-tab&gt;
+    &lt;/p-tablist&gt;
+
+    &lt;p-tabpanels&gt;
+      &lt;p-tabpanel value&#x3D;&quot;turnos&quot;&gt;
+        &lt;p-table
+          [value]&#x3D;&quot;turnos()&quot;
+          [loading]&#x3D;&quot;cargando()&quot;
+          [paginator]&#x3D;&quot;turnos().length &gt; 10&quot;
+          [rows]&#x3D;&quot;10&quot;
+          dataKey&#x3D;&quot;id&quot;
+        &gt;
+          &lt;ng-template #header&gt;
+            &lt;tr&gt;
+              &lt;th&gt;Fecha y hora&lt;/th&gt;
+              &lt;th&gt;Médico&lt;/th&gt;
+              &lt;th&gt;Matrícula&lt;/th&gt;
+              &lt;th&gt;Valor&lt;/th&gt;
+              &lt;th&gt;Estado&lt;/th&gt;
+              &lt;th&gt;&lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/ng-template&gt;
+          &lt;ng-template #body let-turno&gt;
+            &lt;tr&gt;
+              &lt;td&gt;{{ turno.fecha_hora | date: &#x27;dd/MM/yyyy HH:mm&#x27; }} hs&lt;/td&gt;
+              &lt;td&gt;Dr/a. {{ turno.medico.apellidos }}, {{ turno.medico.nombres }}&lt;/td&gt;
+              &lt;td&gt;{{ turno.medico.matricula }}&lt;/td&gt;
+              &lt;td&gt;$ {{ turno.valor_consulta | number }}&lt;/td&gt;
+              &lt;td&gt;
+                &lt;app-estado-reserva [estado]&#x3D;&quot;turno.estado&quot; /&gt;
+              &lt;/td&gt;
+              &lt;td&gt;
+                &lt;div class&#x3D;&quot;celda-acciones&quot;&gt;
+                  @if (puedeCancelar(turno)) {
+                    &lt;p-button
+                      label&#x3D;&quot;Cancelar&quot;
+                      icon&#x3D;&quot;pi pi-times&quot;
+                      severity&#x3D;&quot;danger&quot;
+                      size&#x3D;&quot;small&quot;
+                      [outlined]&#x3D;&quot;true&quot;
+                      (onClick)&#x3D;&quot;cancelar(turno)&quot;
+                    /&gt;
+                  }
+                &lt;/div&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/ng-template&gt;
+          &lt;ng-template #emptymessage&gt;
+            &lt;tr&gt;
+              &lt;td colspan&#x3D;&quot;6&quot;&gt;
+                No tenés turnos reservados.
+                &lt;p-button
+                  label&#x3D;&quot;Reservar un turno&quot;
+                  icon&#x3D;&quot;pi pi-calendar-plus&quot;
+                  [link]&#x3D;&quot;true&quot;
+                  (onClick)&#x3D;&quot;tabActiva.set(&#x27;reservar&#x27;)&quot;
+                /&gt;
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/ng-template&gt;
+        &lt;/p-table&gt;
+        &lt;p class&#x3D;&quot;texto-secundario&quot;&gt;
+          Podés cancelar un turno activo hasta el día anterior a la consulta.
+        &lt;/p&gt;
+      &lt;/p-tabpanel&gt;
+
+      &lt;p-tabpanel value&#x3D;&quot;reservar&quot;&gt;
+        &lt;p-card
+          header&#x3D;&quot;Reservar turno&quot;
+          subheader&#x3D;&quot;Atención de 8:00 a 16:00 hs, turnos de 1 hora.&quot;
+        &gt;
+          &lt;app-form-reserva [medicos]&#x3D;&quot;medicos()&quot; (reservada)&#x3D;&quot;onReservada()&quot; /&gt;
+        &lt;/p-card&gt;
+      &lt;/p-tabpanel&gt;
+    &lt;/p-tabpanels&gt;
+  &lt;/p-tabs&gt;
+&lt;/section&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><section class="panel">  <header class="panel-encabezado">    <h1>Mis turnos</h1>    @if (authService.usuario(); as usuario) {      <p>Bienvenido/a, {{ usuario.nombres }} {{ usuario.apellidos }}</p>    }  </header>  <p-tabs [(value)]="tabActiva">    <p-tablist>      <p-tab value="turnos"><i class="pi pi-calendar"></i> Mis turnos ({{ turnos().length }})</p-tab>      <p-tab value="reservar"><i class="pi pi-calendar-plus"></i> Reservar turno</p-tab>    </p-tablist>    <p-tabpanels>      <p-tabpanel value="turnos">        <p-table          [value]="turnos()"          [loading]="cargando()"          [paginator]="turnos().length > 10"          [rows]="10"          dataKey="id"        >          <ng-template #header>            <tr>              <th>Fecha y hora</th>              <th>Médico</th>              <th>Matrícula</th>              <th>Valor</th>              <th>Estado</th>              <th></th>            </tr>          </ng-template>          <ng-template #body let-turno>            <tr>              <td>{{ turno.fecha_hora | date: \'dd/MM/yyyy HH:mm\' }} hs</td>              <td>Dr/a. {{ turno.medico.apellidos }}, {{ turno.medico.nombres }}</td>              <td>{{ turno.medico.matricula }}</td>              <td>$ {{ turno.valor_consulta | number }}</td>              <td>                <app-estado-reserva [estado]="turno.estado" />              </td>              <td>                <div class="celda-acciones">                  @if (puedeCancelar(turno)) {                    <p-button                      label="Cancelar"                      icon="pi pi-times"                      severity="danger"                      size="small"                      [outlined]="true"                      (onClick)="cancelar(turno)"                    />                  }                </div>              </td>            </tr>          </ng-template>          <ng-template #emptymessage>            <tr>              <td colspan="6">                No tenés turnos reservados.                <p-button                  label="Reservar un turno"                  icon="pi pi-calendar-plus"                  [link]="true"                  (onClick)="tabActiva.set(\'reservar\')"                />              </td>            </tr>          </ng-template>        </p-table>        <p class="texto-secundario">          Podés cancelar un turno activo hasta el día anterior a la consulta.        </p>      </p-tabpanel>      <p-tabpanel value="reservar">        <p-card          header="Reservar turno"          subheader="Atención de 8:00 a 16:00 hs, turnos de 1 hora."        >          <app-form-reserva [medicos]="medicos()" (reservada)="onReservada()" />        </p-card>      </p-tabpanel>    </p-tabpanels>  </p-tabs></section></div>'
+    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'EstadoReservaTag', 'selector': 'app-estado-reserva'},{'name': 'FormReserva', 'selector': 'app-form-reserva'},{'name': 'Login', 'selector': 'app-login'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'PanelAdmin', 'selector': 'app-admin'},{'name': 'PanelMedico', 'selector': 'app-medico'},{'name': 'PanelPaciente', 'selector': 'app-paciente'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'PanelPaciente'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'PanelPaciente.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

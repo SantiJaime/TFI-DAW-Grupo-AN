@@ -1,0 +1,1743 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>frontend documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">frontend documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+    <button type="button"
+        class="search-input-clear"
+        aria-label="Clear search"
+        data-search-input-clear>&times;</button>
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  FormReserva</li>
+</ol>
+
+<div class="io-file io-file-path" data-compodoc="entity-file-path">
+    <span class="icon ion-ios-document" aria-hidden="true"></span>
+    <code>src/app/components/form-reserva/form-reserva.ts</code>
+</div>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#api" class="nav-link"
+                role="tab" id="api-tab" data-bs-toggle="tab" data-link="api">API</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-form-reserva</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                        <div>        <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+</div>
+                        <div>    <code>Select</code>
+</div>
+                        <div>    <code>DatePicker</code>
+</div>
+                        <div>    <code>SelectButton</code>
+</div>
+                        <div>    <code>Button</code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/common/DecimalPipe" target="_blank" >DecimalPipe</a></code>
+</div>
+                        <div>        <code><a href="https://angular.dev/api/common/DatePipe" target="_blank" >DatePipe</a></code>
+</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./form-reserva.css</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./form-reserva.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./form-reserva.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+        <section data-compodoc="block-relationships">
+            <h3>Relationships</h3>
+
+            <div class="row pt-3">
+                <div class="col-sm-6">
+                    <h4>Used by</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="../components/PanelAdmin.html" target="_self" >PanelAdmin</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="../components/PanelPaciente.html" target="_self" >PanelPaciente</a></code>
+                                </li>
+                        </ul>
+                </div>
+
+                <div class="col-sm-6">
+                    <h4>Depends on</h4>
+                        <ul class="list-unstyled relationships-list">
+                                <li>
+                                            <code><a href="https://angular.dev/api/forms/ReactiveFormsModule" target="_blank" >ReactiveFormsModule</a></code>
+                                </li>
+                                <li>
+                                        <code>Select</code>
+                                </li>
+                                <li>
+                                        <code>DatePicker</code>
+                                </li>
+                                <li>
+                                        <code>SelectButton</code>
+                                </li>
+                                <li>
+                                        <code>Button</code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/DecimalPipe" target="_blank" >DecimalPipe</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/common/DatePipe" target="_blank" >DatePipe</a></code>
+                                </li>
+                                <li>
+                                            <code><a href="https://angular.dev/api/core/OnInit" target="_blank" >OnInit</a></code>
+                                </li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+</div>
+
+    <div class="tab-pane fade " id="api">    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#cargandoHorarios" >cargandoHorarios</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#destroyRef" >destroyRef</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#enviando" >enviando</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#fechaHora" >fechaHora</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#fechaMaxima" >fechaMaxima</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#fechaMinima" >fechaMinima</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#form" >form</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#horarios" >horarios</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#idMedico" >idMedico</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#idPaciente" >idPaciente</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#medicoSeleccionado" >medicoSeleccionado</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#messageService" >messageService</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#opcionesMedicos" >opcionesMedicos</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#opcionesPacientes" >opcionesPacientes</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#pacienteSeleccionado" >pacienteSeleccionado</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">P</span>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#reservasService" >reservasService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Private</span>
+                                <a href="#cargarHorarios" >cargarHorarios</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--method" aria-hidden="true">M</span>
+                                    <span class="modifier">Protected</span>
+                                <a href="#onSubmit" >onSubmit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#medicos" >medicos</a>
+                            </li>
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">I</span><a href="#pacientes" >pacientes</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-sm table-bordered index-table">
+            <tbody>
+                <tr>
+                    <td class="col-md-3">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                    <td class="col-md-9">
+                        <ul class="index-list">
+                            <li>
+                                <span class="reference-badge reference-badge--property" aria-hidden="true">O</span><a href="#reservada" >reservada</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="medicos"></a>
+                        <b>medicos</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Medico.html" target="_self" >Medico[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Required : </i>&nbsp;<b>true</b>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:47</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="pacientes"></a>
+                        <b>pacientes</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Usuario.html" target="_self" >Usuario[] | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:48</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="reservada"></a>
+                        <b>reservada</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Reserva.html" target="_self" >Reserva</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:49</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargarHorarios"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>cargarHorarios</b></span>
+                        <a href="#cargarHorarios"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>cargarHorarios()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="157"
+                                    class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:157</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="101"
+                                    class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:101</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSubmit"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>onSubmit</b></span>
+                        <a href="#onSubmit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onSubmit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:111</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cargandoHorarios"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>cargandoHorarios</b></span>
+                        <a href="#cargandoHorarios"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="destroyRef"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>destroyRef</b></span>
+                        <a href="#destroyRef"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(DestroyRef)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="enviando"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>enviando</b></span>
+                        <a href="#enviando"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fechaHora"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>fechaHora</b></span>
+                        <a href="#fechaHora"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>toSignal(this.form.controls.fecha_hora.valueChanges, {
+    initialValue: null,
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:75</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fechaMaxima"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>fechaMaxima</b></span>
+                        <a href="#fechaMaxima"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(() &#x3D;&gt; {
+    const max &#x3D; new Date();
+    max.setDate(max.getDate() + DIAS_MAXIMOS_ANTICIPACION);
+    return max;
+  })()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fechaMinima"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>fechaMinima</b></span>
+                        <a href="#fechaMinima"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Date()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="form"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>form</b></span>
+                        <a href="#form"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new FormGroup({
+    id_paciente: new FormControl&lt;number | null&gt;(null),
+    id_medico: new FormControl&lt;number | null&gt;(null, { validators: [Validators.required] }),
+    fecha: new FormControl&lt;Date | null&gt;(null, { validators: [Validators.required] }),
+    fecha_hora: new FormControl&lt;string | null&gt;(null, { validators: [Validators.required] }),
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="horarios"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>horarios</b></span>
+                        <a href="#horarios"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;OpcionHorario[]&gt;([])</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="idMedico"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>idMedico</b></span>
+                        <a href="#idMedico"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>toSignal(this.form.controls.id_medico.valueChanges, {
+    initialValue: null,
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:69</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="idPaciente"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>idPaciente</b></span>
+                        <a href="#idPaciente"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>toSignal(this.form.controls.id_paciente.valueChanges, {
+    initialValue: null,
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="medicoSeleccionado"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>medicoSeleccionado</b></span>
+                        <a href="#medicoSeleccionado"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(
+    () &#x3D;&gt; this.medicos().find((m) &#x3D;&gt; m.id &#x3D;&#x3D;&#x3D; this.idMedico()) ?? null,
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:93</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="messageService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>messageService</b></span>
+                        <a href="#messageService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(MessageService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="opcionesMedicos"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>opcionesMedicos</b></span>
+                        <a href="#opcionesMedicos"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt;
+    this.medicos().map((m) &#x3D;&gt; ({
+      etiqueta: &#x60;Dr/a. ${m.apellidos}, ${m.nombres} (Mat. ${m.matricula})&#x60;,
+      id: m.id,
+    })),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:79</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="opcionesPacientes"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>opcionesPacientes</b></span>
+                        <a href="#opcionesPacientes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt;
+    (this.pacientes() ?? []).map((p) &#x3D;&gt; ({
+      etiqueta: &#x60;${p.apellidos}, ${p.nombres} (DNI ${p.documento})&#x60;,
+      id: p.id,
+    })),
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:86</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="pacienteSeleccionado"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>pacienteSeleccionado</b></span>
+                        <a href="#pacienteSeleccionado"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(
+    () &#x3D;&gt; this.pacientes()?.find((p) &#x3D;&gt; p.id &#x3D;&#x3D;&#x3D; this.idPaciente()) ?? null,
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:97</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reservasService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>reservasService</b></span>
+                        <a href="#reservasService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ReservasService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/components/form-reserva/form-reserva.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { DecimalPipe, DatePipe } from &#x27;@angular/common&#x27;;
+import { HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
+import {
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  input,
+  OnInit,
+  output,
+  signal,
+} from &#x27;@angular/core&#x27;;
+import { takeUntilDestroyed, toSignal } from &#x27;@angular/core/rxjs-interop&#x27;;
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from &#x27;@angular/forms&#x27;;
+import { MessageService } from &#x27;primeng/api&#x27;;
+import { Button } from &#x27;primeng/button&#x27;;
+import { DatePicker } from &#x27;primeng/datepicker&#x27;;
+import { Select } from &#x27;primeng/select&#x27;;
+import { SelectButton } from &#x27;primeng/selectbutton&#x27;;
+import { merge } from &#x27;rxjs&#x27;;
+import { Medico } from &#x27;../../core/models/medico.models&#x27;;
+import { Reserva } from &#x27;../../core/models/reserva.models&#x27;;
+import { Usuario } from &#x27;../../core/models/usuario.models&#x27;;
+import { ReservasService } from &#x27;../../core/services/reservas.service&#x27;;
+import { mensajeError } from &#x27;../../core/utils/errores&#x27;;
+import { formatearYMD } from &#x27;../../core/utils/reservas.utils&#x27;;
+
+const DIAS_MAXIMOS_ANTICIPACION &#x3D; 30;
+
+interface OpcionHorario {
+  etiqueta: string;
+  fecha_hora: string;
+  ocupado: boolean;
+}
+
+@Component({
+  selector: &#x27;app-form-reserva&#x27;,
+  imports: [ReactiveFormsModule, Select, DatePicker, SelectButton, Button, DecimalPipe, DatePipe],
+  templateUrl: &#x27;./form-reserva.html&#x27;,
+  styleUrl: &#x27;./form-reserva.css&#x27;,
+})
+export class FormReserva implements OnInit {
+  private readonly reservasService &#x3D; inject(ReservasService);
+  private readonly messageService &#x3D; inject(MessageService);
+  private readonly destroyRef &#x3D; inject(DestroyRef);
+
+  readonly medicos &#x3D; input.required&lt;Medico[]&gt;();
+  readonly pacientes &#x3D; input&lt;Usuario[] | null&gt;(null);
+  readonly reservada &#x3D; output&lt;Reserva&gt;();
+
+  protected readonly horarios &#x3D; signal&lt;OpcionHorario[]&gt;([]);
+  protected readonly cargandoHorarios &#x3D; signal(false);
+  protected readonly enviando &#x3D; signal(false);
+
+  protected readonly fechaMinima &#x3D; new Date();
+  protected readonly fechaMaxima &#x3D; (() &#x3D;&gt; {
+    const max &#x3D; new Date();
+    max.setDate(max.getDate() + DIAS_MAXIMOS_ANTICIPACION);
+    return max;
+  })();
+
+  protected readonly form &#x3D; new FormGroup({
+    id_paciente: new FormControl&lt;number | null&gt;(null),
+    id_medico: new FormControl&lt;number | null&gt;(null, { validators: [Validators.required] }),
+    fecha: new FormControl&lt;Date | null&gt;(null, { validators: [Validators.required] }),
+    fecha_hora: new FormControl&lt;string | null&gt;(null, { validators: [Validators.required] }),
+  });
+
+  private readonly idMedico &#x3D; toSignal(this.form.controls.id_medico.valueChanges, {
+    initialValue: null,
+  });
+  private readonly idPaciente &#x3D; toSignal(this.form.controls.id_paciente.valueChanges, {
+    initialValue: null,
+  });
+  protected readonly fechaHora &#x3D; toSignal(this.form.controls.fecha_hora.valueChanges, {
+    initialValue: null,
+  });
+
+  protected readonly opcionesMedicos &#x3D; computed(() &#x3D;&gt;
+    this.medicos().map((m) &#x3D;&gt; ({
+      etiqueta: &#x60;Dr/a. ${m.apellidos}, ${m.nombres} (Mat. ${m.matricula})&#x60;,
+      id: m.id,
+    })),
+  );
+
+  protected readonly opcionesPacientes &#x3D; computed(() &#x3D;&gt;
+    (this.pacientes() ?? []).map((p) &#x3D;&gt; ({
+      etiqueta: &#x60;${p.apellidos}, ${p.nombres} (DNI ${p.documento})&#x60;,
+      id: p.id,
+    })),
+  );
+
+  protected readonly medicoSeleccionado &#x3D; computed(
+    () &#x3D;&gt; this.medicos().find((m) &#x3D;&gt; m.id &#x3D;&#x3D;&#x3D; this.idMedico()) ?? null,
+  );
+
+  protected readonly pacienteSeleccionado &#x3D; computed(
+    () &#x3D;&gt; this.pacientes()?.find((p) &#x3D;&gt; p.id &#x3D;&#x3D;&#x3D; this.idPaciente()) ?? null,
+  );
+
+  ngOnInit(): void {
+    if (this.pacientes()) {
+      this.form.controls.id_paciente.addValidators(Validators.required);
+    }
+
+    merge(this.form.controls.id_medico.valueChanges, this.form.controls.fecha.valueChanges)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() &#x3D;&gt; this.cargarHorarios());
+  }
+
+  protected onSubmit(): void {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.messageService.add({
+        severity: &#x27;warn&#x27;,
+        summary: &#x27;Formulario incompleto&#x27;,
+        detail: &#x27;Completá todos los pasos para reservar el turno.&#x27;,
+      });
+      return;
+    }
+
+    const { id_paciente, id_medico, fecha_hora } &#x3D; this.form.getRawValue();
+    this.enviando.set(true);
+
+    this.reservasService
+      .createReserva({
+        id_medico: id_medico!,
+        fecha_hora: fecha_hora!,
+        ...(id_paciente ? { id_paciente } : {}),
+      })
+      .subscribe({
+        next: (reserva) &#x3D;&gt; {
+          this.enviando.set(false);
+          this.messageService.add({
+            severity: &#x27;success&#x27;,
+            summary: &#x27;Turno reservado&#x27;,
+            detail: &#x60;Turno con Dr/a. ${reserva.medico.apellidos} reservado correctamente.&#x60;,
+          });
+          this.form.reset();
+          this.horarios.set([]);
+          this.reservada.emit(reserva);
+        },
+        error: (err: HttpErrorResponse) &#x3D;&gt; {
+          this.enviando.set(false);
+          this.messageService.add({
+            severity: &#x27;error&#x27;,
+            summary: &#x27;No se pudo reservar&#x27;,
+            detail: mensajeError(err, &#x27;Ocurrió un error al reservar el turno.&#x27;),
+          });
+          if (err.status &#x3D;&#x3D;&#x3D; 409) {
+            this.cargarHorarios();
+          }
+        },
+      });
+  }
+
+  private cargarHorarios(): void {
+    const { id_medico, fecha } &#x3D; this.form.getRawValue();
+    this.form.controls.fecha_hora.reset();
+
+    if (!id_medico || !fecha) {
+      this.horarios.set([]);
+      return;
+    }
+
+    this.cargandoHorarios.set(true);
+    this.reservasService.getDisponibilidad(id_medico, formatearYMD(fecha)).subscribe({
+      next: (disponibilidad) &#x3D;&gt; {
+        const ahora &#x3D; Date.now();
+        this.horarios.set(
+          disponibilidad.map((d) &#x3D;&gt; {
+            const inicio &#x3D; new Date(d.fecha_hora);
+            return {
+              etiqueta: &#x60;${String(inicio.getHours()).padStart(2, &#x27;0&#x27;)}:00&#x60;,
+              fecha_hora: d.fecha_hora,
+              ocupado: !d.disponible || inicio.getTime() &lt;&#x3D; ahora,
+            };
+          }),
+        );
+        this.cargandoHorarios.set(false);
+      },
+      error: (err: HttpErrorResponse) &#x3D;&gt; {
+        this.horarios.set([]);
+        this.cargandoHorarios.set(false);
+        this.messageService.add({
+          severity: &#x27;error&#x27;,
+          summary: &#x27;Error al cargar horarios&#x27;,
+          detail: mensajeError(err, &#x27;No se pudieron obtener los horarios disponibles.&#x27;),
+        });
+      },
+    });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;form [formGroup]&#x3D;&quot;form&quot; (ngSubmit)&#x3D;&quot;onSubmit()&quot; class&#x3D;&quot;form-reserva&quot; novalidate&gt;
+  @if (pacientes()) {
+    &lt;div class&#x3D;&quot;campo&quot;&gt;
+      &lt;label for&#x3D;&quot;paciente&quot;&gt;Paciente&lt;/label&gt;
+      &lt;p-select
+        inputId&#x3D;&quot;paciente&quot;
+        formControlName&#x3D;&quot;id_paciente&quot;
+        [options]&#x3D;&quot;opcionesPacientes()&quot;
+        optionLabel&#x3D;&quot;etiqueta&quot;
+        optionValue&#x3D;&quot;id&quot;
+        [filter]&#x3D;&quot;true&quot;
+        filterBy&#x3D;&quot;etiqueta&quot;
+        placeholder&#x3D;&quot;Seleccioná un paciente&quot;
+        emptyMessage&#x3D;&quot;No hay pacientes activos&quot;
+        fluid
+      /&gt;
+    &lt;/div&gt;
+  }
+
+  &lt;div class&#x3D;&quot;campo&quot;&gt;
+    &lt;label for&#x3D;&quot;medico&quot;&gt;Médico&lt;/label&gt;
+    &lt;p-select
+      inputId&#x3D;&quot;medico&quot;
+      formControlName&#x3D;&quot;id_medico&quot;
+      [options]&#x3D;&quot;opcionesMedicos()&quot;
+      optionLabel&#x3D;&quot;etiqueta&quot;
+      optionValue&#x3D;&quot;id&quot;
+      [filter]&#x3D;&quot;true&quot;
+      filterBy&#x3D;&quot;etiqueta&quot;
+      placeholder&#x3D;&quot;Seleccioná un médico&quot;
+      emptyMessage&#x3D;&quot;No hay médicos disponibles&quot;
+      fluid
+    /&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;campo&quot;&gt;
+    &lt;label for&#x3D;&quot;fecha&quot;&gt;Fecha&lt;/label&gt;
+    &lt;p-datepicker
+      inputId&#x3D;&quot;fecha&quot;
+      formControlName&#x3D;&quot;fecha&quot;
+      [minDate]&#x3D;&quot;fechaMinima&quot;
+      [maxDate]&#x3D;&quot;fechaMaxima&quot;
+      [showIcon]&#x3D;&quot;true&quot;
+      [readonlyInput]&#x3D;&quot;true&quot;
+      dateFormat&#x3D;&quot;dd/mm/yy&quot;
+      placeholder&#x3D;&quot;dd/mm/aaaa&quot;
+      fluid
+    /&gt;
+    &lt;small class&#x3D;&quot;ayuda&quot;&gt;Hasta 30 días de anticipación.&lt;/small&gt;
+  &lt;/div&gt;
+
+  &lt;div class&#x3D;&quot;campo&quot;&gt;
+    &lt;label for&#x3D;&quot;horario&quot;&gt;Horario&lt;/label&gt;
+    @if (cargandoHorarios()) {
+      &lt;small class&#x3D;&quot;ayuda&quot;&gt;&lt;i class&#x3D;&quot;pi pi-spin pi-spinner&quot;&gt;&lt;/i&gt; Cargando horarios...&lt;/small&gt;
+    } @else if (horarios().length) {
+      &lt;p-selectbutton
+        formControlName&#x3D;&quot;fecha_hora&quot;
+        [options]&#x3D;&quot;horarios()&quot;
+        optionLabel&#x3D;&quot;etiqueta&quot;
+        optionValue&#x3D;&quot;fecha_hora&quot;
+        optionDisabled&#x3D;&quot;ocupado&quot;
+        [allowEmpty]&#x3D;&quot;false&quot;
+        styleClass&#x3D;&quot;horarios&quot;
+      /&gt;
+      &lt;small class&#x3D;&quot;ayuda&quot;&gt;Turnos de 1 hora. Los horarios deshabilitados ya están ocupados.&lt;/small&gt;
+    } @else {
+      &lt;small class&#x3D;&quot;ayuda&quot;&gt;Elegí un médico y una fecha para ver los horarios disponibles.&lt;/small&gt;
+    }
+  &lt;/div&gt;
+
+  @if (medicoSeleccionado(); as medico) {
+    @if (fechaHora(); as turno) {
+      &lt;div class&#x3D;&quot;resumen&quot;&gt;
+        &lt;h4&gt;&lt;i class&#x3D;&quot;pi pi-check-circle&quot;&gt;&lt;/i&gt; Resumen del turno&lt;/h4&gt;
+        @if (pacienteSeleccionado(); as paciente) {
+          &lt;p&gt;
+            &lt;span&gt;Paciente&lt;/span&gt;&lt;strong&gt;{{ paciente.apellidos }}, {{ paciente.nombres }}&lt;/strong&gt;
+          &lt;/p&gt;
+        }
+        &lt;p&gt;
+          &lt;span&gt;Médico&lt;/span&gt;&lt;strong&gt;Dr/a. {{ medico.apellidos }}, {{ medico.nombres }}&lt;/strong&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+          &lt;span&gt;Fecha y hora&lt;/span&gt;&lt;strong&gt;{{ turno | date: &#x27;dd/MM/yyyy HH:mm&#x27; }} hs&lt;/strong&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+          &lt;span&gt;Valor de la consulta&lt;/span&gt;&lt;strong&gt;$ {{ medico.valor_consulta | number }}&lt;/strong&gt;
+        &lt;/p&gt;
+        &lt;small class&#x3D;&quot;ayuda&quot;&gt;El valor queda congelado al confirmar la reserva.&lt;/small&gt;
+      &lt;/div&gt;
+    }
+  }
+
+  &lt;p-button
+    type&#x3D;&quot;submit&quot;
+    label&#x3D;&quot;Confirmar reserva&quot;
+    icon&#x3D;&quot;pi pi-calendar-plus&quot;
+    [loading]&#x3D;&quot;enviando()&quot;
+  /&gt;
+&lt;/form&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./form-reserva.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.form-reserva {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 640px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.ayuda {
+  color: #6b7280;
+  font-size: 0.8rem;
+}
+
+:host ::ng-deep .horarios {
+  flex-wrap: wrap;
+}
+
+.resumen {
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--p-primary-200);
+  border-radius: 8px;
+  background: var(--p-primary-50);
+}
+
+.resumen h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.75rem;
+  color: var(--p-primary-700);
+}
+
+.resumen p {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 0.4rem;
+  font-size: 0.9rem;
+}
+
+.resumen p span {
+  color: #4b5563;
+}
+
+p-button {
+  align-self: flex-start;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-reserva" novalidate>  @if (pacientes()) {    <div class="campo">      <label for="paciente">Paciente</label>      <p-select        inputId="paciente"        formControlName="id_paciente"        [options]="opcionesPacientes()"        optionLabel="etiqueta"        optionValue="id"        [filter]="true"        filterBy="etiqueta"        placeholder="Seleccioná un paciente"        emptyMessage="No hay pacientes activos"        fluid      />    </div>  }  <div class="campo">    <label for="medico">Médico</label>    <p-select      inputId="medico"      formControlName="id_medico"      [options]="opcionesMedicos()"      optionLabel="etiqueta"      optionValue="id"      [filter]="true"      filterBy="etiqueta"      placeholder="Seleccioná un médico"      emptyMessage="No hay médicos disponibles"      fluid    />  </div>  <div class="campo">    <label for="fecha">Fecha</label>    <p-datepicker      inputId="fecha"      formControlName="fecha"      [minDate]="fechaMinima"      [maxDate]="fechaMaxima"      [showIcon]="true"      [readonlyInput]="true"      dateFormat="dd/mm/yy"      placeholder="dd/mm/aaaa"      fluid    />    <small class="ayuda">Hasta 30 días de anticipación.</small>  </div>  <div class="campo">    <label for="horario">Horario</label>    @if (cargandoHorarios()) {      <small class="ayuda"><i class="pi pi-spin pi-spinner"></i> Cargando horarios...</small>    } @else if (horarios().length) {      <p-selectbutton        formControlName="fecha_hora"        [options]="horarios()"        optionLabel="etiqueta"        optionValue="fecha_hora"        optionDisabled="ocupado"        [allowEmpty]="false"        styleClass="horarios"      />      <small class="ayuda">Turnos de 1 hora. Los horarios deshabilitados ya están ocupados.</small>    } @else {      <small class="ayuda">Elegí un médico y una fecha para ver los horarios disponibles.</small>    }  </div>  @if (medicoSeleccionado(); as medico) {    @if (fechaHora(); as turno) {      <div class="resumen">        <h4><i class="pi pi-check-circle"></i> Resumen del turno</h4>        @if (pacienteSeleccionado(); as paciente) {          <p>            <span>Paciente</span><strong>{{ paciente.apellidos }}, {{ paciente.nombres }}</strong>          </p>        }        <p>          <span>Médico</span><strong>Dr/a. {{ medico.apellidos }}, {{ medico.nombres }}</strong>        </p>        <p>          <span>Fecha y hora</span><strong>{{ turno | date: \'dd/MM/yyyy HH:mm\' }} hs</strong>        </p>        <p>          <span>Valor de la consulta</span><strong>$ {{ medico.valor_consulta | number }}</strong>        </p>        <small class="ayuda">El valor queda congelado al confirmar la reserva.</small>      </div>    }  }  <p-button    type="submit"    label="Confirmar reserva"    icon="pi pi-calendar-plus"    [loading]="enviando()"  /></form></div>'
+    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'EstadoReservaTag', 'selector': 'app-estado-reserva'},{'name': 'FormReserva', 'selector': 'app-form-reserva'},{'name': 'Login', 'selector': 'app-login'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'PanelAdmin', 'selector': 'app-admin'},{'name': 'PanelMedico', 'selector': 'app-medico'},{'name': 'PanelPaciente', 'selector': 'app-paciente'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'FormReserva'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'FormReserva.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var updateDarkModeSwitchOffset = function () {
+                    var content = document.querySelector('.content');
+                    var scrollbarWidth = 0;
+
+                    if (content) {
+                         scrollbarWidth = Math.max(0, content.offsetWidth - content.clientWidth);
+                    }
+
+                    document.documentElement.style.setProperty(
+                         '--content-scrollbar-width',
+                         scrollbarWidth + 'px'
+                    );
+               };
+
+               updateDarkModeSwitchOffset();
+               requestAnimationFrame(updateDarkModeSwitchOffset);
+               window.addEventListener('resize', updateDarkModeSwitchOffset);
+
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

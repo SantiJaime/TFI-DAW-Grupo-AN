@@ -1,0 +1,47 @@
+:host ::ng-deep .navbar {
+  border-radius: 0;
+  border-width: 0 0 1px;
+  padding: 0.5rem 1.5rem;
+}
+
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 1.5rem;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--p-primary-color);
+}
+
+.enlace {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.enlace.activo {
+  background: var(--p-primary-50);
+  color: var(--p-primary-700);
+}
+
+.usuario {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nombre {
+  font-weight: 600;
+  color: #374151;
+}
+
+@media (max-width: 640px) {
+  .nombre {
+    display: none;
+  }
+}
