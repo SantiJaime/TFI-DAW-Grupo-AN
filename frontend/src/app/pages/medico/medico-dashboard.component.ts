@@ -2,10 +2,10 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
-import { ReservasService } from '../../services/reservas.service';
-import { MedicosService } from '../../services/medicos.service';
-import { Reserva } from '../../models/reserva.model';
-import { Medico } from '../../models/medico.model';
+import { ReservasService } from '../../core/services/reservas.service';
+import { MedicosService } from '../../core/services/medicos.service';
+import { Reserva } from '../../core/models/reserva.models';
+import { EstadoReserva } from '../../core/enums/reserva.enums';
 
 @Component({
   selector: 'app-medico-dashboard',
@@ -71,14 +71,6 @@ import { Medico } from '../../models/medico.model';
               >
                 Mañana
               </button>
-              <button
-                type="button"
-                class="btn-filter"
-                [class.active]="showAllDates()"
-                (click)="selectAllDates()"
-              >
-                Ver Todas las Fechas
-              </button>
             </div>
           </div>
 
@@ -88,15 +80,15 @@ import { Medico } from '../../models/medico.model';
               <span class="metric-label">Turnos Totales</span>
             </div>
             <div class="metric-item item-green">
-              <span class="metric-value">{{ countByEstado('ASISTIO') }}</span>
+              <span class="metric-value">{{ countByEstado(EstadoReserva.ATENDIDO) }}</span>
               <span class="metric-label">Atendidos</span>
             </div>
             <div class="metric-item item-blue">
-              <span class="metric-value">{{ countByEstado('PENDIENTE') + countByEstado('CONFIRMADA') }}</span>
+              <span class="metric-value">{{ countByEstado(EstadoReserva.ACTIVO) }}</span>
               <span class="metric-label">Pendientes</span>
             </div>
             <div class="metric-item item-red">
-              <span class="metric-value">{{ countByEstado('CANCELADA') }}</span>
+              <span class="metric-value">{{ countByEstado(EstadoReserva.AUSENTE) + countByEstado(EstadoReserva.CANCELADO) }}</span>
               <span class="metric-label">Ausentes / Canc.</span>
             </div>
           </div>
@@ -105,11 +97,7 @@ import { Medico } from '../../models/medico.model';
         <div class="turnos-card">
           <div class="card-header">
             <h3>
-              @if (showAllDates()) {
-                Todos los Turnos Asignados
-              } @else {
-                Turnos Reservados para el: {{ formatDateDisplay(selectedDate) }}
-              }
+Turnos Reservados para el: {{ formatDateDisplay(selectedDate) }}
             </h3>
             <span class="turnos-count">{{ filteredTurnos().length }} turnos encontrados</span>
           </div>
@@ -140,7 +128,6 @@ import { Medico } from '../../models/medico.model';
                     <th>Horario</th>
                     <th>Paciente</th>
                     <th>Documento</th>
-                    <th>Contacto</th>
                     <th>Valor Cita</th>
                     <th>Estado</th>
                     <th class="text-right">Acciones (Médico)</th>
@@ -159,7 +146,6 @@ import { Medico } from '../../models/medico.model';
                         <strong>{{ turno.paciente.nombres }} {{ turno.paciente.apellidos }}</strong>
                       </td>
                       <td>{{ turno.paciente.documento }}</td>
-                      <td class="cell-email">{{ turno.paciente.email }}</td>
                       <td class="cell-valor">
                         \${{ turno.valor_consulta | number }}
                       </td>
@@ -169,7 +155,7 @@ import { Medico } from '../../models/medico.model';
                         </span>
                       </td>
                       <td class="cell-actions text-right">
-                        @if (turno.estado === 'PENDIENTE' || turno.estado === 'CONFIRMADA') {
+                        @if (turno.estado === EstadoReserva.ACTIVO) {
                           <div class="action-buttons">
                             <button
                               class="btn-action btn-atendido"
@@ -193,9 +179,9 @@ import { Medico } from '../../models/medico.model';
                               <span>Ausente</span>
                             </button>
                           </div>
-                        } @else if (turno.estado === 'ASISTIO') {
+                        } @else if (turno.estado === EstadoReserva.ATENDIDO) {
                           <span class="status-final final-atendido">✓ Consulta realizada</span>
-                        } @else if (turno.estado === 'CANCELADA') {
+                        } @else if (turno.estado === EstadoReserva.CANCELADO || turno.estado === EstadoReserva.AUSENTE) {
                           <span class="status-final final-ausente">✕ Ausente / Cancelado</span>
                         }
                       </td>
@@ -521,11 +507,12 @@ import { Medico } from '../../models/medico.model';
   `]
 })
 export class MedicoDashboardComponent implements OnInit {
+  protected readonly EstadoReserva = EstadoReserva;
+
   private readonly authService = inject(AuthService);
   private readonly reservasService = inject(ReservasService);
   private readonly medicosService = inject(MedicosService);
 
-  readonly allTurnos = signal<Reserva[]>([]);
   readonly filteredTurnos = signal<Reserva[]>([]);
   readonly isLoading = signal(true);
   readonly doctorName = signal('');
@@ -534,9 +521,6 @@ export class MedicoDashboardComponent implements OnInit {
   readonly feedbackType = signal<'success' | 'error'>('success');
 
   selectedDate: string = this.getTodayString();
-  showAllDates = signal(false);
-
-  private currentMedicoId: number | null = null;
 
   ngOnInit(): void {
     this.loadDoctorProfileAndTurnos();
@@ -554,39 +538,29 @@ export class MedicoDashboardComponent implements OnInit {
   }
 
   isTodaySelected(): boolean {
-    return !this.showAllDates() && this.selectedDate === this.getTodayString();
+    return this.selectedDate === this.getTodayString();
   }
 
   isTomorrowSelected(): boolean {
-    return !this.showAllDates() && this.selectedDate === this.getTomorrowString();
+    return this.selectedDate === this.getTomorrowString();
   }
 
   selectToday(): void {
-    this.showAllDates.set(false);
     this.selectedDate = this.getTodayString();
-    this.filterTurnos();
+    this.fetchTurnos();
   }
 
   selectTomorrow(): void {
-    this.showAllDates.set(false);
     this.selectedDate = this.getTomorrowString();
-    this.filterTurnos();
-  }
-
-  selectAllDates(): void {
-    this.showAllDates.set(true);
-    this.filterTurnos();
+    this.fetchTurnos();
   }
 
   applyDateFilter(): void {
-    this.showAllDates.set(false);
-    this.filterTurnos();
+    this.fetchTurnos();
   }
 
   private loadDoctorProfileAndTurnos(): void {
-    this.isLoading.set(true);
     const usuario = this.authService.usuario();
-
     if (!usuario) {
       this.isLoading.set(false);
       return;
@@ -594,45 +568,27 @@ export class MedicoDashboardComponent implements OnInit {
 
     this.doctorName.set(`${usuario.nombres} ${usuario.apellidos}`);
 
-    this.medicosService.getMedicos().subscribe({
-      next: (medicos) => {
-        const medico = medicos.find(
-          (m) => m.id_usuario === usuario.id || m.usuario?.id === usuario.id
-        );
-        if (medico) {
-          this.currentMedicoId = medico.id;
-          this.doctorMatricula.set(medico.matricula);
-          if (medico.usuario) {
-            this.doctorName.set(`${medico.usuario.nombres} ${medico.usuario.apellidos}`);
-          }
-        }
-        this.fetchTurnos();
-      },
-      error: () => {
-        this.fetchTurnos();
-      }
-    });
+    if (usuario.id_medico) {
+      this.medicosService.getMedico(usuario.id_medico).subscribe({
+        next: (medico) => this.doctorMatricula.set(medico.matricula)
+      });
+    }
+
+    this.fetchTurnos();
   }
 
   fetchTurnos(): void {
-    this.reservasService.getReservas().subscribe({
-      next: (reservas) => {
-        const sessionUserId = this.authService.usuario()?.id ?? null;
+    if (!this.selectedDate) {
+      this.filteredTurnos.set([]);
+      this.isLoading.set(false);
+      return;
+    }
 
-        const misTurnos = reservas.filter((r) => {
-          if (this.currentMedicoId && r.medico?.id === this.currentMedicoId) {
-            return true;
-          }
-          if (sessionUserId && (r.medico?.id_usuario === sessionUserId || r.medico?.usuario?.id === sessionUserId)) {
-            return true;
-          }
-          return false;
-        });
-
-        misTurnos.sort((a, b) => new Date(a.fecha_hora).getTime() - new Date(b.fecha_hora).getTime());
-
-        this.allTurnos.set(misTurnos);
-        this.filterTurnos();
+    this.isLoading.set(true);
+    this.reservasService.getMisTurnos(this.selectedDate).subscribe({
+      next: (turnos) => {
+        turnos.sort((a, b) => new Date(a.fecha_hora).getTime() - new Date(b.fecha_hora).getTime());
+        this.filteredTurnos.set(turnos);
         this.isLoading.set(false);
       },
       error: () => {
@@ -640,21 +596,6 @@ export class MedicoDashboardComponent implements OnInit {
         this.showFeedback('Error al cargar la lista de turnos médicos.', 'error');
       }
     });
-  }
-
-  filterTurnos(): void {
-    if (this.showAllDates()) {
-      this.filteredTurnos.set(this.allTurnos());
-      return;
-    }
-
-    const filtered = this.allTurnos().filter((t) => {
-      const fechaCita = new Date(t.fecha_hora);
-      const ymd = `${fechaCita.getFullYear()}-${String(fechaCita.getMonth() + 1).padStart(2, '0')}-${String(fechaCita.getDate()).padStart(2, '0')}`;
-      return ymd === this.selectedDate;
-    });
-
-    this.filteredTurnos.set(filtered);
   }
 
   marcarAtendido(turno: Reserva): void {
@@ -665,10 +606,10 @@ export class MedicoDashboardComponent implements OnInit {
     this.reservasService.marcarAtendido(turno.id).subscribe({
       next: () => {
         this.showFeedback(`Turno de las ${this.formatSlotHour(turno.fecha_hora)} marcado como ATENDIDO.`, 'success');
-        this.updateLocalTurno(turno.id, 'ASISTIO');
+        this.updateLocalTurno(turno.id, EstadoReserva.ATENDIDO);
       },
-      error: () => {
-        this.showFeedback('Error al registrar atención del turno.', 'error');
+      error: (err) => {
+        this.showFeedback(err.error?.message || 'Error al registrar atención del turno.', 'error');
       }
     });
   }
@@ -681,21 +622,20 @@ export class MedicoDashboardComponent implements OnInit {
     this.reservasService.marcarAusente(turno.id).subscribe({
       next: () => {
         this.showFeedback(`Turno de las ${this.formatSlotHour(turno.fecha_hora)} marcado como AUSENTE.`, 'success');
-        this.updateLocalTurno(turno.id, 'CANCELADA');
+        this.updateLocalTurno(turno.id, EstadoReserva.AUSENTE);
       },
-      error: () => {
-        this.showFeedback('Error al registrar ausencia del paciente.', 'error');
+      error: (err) => {
+        this.showFeedback(err.error?.message || 'Error al registrar ausencia del paciente.', 'error');
       }
     });
   }
 
   private updateLocalTurno(id: number, nuevoEstado: Reserva['estado']): void {
-    const list = this.allTurnos().map((t) => (t.id === id ? { ...t, estado: nuevoEstado } : t));
-    this.allTurnos.set(list);
-    this.filterTurnos();
+    const list = this.filteredTurnos().map((t) => (t.id === id ? { ...t, estado: nuevoEstado } : t));
+    this.filteredTurnos.set(list);
   }
 
-  countByEstado(estado: string): number {
+  countByEstado(estado: EstadoReserva): number {
     return this.filteredTurnos().filter((t) => t.estado === estado).length;
   }
 
@@ -717,27 +657,28 @@ export class MedicoDashboardComponent implements OnInit {
     return `${d}/${m}/${y}`;
   }
 
-  getStatusBadgeClass(estado: string): string {
+  getStatusBadgeClass(estado: EstadoReserva): string {
     switch (estado) {
-      case 'ASISTIO':
+      case EstadoReserva.ATENDIDO:
         return 'badge-atendido';
-      case 'CANCELADA':
+      case EstadoReserva.AUSENTE:
+      case EstadoReserva.CANCELADO:
         return 'badge-ausente';
       default:
         return 'badge-activo';
     }
   }
 
-  getStatusLabel(estado: string): string {
+  getStatusLabel(estado: EstadoReserva): string {
     switch (estado) {
-      case 'ASISTIO':
+      case EstadoReserva.ATENDIDO:
         return 'Atendido';
-      case 'CANCELADA':
-        return 'Ausente / Cancelado';
-      case 'CONFIRMADA':
-        return 'Confirmada';
+      case EstadoReserva.AUSENTE:
+        return 'Ausente';
+      case EstadoReserva.CANCELADO:
+        return 'Cancelado';
       default:
-        return 'Activo / Pendiente';
+        return 'Activo';
     }
   }
 

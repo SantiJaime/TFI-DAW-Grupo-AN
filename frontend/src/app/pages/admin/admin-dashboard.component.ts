@@ -1,12 +1,13 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { ReservasService } from '../../services/reservas.service';
-import { MedicosService } from '../../services/medicos.service';
-import { UsuariosService } from '../../services/usuarios.service';
-import { Reserva, CreateReservaDto } from '../../models/reserva.model';
-import { Medico, UpdateMedicoDto } from '../../models/medico.model';
-import { Usuario } from '../../models/usuario.model';
+import { ReservasService } from '../../core/services/reservas.service';
+import { MedicosService } from '../../core/services/medicos.service';
+import { UsuariosService } from '../../core/services/usuarios.service';
+import { CreateReservaRequest, Reserva } from '../../core/models/reserva.models';
+import { Medico } from '../../core/models/medico.models';
+import { Usuario } from '../../core/models/usuario.models';
+import { EstadoReserva } from '../../core/enums/reserva.enums';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -96,7 +97,7 @@ import { Usuario } from '../../models/usuario.model';
                   <option [ngValue]="null">Todos los Médicos</option>
                   @for (m of medicos(); track m.id) {
                     <option [ngValue]="m.id">
-                      Dr/a. {{ m.usuario ? (m.usuario.nombres + ' ' + m.usuario.apellidos) : ('Médico #' + m.id) }} (Mat. {{ m.matricula }})
+                      Dr/a. {{ m.nombres + ' ' + m.apellidos }} (Mat. {{ m.matricula }})
                     </option>
                   }
                 </select>
@@ -111,9 +112,10 @@ import { Usuario } from '../../models/usuario.model';
                   class="filter-select"
                 >
                   <option value="TODOS">Todos los Estados</option>
-                  <option value="PENDIENTE">Pendientes / Activos</option>
-                  <option value="ASISTIO">Atendidos</option>
-                  <option value="CANCELADA">Cancelados / Ausentes</option>
+                  <option [value]="EstadoReserva.ACTIVO">Activos</option>
+                  <option [value]="EstadoReserva.ATENDIDO">Atendidos</option>
+                  <option [value]="EstadoReserva.AUSENTE">Ausentes</option>
+                  <option [value]="EstadoReserva.CANCELADO">Cancelados</option>
                 </select>
               </div>
 
@@ -161,7 +163,7 @@ import { Usuario } from '../../models/usuario.model';
                           </div>
                         </td>
                         <td>
-                          <strong>Dr/a. {{ turno.medico.usuario ? (turno.medico.usuario.nombres + ' ' + turno.medico.usuario.apellidos) : ('Matrícula: ' + turno.medico.matricula) }}</strong>
+                          <strong>Dr/a. {{ turno.medico.nombres + ' ' + turno.medico.apellidos }}</strong>
                         </td>
                         <td>
                           {{ turno.paciente.nombres }} {{ turno.paciente.apellidos }}
@@ -176,7 +178,7 @@ import { Usuario } from '../../models/usuario.model';
                           </span>
                         </td>
                         <td class="text-right">
-                          @if (turno.estado === 'PENDIENTE' || turno.estado === 'CONFIRMADA') {
+                          @if (turno.estado === EstadoReserva.ACTIVO) {
                             @if (canAdminCancelTurno(turno.fecha_hora)) {
                               <button
                                 class="btn-cancel"
@@ -193,9 +195,9 @@ import { Usuario } from '../../models/usuario.model';
                                 Consulta iniciada / pasada
                               </span>
                             }
-                          } @else if (turno.estado === 'CANCELADA') {
+                          } @else if (turno.estado === EstadoReserva.CANCELADO || turno.estado === EstadoReserva.AUSENTE) {
                             <span class="text-muted">Cancelado</span>
-                          } @else if (turno.estado === 'ASISTIO') {
+                          } @else if (turno.estado === EstadoReserva.ATENDIDO) {
                             <span class="text-success">Atendido ✓</span>
                           }
                         </td>
@@ -232,7 +234,7 @@ import { Usuario } from '../../models/usuario.model';
                     <option [ngValue]="null" disabled>-- Seleccione un Paciente --</option>
                     @for (paciente of pacientes(); track paciente.id) {
                       <option [ngValue]="paciente.id">
-                        {{ paciente.nombres }} {{ paciente.apellidos }} (DNI: {{ paciente.documento }}) - {{ paciente.email }}
+                        {{ paciente.nombres }} {{ paciente.apellidos }} (DNI: {{ paciente.documento }}){{ ' - ' + paciente.email }}
                       </option>
                     }
                   </select>
@@ -257,7 +259,7 @@ import { Usuario } from '../../models/usuario.model';
                           </svg>
                         </div>
                         <div class="medico-info">
-                          <strong>Dr/a. {{ medico.usuario ? (medico.usuario.nombres + ' ' + medico.usuario.apellidos) : ('Médico #' + medico.id) }}</strong>
+                          <strong>Dr/a. {{ medico.nombres + ' ' + medico.apellidos }}</strong>
                           <span class="medico-mat">Matrícula: {{ medico.matricula }}</span>
                           <span class="medico-fee">Valor Consulta: \${{ medico.valor_consulta | number }}</span>
                         </div>
@@ -321,7 +323,7 @@ import { Usuario } from '../../models/usuario.model';
                     </div>
                     <div class="summary-row">
                       <span>Médico Clínico:</span>
-                      <strong>Dr/a. {{ selectedMedico()?.usuario?.nombres }} {{ selectedMedico()?.usuario?.apellidos }}</strong>
+                      <strong>Dr/a. {{ selectedMedico()?.nombres }} {{ selectedMedico()?.apellidos }}</strong>
                     </div>
                     <div class="summary-row">
                       <span>Fecha y Horario:</span>
@@ -379,10 +381,10 @@ import { Usuario } from '../../models/usuario.model';
                     <tr>
                       <td>#{{ medico.id }}</td>
                       <td>
-                        <strong>Dr/a. {{ medico.usuario ? (medico.usuario.nombres + ' ' + medico.usuario.apellidos) : 'Médico Clínico' }}</strong>
+                        <strong>Dr/a. {{ medico.nombres + ' ' + medico.apellidos }}</strong>
                       </td>
                       <td>{{ medico.matricula }}</td>
-                      <td>{{ medico.usuario?.email || '---' }}</td>
+                      <td>{{ medico.email }}</td>
                       <td class="cell-fee">
                         \${{ medico.valor_consulta | number }}
                       </td>
@@ -416,7 +418,7 @@ import { Usuario } from '../../models/usuario.model';
 
               <div class="modal-body">
                 <p>
-                  Médico: <strong>Dr/a. {{ editingMedico()?.usuario?.nombres }} {{ editingMedico()?.usuario?.apellidos }}</strong>
+                  Médico: <strong>Dr/a. {{ editingMedico()?.nombres }} {{ editingMedico()?.apellidos }}</strong>
                 </p>
                 <p class="modal-matricula">Matrícula: {{ editingMedico()?.matricula }}</p>
 
@@ -987,6 +989,8 @@ import { Usuario } from '../../models/usuario.model';
   `]
 })
 export class AdminDashboardComponent implements OnInit {
+  protected readonly EstadoReserva = EstadoReserva;
+
   private readonly fb = inject(FormBuilder);
   private readonly reservasService = inject(ReservasService);
   private readonly medicosService = inject(MedicosService);
@@ -1101,8 +1105,8 @@ export class AdminDashboardComponent implements OnInit {
         this.showFeedback('Turno cancelado exitosamente por administración.', 'success');
         this.loadAllData();
       },
-      error: () => {
-        this.showFeedback('Error al cancelar turno.', 'error');
+      error: (err) => {
+        this.showFeedback(err.error?.message || 'Error al cancelar turno.', 'error');
       }
     });
   }
@@ -1130,35 +1134,34 @@ export class AdminDashboardComponent implements OnInit {
       return;
     }
 
-    const slots = this.reservasService.HORARIOS_DISPONIBLES.map((hour) => {
-      const occupied = this.reservasService.isHorarioOcupado(
-        medicoId,
-        fecha,
-        hour,
-        this.allReservas()
-      );
+    this.reservasService.getDisponibilidad(medicoId, fecha).subscribe({
+      next: (horarios) => {
+        const ahora = Date.now();
+        const slots = horarios.map((h) => {
+          const fechaHora = new Date(h.fecha_hora);
+          const hour = fechaHora.getHours();
+          return {
+            hour,
+            label: this.formatHourString(hour),
+            occupied: !h.disponible || fechaHora.getTime() <= ahora
+          };
+        });
 
-      const hoy = new Date();
-      const [y, m, d] = fecha.split('-').map(Number);
-      const slotDate = new Date(y, m - 1, d, hour, 0, 0);
-      const isPast = slotDate.getTime() <= hoy.getTime();
+        this.timeSlots.set(slots);
 
-      return {
-        hour,
-        label: `${String(hour).padStart(2, '0')}:00 hs`,
-        occupied: occupied || isPast
-      };
-    });
-
-    this.timeSlots.set(slots);
-
-    const currentHora = this.reservaForm.value.hora;
-    if (currentHora !== null) {
-      const currentSlot = slots.find((s) => s.hour === currentHora);
-      if (!currentSlot || currentSlot.occupied) {
-        this.reservaForm.patchValue({ hora: null });
+        const currentHora = this.reservaForm.value.hora;
+        if (currentHora !== null) {
+          const currentSlot = slots.find((s) => s.hour === currentHora);
+          if (!currentSlot || currentSlot.occupied) {
+            this.reservaForm.patchValue({ hora: null });
+          }
+        }
+      },
+      error: () => {
+        this.timeSlots.set([]);
+        this.showFeedback('Error al consultar los horarios disponibles.', 'error');
       }
-    }
+    });
   }
 
   getSelectedPacienteName(): string {
@@ -1177,18 +1180,6 @@ export class AdminDashboardComponent implements OnInit {
       return;
     }
 
-    const isOccupied = this.reservasService.isHorarioOcupado(
-      id_medico,
-      fecha,
-      hora,
-      this.allReservas()
-    );
-
-    if (isOccupied) {
-      this.showFeedback('El horario seleccionado ya se encuentra ocupado. Seleccione otro turno.', 'error');
-      this.recalculateSlots();
-      return;
-    }
 
     this.isSubmitting.set(true);
 
@@ -1196,7 +1187,7 @@ export class AdminDashboardComponent implements OnInit {
     const fechaObj = new Date(year, month - 1, day, hora, 0, 0);
     const fechaIso = fechaObj.toISOString();
 
-    const dto: CreateReservaDto = {
+    const dto: CreateReservaRequest = {
       id_medico,
       id_paciente,
       fecha_hora: fechaIso
@@ -1236,20 +1227,18 @@ export class AdminDashboardComponent implements OnInit {
     }
 
     this.isSavingFee.set(true);
-    const dto: UpdateMedicoDto = {
-      valor_consulta: Math.round(this.nuevoValorConsulta)
-    };
+    const dto = { valor_consulta: Math.round(this.nuevoValorConsulta) };
 
-    this.medicosService.updateMedico(med.id, dto).subscribe({
+    this.medicosService.updateValorConsulta(med.id, dto).subscribe({
       next: () => {
         this.isSavingFee.set(false);
         this.showFeedback(
-          `Arancel actualizado para Dr/a. ${med.usuario?.nombres || ''} ${med.usuario?.apellidos || ''}: \$${dto.valor_consulta}`,
+          `Arancel actualizado para Dr/a. ${med.nombres} ${med.apellidos}: \$${dto.valor_consulta}`,
           'success'
         );
         this.closeEditFeeModal();
         const lista = this.medicos().map((m) =>
-          m.id === med.id ? { ...m, valor_consulta: dto.valor_consulta! } : m
+          m.id === med.id ? { ...m, valor_consulta: dto.valor_consulta } : m
         );
         this.medicos.set(lista);
       },
@@ -1282,20 +1271,28 @@ export class AdminDashboardComponent implements OnInit {
     return `${String(hour).padStart(2, '0')}:00 hs`;
   }
 
-  getStatusBadgeClass(estado: string): string {
+  getStatusBadgeClass(estado: EstadoReserva): string {
     switch (estado) {
-      case 'ASISTIO': return 'badge-atendido';
-      case 'CANCELADA': return 'badge-ausente';
-      default: return 'badge-activo';
+      case EstadoReserva.ATENDIDO:
+        return 'badge-atendido';
+      case EstadoReserva.AUSENTE:
+      case EstadoReserva.CANCELADO:
+        return 'badge-ausente';
+      default:
+        return 'badge-activo';
     }
   }
 
-  getStatusLabel(estado: string): string {
+  getStatusLabel(estado: EstadoReserva): string {
     switch (estado) {
-      case 'ASISTIO': return 'Atendido';
-      case 'CANCELADA': return 'Cancelado';
-      case 'CONFIRMADA': return 'Confirmado';
-      default: return 'Activo / Pendiente';
+      case EstadoReserva.ATENDIDO:
+        return 'Atendido';
+      case EstadoReserva.AUSENTE:
+        return 'Ausente';
+      case EstadoReserva.CANCELADO:
+        return 'Cancelado';
+      default:
+        return 'Activo';
     }
   }
 
