@@ -1,0 +1,206 @@
+<section class="panel">
+  <header class="panel-encabezado">
+    <h1>Administración</h1>
+    <p>Gestión de turnos, reservas y valores de consulta.</p>
+  </header>
+
+  <p-tabs [(value)]="tabActiva">
+    <p-tablist>
+      <p-tab value="turnos"><i class="pi pi-list"></i> Turnos</p-tab>
+      <p-tab value="reservar"><i class="pi pi-calendar-plus"></i> Nueva reserva</p-tab>
+      <p-tab value="medicos"><i class="pi pi-dollar"></i> Médicos y valores</p-tab>
+    </p-tablist>
+
+    <p-tabpanels>
+      <!-- Listado de turnos con filtros (se aplican en el backend) -->
+      <p-tabpanel value="turnos">
+        <form [formGroup]="filtros" class="panel-barra">
+          <div class="campo">
+            <label for="filtroFecha">Fecha</label>
+            <p-datepicker
+              inputId="filtroFecha"
+              formControlName="fecha"
+              dateFormat="dd/mm/yy"
+              placeholder="Todas"
+              [showIcon]="true"
+              [showClear]="true"
+              [readonlyInput]="true"
+            />
+          </div>
+          <div class="campo">
+            <label for="filtroMedico">Médico</label>
+            <p-select
+              inputId="filtroMedico"
+              formControlName="id_medico"
+              [options]="opcionesMedicos()"
+              optionLabel="etiqueta"
+              optionValue="id"
+              placeholder="Todos"
+              [showClear]="true"
+            />
+          </div>
+          <div class="campo">
+            <label for="filtroEstado">Estado</label>
+            <p-select
+              inputId="filtroEstado"
+              formControlName="estado"
+              [options]="opcionesEstados"
+              optionLabel="etiqueta"
+              optionValue="valor"
+              placeholder="Todos"
+              [showClear]="true"
+            />
+          </div>
+          <p-button
+            label="Limpiar filtros"
+            icon="pi pi-filter-slash"
+            severity="secondary"
+            [outlined]="true"
+            (onClick)="limpiarFiltros()"
+          />
+        </form>
+
+        <p-table
+          [value]="reservas()"
+          [loading]="cargando()"
+          [paginator]="true"
+          [rows]="10"
+          dataKey="id"
+        >
+          <ng-template #header>
+            <tr>
+              <th>Fecha y hora</th>
+              <th>Médico</th>
+              <th>Paciente</th>
+              <th>DNI</th>
+              <th>Valor</th>
+              <th>Estado</th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template #body let-turno>
+            <tr>
+              <td>{{ turno.fecha_hora | date: 'dd/MM/yyyy HH:mm' }} hs</td>
+              <td>Dr/a. {{ turno.medico.apellidos }}, {{ turno.medico.nombres }}</td>
+              <td>{{ turno.paciente.apellidos }}, {{ turno.paciente.nombres }}</td>
+              <td>{{ turno.paciente.documento }}</td>
+              <td>$ {{ turno.valor_consulta | number }}</td>
+              <td>
+                <app-estado-reserva [estado]="turno.estado" />
+              </td>
+              <td>
+                <div class="celda-acciones">
+                  @if (puedeCancelar(turno)) {
+                    <p-button
+                      label="Cancelar"
+                      icon="pi pi-times"
+                      severity="danger"
+                      size="small"
+                      [outlined]="true"
+                      (onClick)="cancelar(turno)"
+                    />
+                  }
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template #emptymessage>
+            <tr>
+              <td colspan="7">No se encontraron turnos con los filtros aplicados.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-tabpanel>
+
+      <!-- Reserva a nombre de un paciente -->
+      <p-tabpanel value="reservar">
+        <p-card
+          header="Nueva reserva"
+          subheader="Asigná un turno a cualquier paciente activo (hasta 30 días de anticipación)."
+        >
+          <app-form-reserva
+            [medicos]="medicos()"
+            [pacientes]="pacientes()"
+            (reservada)="onReservada()"
+          />
+        </p-card>
+      </p-tabpanel>
+
+      <!-- Valores de consulta -->
+      <p-tabpanel value="medicos">
+        <p-table [value]="medicos()" dataKey="id">
+          <ng-template #header>
+            <tr>
+              <th>Médico</th>
+              <th>Matrícula</th>
+              <th>Email</th>
+              <th>Valor de la consulta</th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template #body let-medico>
+            <tr>
+              <td>Dr/a. {{ medico.apellidos }}, {{ medico.nombres }}</td>
+              <td>{{ medico.matricula }}</td>
+              <td>{{ medico.email }}</td>
+              <td>$ {{ medico.valor_consulta | number }}</td>
+              <td>
+                <div class="celda-acciones">
+                  <p-button
+                    label="Modificar"
+                    icon="pi pi-pencil"
+                    size="small"
+                    [outlined]="true"
+                    (onClick)="editarValor(medico)"
+                  />
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template #emptymessage>
+            <tr>
+              <td colspan="5">No hay médicos registrados.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <p class="texto-secundario">
+          Las reservas ya emitidas conservan el valor que tenían al momento de reservar.
+        </p>
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
+</section>
+
+<p-dialog
+  header="Modificar valor de la consulta"
+  [visible]="medicoEditando() !== null"
+  (visibleChange)="!$event && cerrarEdicion()"
+  [modal]="true"
+  [style]="{ width: '24rem' }"
+>
+  @if (medicoEditando(); as medico) {
+    <form [formGroup]="formValor" (ngSubmit)="guardarValor()" class="form-valor">
+      <p>Dr/a. {{ medico.apellidos }}, {{ medico.nombres }} (Mat. {{ medico.matricula }})</p>
+      <label for="valor">Nuevo valor</label>
+      <p-inputnumber
+        inputId="valor"
+        formControlName="valor_consulta"
+        mode="currency"
+        currency="ARS"
+        locale="es-AR"
+        [min]="1"
+        [maxFractionDigits]="0"
+        fluid
+      />
+      <div class="celda-acciones">
+        <p-button
+          label="Cancelar"
+          severity="secondary"
+          [outlined]="true"
+          (onClick)="cerrarEdicion()"
+        />
+        <p-button type="submit" label="Guardar" icon="pi pi-check" [loading]="guardandoValor()" />
+      </div>
+    </form>
+  }
+</p-dialog>

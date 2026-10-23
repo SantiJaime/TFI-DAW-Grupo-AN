@@ -1,0 +1,28 @@
+@if (authService.usuario(); as usuario) {
+  <p-toolbar styleClass="navbar">
+    <ng-template #start>
+      <span class="marca"><i class="pi pi-heart-fill"></i> Clínica Médica</span>
+      @if (seccion(); as s) {
+        <a [routerLink]="s.ruta" routerLinkActive="activo" class="enlace">
+          <i [class]="s.icono"></i> {{ s.enlace }}
+        </a>
+      }
+    </ng-template>
+    <ng-template #end>
+      <div class="usuario">
+        <span class="nombre">{{ usuario.nombres }} {{ usuario.apellidos }}</span>
+        @if (seccion(); as s) {
+          <p-tag [value]="s.etiqueta" severity="secondary" />
+        }
+        <p-button
+          label="Salir"
+          icon="pi pi-sign-out"
+          severity="secondary"
+          size="small"
+          [outlined]="true"
+          (onClick)="authService.logout()"
+        />
+      </div>
+    </ng-template>
+  </p-toolbar>
+}

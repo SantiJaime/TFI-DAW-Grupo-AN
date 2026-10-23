@@ -8,8 +8,6 @@ import {
   Reserva,
 } from '../models/reserva.models';
 
-const DIAS_MAXIMOS_ANTICIPACION = 30;
-
 @Injectable({ providedIn: 'root' })
 export class ReservasService {
   private readonly http = inject(HttpClient);
@@ -59,30 +57,16 @@ export class ReservasService {
   }
 
   /** El paciente puede cancelar hasta el día anterior al turno */
-  canPatientCancel(fechaHora: string | Date): boolean {
-    const cita = new Date(fechaHora);
-    const ahora = new Date();
-    const citaFechaSolo = new Date(cita.getFullYear(), cita.getMonth(), cita.getDate()).getTime();
-    const hoyFechaSolo = new Date(ahora.getFullYear(), ahora.getMonth(), ahora.getDate()).getTime();
-    return citaFechaSolo > hoyFechaSolo;
+  pacientePuedeCancelar(fechaHora: string): boolean {
+    const turno = new Date(fechaHora);
+    turno.setHours(0, 0, 0, 0);
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+    return turno.getTime() > hoy.getTime();
   }
 
   /** El administrador puede cancelar hasta que empiece el turno */
-  canAdminCancel(fechaHora: string | Date): boolean {
+  adminPuedeCancelar(fechaHora: string): boolean {
     return new Date(fechaHora).getTime() > Date.now();
-  }
-
-  getMinDate(): string {
-    return this.formatearYMD(new Date());
-  }
-
-  getMaxDate(): string {
-    const max = new Date();
-    max.setDate(max.getDate() + DIAS_MAXIMOS_ANTICIPACION);
-    return this.formatearYMD(max);
-  }
-
-  formatearYMD(fecha: Date): string {
-    return `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, '0')}-${String(fecha.getDate()).padStart(2, '0')}`;
   }
 }

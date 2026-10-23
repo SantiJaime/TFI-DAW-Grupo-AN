@@ -1,0 +1,58 @@
+.form-reserva {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 640px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #374151;
+}
+
+.ayuda {
+  color: #6b7280;
+  font-size: 0.8rem;
+}
+
+:host ::ng-deep .horarios {
+  flex-wrap: wrap;
+}
+
+.resumen {
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--p-primary-200);
+  border-radius: 8px;
+  background: var(--p-primary-50);
+}
+
+.resumen h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.75rem;
+  color: var(--p-primary-700);
+}
+
+.resumen p {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 0.4rem;
+  font-size: 0.9rem;
+}
+
+.resumen p span {
+  color: #4b5563;
+}
+
+p-button {
+  align-self: flex-start;
+}
