@@ -1415,53 +1415,55 @@ export class PanelMedico implements OnInit {
     }
   &lt;/div&gt;
 
-  &lt;p-table [value]&#x3D;&quot;turnos()&quot; [loading]&#x3D;&quot;cargando()&quot; dataKey&#x3D;&quot;id&quot;&gt;
-    &lt;ng-template #header&gt;
-      &lt;tr&gt;
-        &lt;th&gt;Horario&lt;/th&gt;
-        &lt;th&gt;Paciente&lt;/th&gt;
-        &lt;th&gt;Documento&lt;/th&gt;
-        &lt;th&gt;Estado&lt;/th&gt;
-        &lt;th&gt;&lt;/th&gt;
-      &lt;/tr&gt;
-    &lt;/ng-template&gt;
-    &lt;ng-template #body let-turno&gt;
-      &lt;tr&gt;
-        &lt;td&gt;{{ turno.fecha_hora | date: &#x27;HH:mm&#x27; }} hs&lt;/td&gt;
-        &lt;td&gt;{{ turno.paciente.apellidos }}, {{ turno.paciente.nombres }}&lt;/td&gt;
-        &lt;td&gt;{{ turno.paciente.documento }}&lt;/td&gt;
-        &lt;td&gt;
-          &lt;app-estado-reserva [estado]&#x3D;&quot;turno.estado&quot; /&gt;
-        &lt;/td&gt;
-        &lt;td&gt;
-          &lt;div class&#x3D;&quot;celda-acciones&quot;&gt;
-            @if (turno.estado &#x3D;&#x3D;&#x3D; EstadoReserva.ACTIVO) {
-              &lt;p-button
-                label&#x3D;&quot;Atendido&quot;
-                icon&#x3D;&quot;pi pi-check&quot;
-                severity&#x3D;&quot;success&quot;
-                size&#x3D;&quot;small&quot;
-                (onClick)&#x3D;&quot;marcarAtendido(turno)&quot;
-              /&gt;
-              &lt;p-button
-                label&#x3D;&quot;Ausente&quot;
-                icon&#x3D;&quot;pi pi-user-minus&quot;
-                severity&#x3D;&quot;warn&quot;
-                size&#x3D;&quot;small&quot;
-                [outlined]&#x3D;&quot;true&quot;
-                (onClick)&#x3D;&quot;marcarAusente(turno)&quot;
-              /&gt;
-            }
-          &lt;/div&gt;
-        &lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/ng-template&gt;
-    &lt;ng-template #emptymessage&gt;
-      &lt;tr&gt;
-        &lt;td colspan&#x3D;&quot;5&quot;&gt;No hay turnos reservados para esta fecha.&lt;/td&gt;
-      &lt;/tr&gt;
-    &lt;/ng-template&gt;
-  &lt;/p-table&gt;
+  @if (!cargando() &amp;&amp; turnos().length &#x3D;&#x3D;&#x3D; 0) {
+    &lt;div class&#x3D;&quot;estado-vacio&quot;&gt;
+      &lt;i class&#x3D;&quot;pi pi-calendar-times&quot;&gt;&lt;/i&gt;
+      &lt;p&gt;No hay turnos reservados para esta fecha.&lt;/p&gt;
+    &lt;/div&gt;
+  } @else {
+    &lt;p-table [value]&#x3D;&quot;turnos()&quot; [loading]&#x3D;&quot;cargando()&quot; dataKey&#x3D;&quot;id&quot;&gt;
+      &lt;ng-template #header&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Horario&lt;/th&gt;
+          &lt;th&gt;Paciente&lt;/th&gt;
+          &lt;th&gt;Documento&lt;/th&gt;
+          &lt;th&gt;Estado&lt;/th&gt;
+          &lt;th&gt;&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/ng-template&gt;
+      &lt;ng-template #body let-turno&gt;
+        &lt;tr&gt;
+          &lt;td&gt;{{ turno.fecha_hora | date: &#x27;HH:mm&#x27; }} hs&lt;/td&gt;
+          &lt;td&gt;{{ turno.paciente.apellidos }}, {{ turno.paciente.nombres }}&lt;/td&gt;
+          &lt;td&gt;{{ turno.paciente.documento }}&lt;/td&gt;
+          &lt;td&gt;
+            &lt;app-estado-reserva [estado]&#x3D;&quot;turno.estado&quot; /&gt;
+          &lt;/td&gt;
+          &lt;td&gt;
+            &lt;div class&#x3D;&quot;celda-acciones&quot;&gt;
+              @if (turno.estado &#x3D;&#x3D;&#x3D; EstadoReserva.ACTIVO) {
+                &lt;p-button
+                  label&#x3D;&quot;Atendido&quot;
+                  icon&#x3D;&quot;pi pi-check&quot;
+                  severity&#x3D;&quot;success&quot;
+                  size&#x3D;&quot;small&quot;
+                  (onClick)&#x3D;&quot;marcarAtendido(turno)&quot;
+                /&gt;
+                &lt;p-button
+                  label&#x3D;&quot;Ausente&quot;
+                  icon&#x3D;&quot;pi pi-user-minus&quot;
+                  severity&#x3D;&quot;warn&quot;
+                  size&#x3D;&quot;small&quot;
+                  [outlined]&#x3D;&quot;true&quot;
+                  (onClick)&#x3D;&quot;marcarAusente(turno)&quot;
+                /&gt;
+              }
+            &lt;/div&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/ng-template&gt;
+    &lt;/p-table&gt;
+  }
 &lt;/section&gt;
 </code></pre>
     </div>
@@ -1533,8 +1535,8 @@ export class PanelMedico implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><section class="panel">  <header class="panel-encabezado">    <h1>Agenda médica</h1>    @if (authService.usuario(); as usuario) {      <p>        Dr/a. {{ usuario.nombres }} {{ usuario.apellidos }}        @if (matricula(); as mat) {          · Matrícula {{ mat }}        }      </p>    }  </header>  <form [formGroup]="form" class="panel-barra">    <div class="campo">      <label for="fecha">Fecha</label>      <p-datepicker        inputId="fecha"        formControlName="fecha"        dateFormat="dd/mm/yy"        [showIcon]="true"        [readonlyInput]="true"      />    </div>    <p-button label="Hoy" severity="secondary" [outlined]="true" (onClick)="irADia(0)" />    <p-button label="Mañana" severity="secondary" [outlined]="true" (onClick)="irADia(1)" />  </form>  <div class="resumen">    @for (item of resumen(); track item.etiqueta) {      <div class="resumen-item">        <i [class]="item.icono"></i>        <span class="valor">{{ item.valor }}</span>        <span class="etiqueta">{{ item.etiqueta }}</span>      </div>    }  </div>  <p-table [value]="turnos()" [loading]="cargando()" dataKey="id">    <ng-template #header>      <tr>        <th>Horario</th>        <th>Paciente</th>        <th>Documento</th>        <th>Estado</th>        <th></th>      </tr>    </ng-template>    <ng-template #body let-turno>      <tr>        <td>{{ turno.fecha_hora | date: \'HH:mm\' }} hs</td>        <td>{{ turno.paciente.apellidos }}, {{ turno.paciente.nombres }}</td>        <td>{{ turno.paciente.documento }}</td>        <td>          <app-estado-reserva [estado]="turno.estado" />        </td>        <td>          <div class="celda-acciones">            @if (turno.estado === EstadoReserva.ACTIVO) {              <p-button                label="Atendido"                icon="pi pi-check"                severity="success"                size="small"                (onClick)="marcarAtendido(turno)"              />              <p-button                label="Ausente"                icon="pi pi-user-minus"                severity="warn"                size="small"                [outlined]="true"                (onClick)="marcarAusente(turno)"              />            }          </div>        </td>      </tr>    </ng-template>    <ng-template #emptymessage>      <tr>        <td colspan="5">No hay turnos reservados para esta fecha.</td>      </tr>    </ng-template>  </p-table></section></div>'
-    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'EstadoReservaTag', 'selector': 'app-estado-reserva'},{'name': 'FormReserva', 'selector': 'app-form-reserva'},{'name': 'Login', 'selector': 'app-login'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'PanelAdmin', 'selector': 'app-admin'},{'name': 'PanelMedico', 'selector': 'app-medico'},{'name': 'PanelPaciente', 'selector': 'app-paciente'}];
+        var COMPONENT_TEMPLATE = '<div><section class="panel">  <header class="panel-encabezado">    <h1>Agenda médica</h1>    @if (authService.usuario(); as usuario) {      <p>        Dr/a. {{ usuario.nombres }} {{ usuario.apellidos }}        @if (matricula(); as mat) {          · Matrícula {{ mat }}        }      </p>    }  </header>  <form [formGroup]="form" class="panel-barra">    <div class="campo">      <label for="fecha">Fecha</label>      <p-datepicker        inputId="fecha"        formControlName="fecha"        dateFormat="dd/mm/yy"        [showIcon]="true"        [readonlyInput]="true"      />    </div>    <p-button label="Hoy" severity="secondary" [outlined]="true" (onClick)="irADia(0)" />    <p-button label="Mañana" severity="secondary" [outlined]="true" (onClick)="irADia(1)" />  </form>  <div class="resumen">    @for (item of resumen(); track item.etiqueta) {      <div class="resumen-item">        <i [class]="item.icono"></i>        <span class="valor">{{ item.valor }}</span>        <span class="etiqueta">{{ item.etiqueta }}</span>      </div>    }  </div>  @if (!cargando() && turnos().length === 0) {    <div class="estado-vacio">      <i class="pi pi-calendar-times"></i>      <p>No hay turnos reservados para esta fecha.</p>    </div>  } @else {    <p-table [value]="turnos()" [loading]="cargando()" dataKey="id">      <ng-template #header>        <tr>          <th>Horario</th>          <th>Paciente</th>          <th>Documento</th>          <th>Estado</th>          <th></th>        </tr>      </ng-template>      <ng-template #body let-turno>        <tr>          <td>{{ turno.fecha_hora | date: \'HH:mm\' }} hs</td>          <td>{{ turno.paciente.apellidos }}, {{ turno.paciente.nombres }}</td>          <td>{{ turno.paciente.documento }}</td>          <td>            <app-estado-reserva [estado]="turno.estado" />          </td>          <td>            <div class="celda-acciones">              @if (turno.estado === EstadoReserva.ACTIVO) {                <p-button                  label="Atendido"                  icon="pi pi-check"                  severity="success"                  size="small"                  (onClick)="marcarAtendido(turno)"                />                <p-button                  label="Ausente"                  icon="pi pi-user-minus"                  severity="warn"                  size="small"                  [outlined]="true"                  (onClick)="marcarAusente(turno)"                />              }            </div>          </td>        </tr>      </ng-template>    </p-table>  }</section></div>'
+    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'EstadoReservaTag', 'selector': 'app-estado-reserva'},{'name': 'FormReserva', 'selector': 'app-form-reserva'},{'name': 'Login', 'selector': 'app-login'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'PanelAdmin', 'selector': 'app-admin'},{'name': 'PanelMedico', 'selector': 'app-medico'},{'name': 'PanelPaciente', 'selector': 'app-paciente'},{'name': 'Registro', 'selector': 'app-registro'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'PanelMedico'};
 </script>

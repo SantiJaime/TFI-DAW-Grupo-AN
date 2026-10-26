@@ -223,7 +223,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/core/models/auth.models.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/core/models/auth.models.ts:26</a></div>
                                 </td>
                             </tr>
 
@@ -262,7 +262,7 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/core/models/auth.models.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/core/models/auth.models.ts:27</a></div>
                                 </td>
                             </tr>
 
@@ -276,6 +276,14 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { RolUsuario } from &#x27;../enums/usuario.enums&#x27;;
 
 export interface LoginRequest {
+  email: string;
+  clave: string;
+}
+
+export interface RegistroRequest {
+  documento: string;
+  apellidos: string;
+  nombres: string;
   email: string;
   clave: string;
 }

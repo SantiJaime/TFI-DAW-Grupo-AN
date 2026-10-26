@@ -440,7 +440,7 @@ export class Navbar {
         <pre class="line-numbers"><code class="language-html">@if (authService.usuario(); as usuario) {
   &lt;p-toolbar styleClass&#x3D;&quot;navbar&quot;&gt;
     &lt;ng-template #start&gt;
-      &lt;span class&#x3D;&quot;marca&quot;&gt;&lt;i class&#x3D;&quot;pi pi-heart-fill&quot;&gt;&lt;/i&gt; Clínica Médica&lt;/span&gt;
+      &lt;span class&#x3D;&quot;marca&quot;&gt;&lt;i class&#x3D;&quot;pi pi-heart-fill&quot;&gt;&lt;/i&gt; Clínica médica&lt;/span&gt;
       @if (seccion(); as s) {
         &lt;a [routerLink]&#x3D;&quot;s.ruta&quot; routerLinkActive&#x3D;&quot;activo&quot; class&#x3D;&quot;enlace&quot;&gt;
           &lt;i [class]&#x3D;&quot;s.icono&quot;&gt;&lt;/i&gt; {{ s.enlace }}
@@ -451,7 +451,7 @@ export class Navbar {
       &lt;div class&#x3D;&quot;usuario&quot;&gt;
         &lt;span class&#x3D;&quot;nombre&quot;&gt;{{ usuario.nombres }} {{ usuario.apellidos }}&lt;/span&gt;
         @if (seccion(); as s) {
-          &lt;p-tag [value]&#x3D;&quot;s.etiqueta&quot; severity&#x3D;&quot;secondary&quot; /&gt;
+          &lt;p-tag [value]&#x3D;&quot;s.etiqueta&quot; /&gt;
         }
         &lt;p-button
           label&#x3D;&quot;Salir&quot;
@@ -547,8 +547,8 @@ export class Navbar {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div>@if (authService.usuario(); as usuario) {  <p-toolbar styleClass="navbar">    <ng-template #start>      <span class="marca"><i class="pi pi-heart-fill"></i> Clínica Médica</span>      @if (seccion(); as s) {        <a [routerLink]="s.ruta" routerLinkActive="activo" class="enlace">          <i [class]="s.icono"></i> {{ s.enlace }}        </a>      }    </ng-template>    <ng-template #end>      <div class="usuario">        <span class="nombre">{{ usuario.nombres }} {{ usuario.apellidos }}</span>        @if (seccion(); as s) {          <p-tag [value]="s.etiqueta" severity="secondary" />        }        <p-button          label="Salir"          icon="pi pi-sign-out"          severity="secondary"          size="small"          [outlined]="true"          (onClick)="authService.logout()"        />      </div>    </ng-template>  </p-toolbar>}</div>'
-    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'EstadoReservaTag', 'selector': 'app-estado-reserva'},{'name': 'FormReserva', 'selector': 'app-form-reserva'},{'name': 'Login', 'selector': 'app-login'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'PanelAdmin', 'selector': 'app-admin'},{'name': 'PanelMedico', 'selector': 'app-medico'},{'name': 'PanelPaciente', 'selector': 'app-paciente'}];
+        var COMPONENT_TEMPLATE = '<div>@if (authService.usuario(); as usuario) {  <p-toolbar styleClass="navbar">    <ng-template #start>      <span class="marca"><i class="pi pi-heart-fill"></i> Clínica médica</span>      @if (seccion(); as s) {        <a [routerLink]="s.ruta" routerLinkActive="activo" class="enlace">          <i [class]="s.icono"></i> {{ s.enlace }}        </a>      }    </ng-template>    <ng-template #end>      <div class="usuario">        <span class="nombre">{{ usuario.nombres }} {{ usuario.apellidos }}</span>        @if (seccion(); as s) {          <p-tag [value]="s.etiqueta" />        }        <p-button          label="Salir"          icon="pi pi-sign-out"          severity="secondary"          size="small"          [outlined]="true"          (onClick)="authService.logout()"        />      </div>    </ng-template>  </p-toolbar>}</div>'
+    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'EstadoReservaTag', 'selector': 'app-estado-reserva'},{'name': 'FormReserva', 'selector': 'app-form-reserva'},{'name': 'Login', 'selector': 'app-login'},{'name': 'Navbar', 'selector': 'app-navbar'},{'name': 'PanelAdmin', 'selector': 'app-admin'},{'name': 'PanelMedico', 'selector': 'app-medico'},{'name': 'PanelPaciente', 'selector': 'app-paciente'},{'name': 'Registro', 'selector': 'app-registro'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'Navbar'};
 </script>
