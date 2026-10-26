@@ -59,56 +59,74 @@
           />
         </form>
 
-        <p-table
-          [value]="reservas()"
-          [loading]="cargando()"
-          [paginator]="true"
-          [rows]="10"
-          dataKey="id"
-        >
-          <ng-template #header>
-            <tr>
-              <th>Fecha y hora</th>
-              <th>Médico</th>
-              <th>Paciente</th>
-              <th>DNI</th>
-              <th>Valor</th>
-              <th>Estado</th>
-              <th></th>
-            </tr>
-          </ng-template>
-          <ng-template #body let-turno>
-            <tr>
-              <td>{{ turno.fecha_hora | date: 'dd/MM/yyyy HH:mm' }} hs</td>
-              <td>Dr/a. {{ turno.medico.apellidos }}, {{ turno.medico.nombres }}</td>
-              <td>{{ turno.paciente.apellidos }}, {{ turno.paciente.nombres }}</td>
-              <td>{{ turno.paciente.documento }}</td>
-              <td>$ {{ turno.valor_consulta | number }}</td>
-              <td>
-                <app-estado-reserva [estado]="turno.estado" />
-              </td>
-              <td>
-                <div class="celda-acciones">
-                  @if (puedeCancelar(turno)) {
-                    <p-button
-                      label="Cancelar"
-                      icon="pi pi-times"
-                      severity="danger"
-                      size="small"
-                      [outlined]="true"
-                      (onClick)="cancelar(turno)"
-                    />
-                  }
-                </div>
-              </td>
-            </tr>
-          </ng-template>
-          <ng-template #emptymessage>
-            <tr>
-              <td colspan="7">No se encontraron turnos con los filtros aplicados.</td>
-            </tr>
-          </ng-template>
-        </p-table>
+        @if (!cargando() && reservas().length === 0) {
+          <div class="estado-vacio">
+            <i class="pi pi-calendar-times"></i>
+            @if (hayFiltrosAplicados()) {
+              <p>No se encontraron turnos con los filtros aplicados.</p>
+              <p-button
+                label="Limpiar filtros"
+                icon="pi pi-filter-slash"
+                severity="secondary"
+                [outlined]="true"
+                (onClick)="limpiarFiltros()"
+              />
+            } @else {
+              <p>Todavía no hay turnos reservados.</p>
+              <p-button
+                label="Nueva reserva"
+                icon="pi pi-calendar-plus"
+                (onClick)="tabActiva.set('reservar')"
+              />
+            }
+          </div>
+        } @else {
+          <p-table
+            [value]="reservas()"
+            [loading]="cargando()"
+            [paginator]="true"
+            [rows]="10"
+            dataKey="id"
+          >
+            <ng-template #header>
+              <tr>
+                <th>Fecha y hora</th>
+                <th>Médico</th>
+                <th>Paciente</th>
+                <th>DNI</th>
+                <th>Valor</th>
+                <th>Estado</th>
+                <th></th>
+              </tr>
+            </ng-template>
+            <ng-template #body let-turno>
+              <tr>
+                <td>{{ turno.fecha_hora | date: 'dd/MM/yyyy HH:mm' }} hs</td>
+                <td>Dr/a. {{ turno.medico.apellidos }}, {{ turno.medico.nombres }}</td>
+                <td>{{ turno.paciente.apellidos }}, {{ turno.paciente.nombres }}</td>
+                <td>{{ turno.paciente.documento }}</td>
+                <td>$ {{ turno.valor_consulta | number }}</td>
+                <td>
+                  <app-estado-reserva [estado]="turno.estado" />
+                </td>
+                <td>
+                  <div class="celda-acciones">
+                    @if (puedeCancelar(turno)) {
+                      <p-button
+                        label="Cancelar"
+                        icon="pi pi-times"
+                        severity="danger"
+                        size="small"
+                        [outlined]="true"
+                        (onClick)="cancelar(turno)"
+                      />
+                    }
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        }
       </p-tabpanel>
 
       <p-tabpanel value="reservar">

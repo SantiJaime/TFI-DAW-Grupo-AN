@@ -1,5 +1,5 @@
 import { inject } from '@angular/core';
-import { Router, Routes } from '@angular/router';
+import { RedirectFunction, Router, Routes } from '@angular/router';
 import { RolUsuario } from './core/enums/usuario.enums';
 import { authGuard, invitadoGuard, rolGuard } from './core/guards/auth.guard';
 import { AuthService } from './core/services/auth.service';
@@ -10,11 +10,21 @@ const RUTA_POR_ROL: Record<RolUsuario, string> = {
   [RolUsuario.ADMINISTRADOR]: '/admin',
 };
 
+const redirigirSegunRol: RedirectFunction = () => {
+  const rol = inject(AuthService).usuario()?.rol;
+  return inject(Router).parseUrl(rol ? RUTA_POR_ROL[rol] : '/login');
+};
+
 export const routes: Routes = [
   {
     path: 'login',
     canActivate: [invitadoGuard],
     loadComponent: () => import('./pages/login/login').then((m) => m.Login),
+  },
+  {
+    path: 'registro',
+    canActivate: [invitadoGuard],
+    loadComponent: () => import('./pages/registro/registro').then((m) => m.Registro),
   },
   {
     path: 'medico',
@@ -34,13 +44,7 @@ export const routes: Routes = [
     data: { roles: [RolUsuario.ADMINISTRADOR] },
     loadComponent: () => import('./pages/admin/admin').then((m) => m.PanelAdmin),
   },
-  {
-    path: 'inicio',
-    redirectTo: () => {
-      const rol = inject(AuthService).usuario()?.rol;
-      return inject(Router).parseUrl(rol ? RUTA_POR_ROL[rol] : '/login');
-    },
-  },
-  { path: '', pathMatch: 'full', redirectTo: 'inicio' },
-  { path: '**', redirectTo: 'inicio' },
+  { path: 'inicio', redirectTo: redirigirSegunRol },
+  { path: '', pathMatch: 'full', redirectTo: redirigirSegunRol },
+  { path: '**', redirectTo: redirigirSegunRol },
 ];

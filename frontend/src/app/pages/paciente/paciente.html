@@ -8,78 +8,76 @@
 
   <p-tabs [(value)]="tabActiva">
     <p-tablist>
-      <p-tab value="turnos"><i class="pi pi-calendar"></i> Mis turnos ({{ turnos().length }})</p-tab>
+      <p-tab value="turnos"
+        ><i class="pi pi-calendar"></i> Mis turnos ({{ turnos().length }})</p-tab
+      >
       <p-tab value="reservar"><i class="pi pi-calendar-plus"></i> Reservar turno</p-tab>
     </p-tablist>
 
     <p-tabpanels>
       <p-tabpanel value="turnos">
-        <p-table
-          [value]="turnos()"
-          [loading]="cargando()"
-          [paginator]="turnos().length > 10"
-          [rows]="10"
-          dataKey="id"
-        >
-          <ng-template #header>
-            <tr>
-              <th>Fecha y hora</th>
-              <th>Médico</th>
-              <th>Matrícula</th>
-              <th>Valor</th>
-              <th>Estado</th>
-              <th></th>
-            </tr>
-          </ng-template>
-          <ng-template #body let-turno>
-            <tr>
-              <td>{{ turno.fecha_hora | date: 'dd/MM/yyyy HH:mm' }} hs</td>
-              <td>Dr/a. {{ turno.medico.apellidos }}, {{ turno.medico.nombres }}</td>
-              <td>{{ turno.medico.matricula }}</td>
-              <td>$ {{ turno.valor_consulta | number }}</td>
-              <td>
-                <app-estado-reserva [estado]="turno.estado" />
-              </td>
-              <td>
-                <div class="celda-acciones">
-                  @if (puedeCancelar(turno)) {
-                    <p-button
-                      label="Cancelar"
-                      icon="pi pi-times"
-                      severity="danger"
-                      size="small"
-                      [outlined]="true"
-                      (onClick)="cancelar(turno)"
-                    />
-                  }
-                </div>
-              </td>
-            </tr>
-          </ng-template>
-          <ng-template #emptymessage>
-            <tr>
-              <td colspan="6">
-                No tenés turnos reservados.
-                <p-button
-                  label="Reservar un turno"
-                  icon="pi pi-calendar-plus"
-                  [link]="true"
-                  (onClick)="tabActiva.set('reservar')"
-                />
-              </td>
-            </tr>
-          </ng-template>
-        </p-table>
+        @if (!cargando() && turnos().length === 0) {
+          <div class="estado-vacio">
+            <i class="pi pi-calendar-times"></i>
+            <p>No tenés turnos reservados.</p>
+            <p-button
+              label="Reservar un turno"
+              icon="pi pi-calendar-plus"
+              (onClick)="tabActiva.set('reservar')"
+            />
+          </div>
+        } @else {
+          <p-table
+            [value]="turnos()"
+            [loading]="cargando()"
+            [paginator]="turnos().length > 10"
+            [rows]="10"
+            dataKey="id"
+          >
+            <ng-template #header>
+              <tr>
+                <th>Fecha y hora</th>
+                <th>Médico</th>
+                <th>Matrícula</th>
+                <th>Valor</th>
+                <th>Estado</th>
+                <th></th>
+              </tr>
+            </ng-template>
+            <ng-template #body let-turno>
+              <tr>
+                <td>{{ turno.fecha_hora | date: 'dd/MM/yyyy HH:mm' }} hs</td>
+                <td>Dr/a. {{ turno.medico.apellidos }}, {{ turno.medico.nombres }}</td>
+                <td>{{ turno.medico.matricula }}</td>
+                <td>$ {{ turno.valor_consulta | number }}</td>
+                <td>
+                  <app-estado-reserva [estado]="turno.estado" />
+                </td>
+                <td>
+                  <div class="celda-acciones">
+                    @if (puedeCancelar(turno)) {
+                      <p-button
+                        label="Cancelar"
+                        icon="pi pi-times"
+                        severity="danger"
+                        size="small"
+                        [outlined]="true"
+                        (onClick)="cancelar(turno)"
+                      />
+                    }
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        }
         <p class="texto-secundario">
           Podés cancelar un turno activo hasta el día anterior a la consulta.
         </p>
       </p-tabpanel>
 
       <p-tabpanel value="reservar">
-        <p-card
-          header="Reservar turno"
-          subheader="Atención de 8:00 a 16:00 hs, turnos de 1 hora."
-        >
+        <p-card header="Reservar turno" subheader="Atención de 8:00 a 16:00 hs, turnos de 1 hora.">
           <app-form-reserva [medicos]="medicos()" (reservada)="onReservada()" />
         </p-card>
       </p-tabpanel>

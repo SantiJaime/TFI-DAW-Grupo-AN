@@ -5,6 +5,14 @@ export interface LoginRequest {
   clave: string;
 }
 
+export interface RegistroRequest {
+  documento: string;
+  apellidos: string;
+  nombres: string;
+  email: string;
+  clave: string;
+}
+
 export interface UsuarioLogueado {
   id: number;
   nombres: string;
