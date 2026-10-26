@@ -6,19 +6,19 @@ export class Usuario {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
+  @Column({ unique: true, type: 'text' })
   documento: string;
 
-  @Column()
+  @Column({ type: 'text' })
   apellidos: string;
 
-  @Column()
+  @Column({ type: 'text' })
   nombres: string;
 
-  @Column()
+  @Column({ type: 'text' })
   email: string;
 
-  @Column()
+  @Column({ type: 'text' })
   clave: string;
 
   @Column({ type: 'enum', enum: EstadoUsuario })
