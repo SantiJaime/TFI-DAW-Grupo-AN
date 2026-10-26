@@ -36,51 +36,53 @@
     }
   </div>
 
-  <p-table [value]="turnos()" [loading]="cargando()" dataKey="id">
-    <ng-template #header>
-      <tr>
-        <th>Horario</th>
-        <th>Paciente</th>
-        <th>Documento</th>
-        <th>Estado</th>
-        <th></th>
-      </tr>
-    </ng-template>
-    <ng-template #body let-turno>
-      <tr>
-        <td>{{ turno.fecha_hora | date: 'HH:mm' }} hs</td>
-        <td>{{ turno.paciente.apellidos }}, {{ turno.paciente.nombres }}</td>
-        <td>{{ turno.paciente.documento }}</td>
-        <td>
-          <app-estado-reserva [estado]="turno.estado" />
-        </td>
-        <td>
-          <div class="celda-acciones">
-            @if (turno.estado === EstadoReserva.ACTIVO) {
-              <p-button
-                label="Atendido"
-                icon="pi pi-check"
-                severity="success"
-                size="small"
-                (onClick)="marcarAtendido(turno)"
-              />
-              <p-button
-                label="Ausente"
-                icon="pi pi-user-minus"
-                severity="warn"
-                size="small"
-                [outlined]="true"
-                (onClick)="marcarAusente(turno)"
-              />
-            }
-          </div>
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template #emptymessage>
-      <tr>
-        <td colspan="5">No hay turnos reservados para esta fecha.</td>
-      </tr>
-    </ng-template>
-  </p-table>
+  @if (!cargando() && turnos().length === 0) {
+    <div class="estado-vacio">
+      <i class="pi pi-calendar-times"></i>
+      <p>No hay turnos reservados para esta fecha.</p>
+    </div>
+  } @else {
+    <p-table [value]="turnos()" [loading]="cargando()" dataKey="id">
+      <ng-template #header>
+        <tr>
+          <th>Horario</th>
+          <th>Paciente</th>
+          <th>Documento</th>
+          <th>Estado</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template #body let-turno>
+        <tr>
+          <td>{{ turno.fecha_hora | date: 'HH:mm' }} hs</td>
+          <td>{{ turno.paciente.apellidos }}, {{ turno.paciente.nombres }}</td>
+          <td>{{ turno.paciente.documento }}</td>
+          <td>
+            <app-estado-reserva [estado]="turno.estado" />
+          </td>
+          <td>
+            <div class="celda-acciones">
+              @if (turno.estado === EstadoReserva.ACTIVO) {
+                <p-button
+                  label="Atendido"
+                  icon="pi pi-check"
+                  severity="success"
+                  size="small"
+                  (onClick)="marcarAtendido(turno)"
+                />
+                <p-button
+                  label="Ausente"
+                  icon="pi pi-user-minus"
+                  severity="warn"
+                  size="small"
+                  [outlined]="true"
+                  (onClick)="marcarAusente(turno)"
+                />
+              }
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  }
 </section>

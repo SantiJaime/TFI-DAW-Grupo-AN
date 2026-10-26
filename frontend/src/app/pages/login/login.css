@@ -55,3 +55,35 @@ label {
   color: var(--p-red-500);
   font-size: 0.8rem;
 }
+
+.alternativa {
+  margin: 1.25rem 0 0;
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+.alternativa a {
+  color: var(--p-primary-color);
+  font-weight: 600;
+}
+
+.demo {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+  text-align: center;
+}
+
+.demo p {
+  margin: 0 0 0.75rem;
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.demo-botones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}

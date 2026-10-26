@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Button } from 'primeng/button';
 import { InputText } from 'primeng/inputtext';
@@ -9,9 +9,17 @@ import { Password } from 'primeng/password';
 import { AuthService } from '../../core/services/auth.service';
 import { mensajeError } from '../../core/utils/errores';
 
+const CLAVE_DEMO = 'test123';
+
+const CUENTAS_DEMO = [
+  { etiqueta: 'Administrador', email: 'admin@clinica.com', icono: 'pi pi-cog', color: 'warn' },
+  { etiqueta: 'Médico', email: 'medico@clinica.com', icono: 'pi pi-clock', color: 'help' },
+  { etiqueta: 'Paciente', email: 'paciente@clinica.com', icono: 'pi pi-user', color: 'success' },
+] as const;
+
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, InputText, Password, Button],
+  imports: [ReactiveFormsModule, RouterLink, InputText, Password, Button],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -21,6 +29,7 @@ export class Login {
   private readonly messageService = inject(MessageService);
 
   protected readonly cargando = signal(false);
+  protected readonly cuentasDemo = CUENTAS_DEMO;
 
   protected readonly form = new FormGroup({
     email: new FormControl('', {
@@ -32,6 +41,10 @@ export class Login {
       validators: [Validators.required],
     }),
   });
+
+  protected completarDemo(email: string): void {
+    this.form.setValue({ email, clave: CLAVE_DEMO });
+  }
 
   protected campoInvalido(campo: 'email' | 'clave'): boolean {
     const control = this.form.controls[campo];

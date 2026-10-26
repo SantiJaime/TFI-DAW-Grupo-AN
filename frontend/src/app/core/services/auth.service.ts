@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
-import { LoginRequest, LoginResponse, UsuarioLogueado } from '../models/auth.models';
+import { LoginRequest, LoginResponse, RegistroRequest, UsuarioLogueado } from '../models/auth.models';
+import { Usuario } from '../models/usuario.models';
 
 const CLAVE_TOKEN = 'clinica_token';
 const CLAVE_USUARIO = 'clinica_usuario';
@@ -28,6 +29,10 @@ export class AuthService {
     return this.http
       .post<LoginResponse>(`${this.apiUrl}/login`, credenciales)
       .pipe(tap((respuesta) => this.guardarSesion(respuesta)));
+  }
+
+  registrar(datos: RegistroRequest): Observable<Usuario> {
+    return this.http.post<Usuario>(`${this.apiUrl}/registro`, datos);
   }
 
   logout(): void {
