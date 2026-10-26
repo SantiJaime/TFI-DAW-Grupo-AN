@@ -93,6 +93,10 @@ export class PanelAdmin implements OnInit {
     });
   }
 
+  protected hayFiltrosAplicados(): boolean {
+    return Object.values(this.filtros.getRawValue()).some((valor) => valor !== null);
+  }
+
   protected limpiarFiltros(): void {
     this.filtros.reset();
   }

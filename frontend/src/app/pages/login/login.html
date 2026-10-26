@@ -1,13 +1,13 @@
 <main class="contenedor">
   <section class="tarjeta">
     <header>
-      <h1>Clínica Médica</h1>
+      <h1>Clínica médica</h1>
       <p>Ingresá con tu cuenta para gestionar tus turnos</p>
     </header>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
       <div class="campo">
-        <label for="email">Email</label>
+        <label for="email">Correo electrónico</label>
         <input
           pInputText
           id="email"
@@ -54,5 +54,25 @@
         fluid
       />
     </form>
+
+    <p class="alternativa">
+      ¿No tenés cuenta? <a routerLink="/registro">Registrate</a>
+    </p>
+
+    <div class="demo">
+      <p>Completar con una cuenta de prueba:</p>
+      <div class="demo-botones">
+        @for (cuenta of cuentasDemo; track cuenta.email) {
+          <p-button
+            [label]="cuenta.etiqueta"
+            [icon]="cuenta.icono"
+            [severity]="cuenta.color"
+            size="small"
+            [outlined]="true"
+            (onClick)="completarDemo(cuenta.email)"
+          />
+        }
+      </div>
+    </div>
   </section>
 </main>
