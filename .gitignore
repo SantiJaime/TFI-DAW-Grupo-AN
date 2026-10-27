@@ -50,4 +50,5 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 !.vscode/mcp.json
 .DS_Store
 Thumbs.db
-*.md
+CLAUDE.md
+transcripcion_tfi.md

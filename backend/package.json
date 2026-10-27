@@ -13,6 +13,8 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "seed": "ts-node -r tsconfig-paths/register src/seeds/seed.ts",
+    "db:init": "psql -U postgres -f database/init.sql",
+    "deploy": "npm install && npm run build && npm run seed && pm2 startOrRestart ecosystem.config.json && pm2 save",
     "lint": "eslint \"src/**/*.ts\" --fix"
   },
   "dependencies": {
