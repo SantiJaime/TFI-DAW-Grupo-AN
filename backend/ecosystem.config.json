@@ -1,0 +1,23 @@
+{
+  "apps": [
+    {
+      "name": "clinica-backend",
+      "script": "dist/main.js",
+      "env": {
+        "NODE_ENV": "production",
+        "PORT": 3000,
+        "TZ": "America/Argentina/Buenos_Aires",
+        "DB_HOST": "localhost",
+        "DB_PORT": 5432,
+        "DB_USER": "daw",
+        "DB_PASSWORD": "2026",
+        "DB_NAME": "clinica",
+        "DB_LOGGING": "false",
+        "DB_SYNCHRONIZE": "true",
+        "JWT_SECRET": "tfi-clinica-daw",
+        "JWT_EXPIRES_IN": "8h"
+      },
+      "time": true
+    }
+  ]
+}
