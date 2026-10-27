@@ -31,15 +31,19 @@ async function bootstrap() {
     }),
   );
 
-  const config = new DocumentBuilder()
-    .setTitle(NOMBRE_API)
-    .setDescription('Documentación de la API para el sistema de turnos médicos')
-    .setVersion(VERSION_API)
-    .addBearerAuth()
-    .build();
+  if (process.env.SWAGGER_HABILITADO !== 'false') {
+    const config = new DocumentBuilder()
+      .setTitle(NOMBRE_API)
+      .setDescription(
+        'Documentación de la API para el sistema de turnos médicos',
+      )
+      .setVersion(VERSION_API)
+      .addBearerAuth()
+      .build();
 
-  const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup(RUTA_DOCUMENTACION, app, document);
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup(RUTA_DOCUMENTACION, app, document);
+  }
 
   await app.listen(process.env.PORT ?? 3000);
 }
