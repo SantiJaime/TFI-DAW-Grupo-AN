@@ -59,15 +59,19 @@ Comandos útiles de PM2: `pm2 status`, `pm2 logs clinica-backend`, `pm2 restart 
 
 nginx redirige el puerto 80 a HTTPS, por lo que necesita un certificado para `localhost`. Se generan con mkcert dentro de la carpeta `conf\ssl` de nginx:
 
+1. Abrir una terminal.
+2. Navegar a la carpeta `conf` de nginx: `cd C:\nginx-1.XX.X\conf`
+3. Crear la carpeta `ssl` y entrar en ella: `mkdir ssl` y `cd ssl`
+4. Generar el certificado: `mkcert localhost`
+
 ```bash
-mkcert -install
 cd C:\nginx-1.XX.X\conf
 mkdir ssl
 cd ssl
-mkcert -cert-file localhost.pem -key-file localhost-key.pem localhost 127.0.0.1
+mkcert localhost
 ```
 
-Los nombres de archivo deben ser `localhost.pem` y `localhost-key.pem`.
+Esto crea `localhost.pem` y `localhost-key.pem`, los nombres que usa `nginx/nginx.conf`. Si el navegador no confía en el certificado, ejecutar una vez `mkcert -install` y reiniciar el navegador.
 
 ## 4. Frontend
 
