@@ -21,9 +21,9 @@ export class Usuario {
   @Column({ type: 'text' })
   clave: string;
 
-  @Column({ type: 'enum', enum: EstadoUsuario })
+  @Column({ type: 'enum', enum: EstadoUsuario, enumName: 'estados_usuarios' })
   estado: EstadoUsuario;
 
-  @Column({ type: 'enum', enum: RolUsuario })
+  @Column({ type: 'enum', enum: RolUsuario, enumName: 'roles_usuarios' })
   rol: RolUsuario;
 }
