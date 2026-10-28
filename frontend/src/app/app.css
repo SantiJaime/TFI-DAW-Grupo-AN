@@ -2,4 +2,5 @@
   min-height: calc(100vh - 65px);
   display: flex;
   flex-direction: column;
+  background: url('/dashboard-bg.jpg') center center / cover no-repeat fixed;
 }
