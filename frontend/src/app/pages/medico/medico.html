@@ -62,7 +62,7 @@
           </td>
           <td>
             <div class="celda-acciones">
-              @if (turno.estado === EstadoReserva.ACTIVO) {
+              @if (turno.estado === EstadoReserva.ACTIVO && yaComenzo(turno)) {
                 <p-button
                   label="Atendido"
                   icon="pi pi-check"

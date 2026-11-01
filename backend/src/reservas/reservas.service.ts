@@ -184,6 +184,11 @@ export class ReservasService {
         `No se puede modificar un turno en estado ${reserva.estado}`,
       );
     }
+    if (new Date() < reserva.fecha_hora) {
+      throw new BadRequestException(
+        'No se puede marcar un turno que todavía no comenzó',
+      );
+    }
 
     reserva.estado = estado;
     return await this.reservaRepository.save(reserva);
