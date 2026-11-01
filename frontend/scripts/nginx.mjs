@@ -1,3 +1,6 @@
+// Usamos este script de Node en lugar del comando que usó el profesor para copiar el build
+// a la carpeta html de nginx: ese comando es exclusivo de Windows y uno de los integrantes del
+// grupo usa Linux. Con Node funciona igual en cualquier sistema operativo.
 import { cpSync, existsSync, readdirSync, rmSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
