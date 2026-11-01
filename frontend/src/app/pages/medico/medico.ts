@@ -68,6 +68,10 @@ export class PanelMedico implements OnInit {
     this.form.controls.fecha.setValue(fecha);
   }
 
+  protected yaComenzo(turno: Reserva): boolean {
+    return new Date(turno.fecha_hora) <= new Date();
+  }
+
   protected marcarAtendido(turno: Reserva): void {
     this.confirmar(
       turno,
